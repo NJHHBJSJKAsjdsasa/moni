@@ -20,16 +20,25 @@ def register_universe_page_routes(app, universe, config):
         if universe is None:
             return None
         galaxy_data = session.get("galaxy")
-        if galaxy_data:
-            galaxy = universe.get_galaxy(*galaxy_data["coordinates"])
-            return galaxy
+        if galaxy_data and "coordinates" in galaxy_data:
+            try:
+                coordinates = galaxy_data["coordinates"]
+                if len(coordinates) == 3:
+                    x, y, z = coordinates
+                    galaxy = universe.get_galaxy(x, y, z)
+                    return galaxy
+            except Exception as e:
+                print(f"Error retrieving current galaxy: {e}")
         return None
 
     def get_current_system():
         galaxy = get_current_galaxy()
         system_index = session.get("system")
         if galaxy and system_index is not None:
-            return galaxy.get_solar_system(system_index)
+            try:
+                return galaxy.get_solar_system(system_index)
+            except Exception as e:
+                print(f"Error retrieving current system: {e}")
         return None
 
     @app.route("/")
@@ -248,57 +257,62 @@ def register_universe_page_routes(app, universe, config):
             )
         except ValueError as e:
             return render_template("error.html", message=str(e), run_mode=RUN)
+        except Exception as e:
+            return render_template("error.html", message=f"An unexpected error occurred: {str(e)}", run_mode=RUN)
 
     @app.route("/planet/<planet_name>")
     def view_planet(planet_name):
-        current_system = get_current_system()
-        if not current_system:
-            return redirect(url_for("view_galaxy"))
+        try:
+            current_system = get_current_system()
+            if not current_system:
+                return redirect(url_for("view_galaxy"))
 
-        current_galaxy = get_current_galaxy()
-        planet_name = planet_name.lower()
-        page = session.get(f"page_{current_galaxy.coordinates}", 1)
+            current_galaxy = get_current_galaxy()
+            planet_name = planet_name.lower()
+            page = session.get(f"page_{current_galaxy.coordinates}", 1)
 
-        for planet_index, planet in current_system.planets.items():
-            if planet.name.lower() == planet_name:
-                session["planet"] = planet_index
+            for planet_index, planet in current_system.planets.items():
+                if planet.name.lower() == planet_name:
+                    session["planet"] = planet_index
 
-                image_url = ""
-                planet_url = generate_planet_url(current_galaxy.coordinates, current_system.index, planet_name, page)
+                    image_url = ""
+                    planet_url = generate_planet_url(current_galaxy.coordinates, current_system.index, planet_name, page)
 
-                planet_summary = {
-                    "类型": planet.planet_type,
-                    "大气": planet.atmosphere,
-                    "质量": f"{planet.mass:.2e} kg",
-                    "直径": f"{planet.diameter:.2f} km",
-                    "重力": f"{planet.gravity:.2f} m/s²",
-                    "轨道半径": f"{planet.orbital_radius:.2f} AU",
-                    "轨道周期": f"{planet.orbital_period_seconds / (365.25 * 24 * 3600):.2f} 年",
-                    "表面温度": f"{planet.surface_temperature:.2f} K",
-                    "元素": ", ".join(planet.elements),
-                    "生命形式": planet.life_forms,
-                }
+                    planet_summary = {
+                        "类型": planet.planet_type,
+                        "大气": planet.atmosphere,
+                        "质量": f"{planet.mass:.2e} kg",
+                        "直径": f"{planet.diameter:.2f} km",
+                        "重力": f"{planet.gravity:.2f} m/s²",
+                        "轨道半径": f"{planet.orbital_radius:.2f} AU",
+                        "轨道周期": f"{planet.orbital_period_seconds / (365.25 * 24 * 3600):.2f} 年",
+                        "表面温度": f"{planet.surface_temperature:.2f} K",
+                        "元素": ", ".join(planet.elements),
+                        "生命形式": planet.life_forms,
+                    }
 
-                universe_config = {"remote": config.remote, "seed_name": config.seed_name, "node_id": config.node_id, "seed_str": config.seed_str, "cosmic_origin_time": config.cosmic_origin_time}
+                    universe_config = {"remote": config.remote, "seed_name": config.seed_name, "node_id": config.node_id, "seed_str": config.seed_str, "cosmic_origin_time": config.cosmic_origin_time}
 
-                return render_template(
-                    "planet.html",
-                    planet=planet,
-                    planet_index=planet_index,
-                    system=current_system,
-                    galaxy=current_galaxy,
-                    image_url=image_url,
-                    summary=planet_summary,
-                    planet_url=planet_url,
-                    version=VERSION,
-                    versionHash=VERSION_HASH,
-                    run_mode=RUN,
-                    cosmic_origin_time=config.cosmic_origin_time,
-                    initial_angle_rotation=planet.initial_angle_rotation,
-                    universe_config=universe_config,
-                )
+                    return render_template(
+                        "planet.html",
+                        planet=planet,
+                        planet_index=planet_index,
+                        system=current_system,
+                        galaxy=current_galaxy,
+                        image_url=image_url,
+                        summary=planet_summary,
+                        planet_url=planet_url,
+                        version=VERSION,
+                        versionHash=VERSION_HASH,
+                        run_mode=RUN,
+                        cosmic_origin_time=config.cosmic_origin_time,
+                        initial_angle_rotation=planet.initial_angle_rotation,
+                        universe_config=universe_config,
+                    )
 
-        return redirect(url_for("view_system", system_index=current_system.index))
+            return redirect(url_for("view_system", system_index=current_system.index))
+        except Exception as e:
+            return render_template("error.html", message=f"An unexpected error occurred: {str(e)}", run_mode=RUN)
 
     @app.route("/stargate/<encoded_url>", endpoint="stargate")
     def stargate(encoded_url):
