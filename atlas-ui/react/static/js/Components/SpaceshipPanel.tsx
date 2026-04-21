@@ -361,7 +361,7 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                         </div>
                       </div>
 
-                      <div className="text-[8px] text-gray-500 mt-2">Complete daily tasks to save more locations</div>
+                      <div className="text-[8px] text-gray-500 mt-2">完成每日任务以保存更多位置</div>
                     </div>
                   </div>
 
@@ -599,6 +599,7 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                           className={`w-full px-2 py-1.5 rounded text-[10px] font-medium transition-all duration-200 ${passiveGeneration.antimatter + passiveGeneration.element115 + passiveGeneration.deuterium > 0 ? "bg-gradient-to-r from-purple-600/30 to-blue-600/30 hover:from-purple-600/40 hover:to-blue-600/40 text-purple-300 border border-purple-500/50 hover:border-purple-400/70 cursor-pointer" : "bg-gray-700/30 text-gray-500 border border-gray-600/30 cursor-not-allowed"}`}
                         >
                           🚀 从 {passiveGeneration.sources.planets}🪐 {passiveGeneration.sources.systems}⭐ 收集
+                        </button>
                       </div>
                     )}
                   </div>
@@ -653,14 +654,14 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                         const progressPercent = Math.max(0, Math.min(100, (progress / maxCooldown) * 100));
 
                         const formatTimeRemaining = (hours: number) => {
-                          if (hours <= 0) return "Ready";
+                          if (hours <= 0) return "就绪";
                           const totalMinutes = Math.floor(hours * 60);
                           const h = Math.floor(totalMinutes / 60);
                           const m = totalMinutes % 60;
                           if (h > 0) {
-                            return `${h}h ${m}m`;
+                            return `${h}小时 ${m}分钟`;
                           }
-                          return `${m}m`;
+                          return `${m}分钟`;
                         };
 
                         const stargateIndex = location.stargateUrl.indexOf("/stargate/");

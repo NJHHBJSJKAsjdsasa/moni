@@ -157,11 +157,11 @@ const PlanetInfo: React.FC<PlanetInfoProps> = ({ planet, system, galaxy, cosmicO
   const formatPeriod = (seconds: number) => {
     const days = seconds / (60 * 60 * 24);
     if (days < 30) {
-      return `${days.toFixed(2)} days`;
+      return `${days.toFixed(2)} 天`;
     } else if (days < 365) {
-      return `${(days / 30).toFixed(2)} months`;
+      return `${(days / 30).toFixed(2)} 月`;
     } else {
-      return `${(days / 365).toFixed(2)} years`;
+      return `${(days / 365).toFixed(2)} 年`;
     }
   };
 
