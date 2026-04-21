@@ -599,6 +599,7 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                           className={`w-full px-2 py-1.5 rounded text-[10px] font-medium transition-all duration-200 ${passiveGeneration.antimatter + passiveGeneration.element115 + passiveGeneration.deuterium > 0 ? "bg-gradient-to-r from-purple-600/30 to-blue-600/30 hover:from-purple-600/40 hover:to-blue-600/40 text-purple-300 border border-purple-500/50 hover:border-purple-400/70 cursor-pointer" : "bg-gray-700/30 text-gray-500 border border-gray-600/30 cursor-not-allowed"}`}
                         >
                           🚀 从 {passiveGeneration.sources.planets}🪐 {passiveGeneration.sources.systems}⭐ 收集
+                        </button>
                       </div>
                     )}
                   </div>

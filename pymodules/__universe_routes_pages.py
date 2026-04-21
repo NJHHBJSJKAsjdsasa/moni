@@ -207,17 +207,17 @@ def register_universe_page_routes(app, universe, config):
 
             star_summary = [
                 {
-                    "Type": star["Type"],
-                    "Color": star["Color"],
-                    "Size": f"{star['Radius Factor']:.2f} solar radii",
+                    "类型": star["Type"],
+                    "颜色": star["Color"],
+                    "大小": f"{star['Radius Factor']:.2f} 太阳半径",
                 }
                 for star in current_system.stars
             ]
 
             system_summary = {
-                "Star System Type": current_system.star_system_type.capitalize(),
-                "Number of Planets": current_system.num_planets,
-                "Stars": star_summary,
+                "恒星系统类型": current_system.star_system_type.capitalize(),
+                "行星数量": current_system.num_planets,
+                "恒星": star_summary,
             }
 
             if request.headers.get("Accept") == "application/json":
@@ -267,16 +267,16 @@ def register_universe_page_routes(app, universe, config):
                 planet_url = generate_planet_url(current_galaxy.coordinates, current_system.index, planet_name, page)
 
                 planet_summary = {
-                    "Type": planet.planet_type,
-                    "Atmosphere": planet.atmosphere,
-                    "Mass": f"{planet.mass:.2e} kg",
-                    "Diameter": f"{planet.diameter:.2f} km",
-                    "Gravity": f"{planet.gravity:.2f} m/s²",
-                    "Orbital Radius": f"{planet.orbital_radius:.2f} AU",
-                    "Orbital Period": f"{planet.orbital_period_seconds / (365.25 * 24 * 3600):.2f} years",
-                    "Surface Temperature": f"{planet.surface_temperature:.2f} K",
-                    "Elements": ", ".join(planet.elements),
-                    "Life Forms": planet.life_forms,
+                    "类型": planet.planet_type,
+                    "大气": planet.atmosphere,
+                    "质量": f"{planet.mass:.2e} kg",
+                    "直径": f"{planet.diameter:.2f} km",
+                    "重力": f"{planet.gravity:.2f} m/s²",
+                    "轨道半径": f"{planet.orbital_radius:.2f} AU",
+                    "轨道周期": f"{planet.orbital_period_seconds / (365.25 * 24 * 3600):.2f} 年",
+                    "表面温度": f"{planet.surface_temperature:.2f} K",
+                    "元素": ", ".join(planet.elements),
+                    "生命形式": planet.life_forms,
                 }
 
                 universe_config = {"remote": config.remote, "seed_name": config.seed_name, "node_id": config.node_id, "seed_str": config.seed_str, "cosmic_origin_time": config.cosmic_origin_time}

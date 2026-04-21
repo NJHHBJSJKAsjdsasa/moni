@@ -342,7 +342,7 @@ export class SpaceshipResourceManager {
 
     const sourceDiv = document.createElement("div");
     sourceDiv.className = "text-xs text-purple-300 mt-1";
-    sourceDiv.textContent = `Collected from ${generation.sources.planets}🪐 ${generation.sources.systems}⭐`;
+    sourceDiv.textContent = `从 ${generation.sources.planets}🪐 ${generation.sources.systems}⭐ 收集`;
 
     contentDiv.appendChild(titleDiv);
     contentDiv.appendChild(resourceDiv);
