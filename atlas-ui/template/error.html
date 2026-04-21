@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {% include 'partials/_favicon.html' %} {% include 'partials/_preamble.html' %} {{ vitecss('global') | safe }}
+
+    <meta name="atlas-version" content="{{ version }}" />
+    <meta name="atlas-version-hash" content="{{ versionHash }}" />
+    <meta name="error-message" content="{{ message }}" />
+
+    <title>Atlas Error</title>
+  </head>
+  <body>
+    {% include 'partials/_preloader.html' %}
+
+    <div id="atlas-react-root"></div>
+
+    {{ vitejs('__error__') | safe }}
+  </body>
+</html>

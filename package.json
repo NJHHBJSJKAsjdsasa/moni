@@ -1,0 +1,48 @@
+{
+  "name": "atlas",
+  "version": "2.10.434",
+  "description": "<p align=\"center\"><img style=\"border-radius: 30px; box-shadow: 0px 5px 5px #7b7b7b;\" src=\"https://github.com/SurceBeats/Atlas/blob/main/public/atlas-logo.jpg\" width=\"400\"></p>",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SurceBeats/Atlas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Polyform Non-Commercial License 1.0.0",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/SurceBeats/Atlas/issues"
+  },
+  "homepage": "https://github.com/SurceBeats/Atlas#readme",
+  "dependencies": {
+    "@types/pako": "^2.0.4",
+    "@types/three": "^0.183.1",
+    "@vitejs/plugin-react": "^5.1.4",
+    "pako": "^2.1.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-medium-image-zoom": "^5.3.0",
+    "simplex-noise": "^4.0.3",
+    "three": "^0.183.1",
+    "three-orbitcontrols": "^2.110.2",
+    "vite": "^7.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.1.7",
+    "autoprefixer": "^10.4.24",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.9.2"
+  }
+}

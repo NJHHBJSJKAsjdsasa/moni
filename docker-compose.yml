@@ -1,0 +1,15 @@
+---
+version: "3.9"
+services:
+  the-atlas:
+    image: bansheetech/atlas:latest
+    container_name: the-atlas
+    ports:
+      - "42424:42424"
+    environment:
+      - EXTERNAL_P2P_OPEN_PORT=42424
+      - ENABLE_P2P=true
+    volumes:
+      - ./atlas_docker_volume:/app
+      # - /your_ssl_cert:/app/ssl:ro # optional SSL certs directory
+    restart: always
