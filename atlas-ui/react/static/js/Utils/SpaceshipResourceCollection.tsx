@@ -198,9 +198,9 @@ export class SpaceshipResourceCollectionManager {
     const titleDiv = document.createElement("div");
     titleDiv.className = "text-sm font-bold text-green-300";
     if (isFirstTime) {
-      titleDiv.textContent = "🎉 First Time Mining - Bonus Applied!";
+      titleDiv.textContent = "🎉 首次采矿 - 奖励已应用！";
     } else {
-      titleDiv.textContent = "Resources Collected!";
+      titleDiv.textContent = "资源已收集！";
     }
 
     const resourceDiv = document.createElement("div");
@@ -245,13 +245,13 @@ export class SpaceshipResourceCollectionManager {
       discoveryBonusDiv.className = "text-xs text-yellow-300 mt-1";
 
       if (bonusInfo.discoveryBonus >= 5.0) {
-        discoveryBonusDiv.textContent = "🎉 Daily Bonus: 5x (First 3 discoveries today)";
+        discoveryBonusDiv.textContent = "🎉 每日奖励: 5倍 (今日前3个发现)";
       } else if (bonusInfo.discoveryBonus >= 3.0) {
-        discoveryBonusDiv.textContent = "✨ Daily Bonus: 3x (Discoveries 4-5 today)";
+        discoveryBonusDiv.textContent = "✨ 每日奖励: 3倍 (今日第4-5个发现)";
       } else if (bonusInfo.discoveryBonus >= 2.0) {
-        discoveryBonusDiv.textContent = "🌟 Daily Bonus: 2x (Discoveries 6-7 today)";
+        discoveryBonusDiv.textContent = "🌟 每日奖励: 2倍 (今日第6-7个发现)";
       } else if (bonusInfo.discoveryBonus >= 1.5) {
-        discoveryBonusDiv.textContent = "⭐ Daily Bonus: 1.5x (Discoveries 8-10 today)";
+        discoveryBonusDiv.textContent = "⭐ 每日奖励: 1.5倍 (今日第8-10个发现)";
       }
 
       contentDiv.appendChild(discoveryBonusDiv);
@@ -261,7 +261,7 @@ export class SpaceshipResourceCollectionManager {
       const shipMultiplierDiv = document.createElement("div");
       shipMultiplierDiv.className = "text-xs text-blue-300 mt-1";
       const multiplierText = bonusInfo.shipMultiplier === Math.floor(bonusInfo.shipMultiplier) ? bonusInfo.shipMultiplier.toFixed(0) : bonusInfo.shipMultiplier.toFixed(1);
-      shipMultiplierDiv.textContent = `🚀 Ship Bonus: ${multiplierText}x`;
+      shipMultiplierDiv.textContent = `🚀 飞船奖励: ${multiplierText}倍`;
       contentDiv.appendChild(shipMultiplierDiv);
     }
 
@@ -270,7 +270,7 @@ export class SpaceshipResourceCollectionManager {
     if (!hasAnyBonus) {
       const noBonusDiv = document.createElement("div");
       noBonusDiv.className = "text-xs text-gray-400 mt-1";
-      noBonusDiv.textContent = "No bonus active, improve your ship";
+      noBonusDiv.textContent = "无奖励激活，提升你的飞船";
       contentDiv.appendChild(noBonusDiv);
     }
 

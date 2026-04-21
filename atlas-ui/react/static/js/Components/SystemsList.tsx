@@ -73,8 +73,8 @@ const SystemsList: React.FC<SystemsListProps> = ({ systems, coordinates }) => {
 
       {systems.length === 0 && (
         <div className="col-span-full text-center py-12">
-          <div className="text-gray-400 text-lg mb-2">No systems found</div>
-          <div className="text-gray-500 text-sm">This galaxy appears to be empty</div>
+          <div className="text-gray-400 text-lg mb-2">未找到系统</div>
+          <div className="text-gray-500 text-sm">该星系似乎为空</div>
         </div>
       )}
     </div>

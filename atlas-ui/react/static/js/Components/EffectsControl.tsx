@@ -27,25 +27,25 @@ const EffectsControl: React.FC<EffectsControlProps> = ({ effects, onToggleEffect
 
   const formatEffectName = (type: string): string => {
     const effectNames: Record<string, string> = {
-      crystalline_surface: "Crystalline Surface",
-      fire_eruption: "Fire Eruption",
-      carbon_trails: "Carbon Trails",
-      radiation_rings: "Radiation Rings",
-      molten_lava: "Molten Lava",
-      lava_flows: "Lava Flows",
-      lava_rivers: "Lava Rivers",
-      aquifer_water: "Aquifer Water",
-      ocean_currents: "Ocean Currents",
-      atmosphere_clouds: "Atmosphere Clouds",
-      crystal_formations: "Crystal Formations",
-      cloud_layers: "Cloud Layers",
-      storm_systems: "Storm Systems",
-      volcanic_activity: "Volcanic Activity",
-      aurora: "Aurora",
-      magnetic_field: "Magnetic Field",
-      city_lights: "City Lights",
-      bioluminescence: "Bioluminescence",
-      thermal_emissions: "Thermal Emissions",
+      crystalline_surface: "结晶表面",
+      fire_eruption: "火焰喷发",
+      carbon_trails: "碳轨迹",
+      radiation_rings: "辐射环",
+      molten_lava: "熔岩",
+      lava_flows: "熔岩流",
+      lava_rivers: "熔岩河",
+      aquifer_water: "含水层",
+      ocean_currents: "洋流",
+      atmosphere_clouds: "大气云",
+      crystal_formations: "晶体形成",
+      cloud_layers: "云层",
+      storm_systems: "风暴系统",
+      volcanic_activity: "火山活动",
+      aurora: "极光",
+      magnetic_field: "磁场",
+      city_lights: "城市灯光",
+      bioluminescence: "生物发光",
+      thermal_emissions: "热辐射",
     };
 
     return (
@@ -66,9 +66,9 @@ const EffectsControl: React.FC<EffectsControlProps> = ({ effects, onToggleEffect
   return (
     <div className="mt-4 pt-3 border-t border-white/10">
       <div className="flex items-center justify-between mb-2">
-        <div className="text-xs text-gray-400">3D Effects Control</div>
+        <div className="text-xs text-gray-400">3D效果控制</div>
         <button onClick={() => setShowEffects(!showEffects)} className="text-xs text-blue-400 hover:text-blue-300 transition-colors">
-          {showEffects ? "Hide" : "Show"} ({localEffects.filter((e) => e.enabled).length}/{localEffects.length})
+          {showEffects ? "隐藏" : "显示"} ({localEffects.filter((e) => e.enabled).length}/{localEffects.length})
         </button>
       </div>
 
@@ -94,7 +94,7 @@ const EffectsControl: React.FC<EffectsControlProps> = ({ effects, onToggleEffect
             }}
             className="text-xs px-2 py-1 bg-green-500/20 text-green-400 rounded hover:bg-green-500/30 transition-colors"
           >
-            Enable All
+            启用全部
           </button>
           <button
             onClick={() => {
@@ -102,7 +102,7 @@ const EffectsControl: React.FC<EffectsControlProps> = ({ effects, onToggleEffect
             }}
             className="text-xs px-2 py-1 bg-red-500/20 text-red-400 rounded hover:bg-red-500/30 transition-colors"
           >
-            Disable All
+            禁用全部
           </button>
         </div>
       )}

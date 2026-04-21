@@ -243,7 +243,7 @@ const CoordinateSelector: React.FC<CoordinateSelectorProps> = ({ onCoordinateCha
   const [showSpinner, setShowSpinner] = useState(false);
   const [showInitializeJump, setShowInitializeJump] = useState(true);
   const [slideUpInitializeJump, setSlideUpInitializeJump] = useState(false);
-  const [randomJumpText, setRandomJumpText] = useState("🎲 Random Location");
+  const [randomJumpText, setRandomJumpText] = useState("🎲 随机位置");
   const [shouldCollapseButton, setShouldCollapseButton] = useState(false);
   const [coordinateGlitchStates, setCoordinateGlitchStates] = useState({
     x: false,
@@ -690,7 +690,7 @@ const CoordinateSelector: React.FC<CoordinateSelectorProps> = ({ onCoordinateCha
       setTimeout(() => {
         setIsRandomJumping(false);
         setShowInitializeJump(true);
-        setRandomJumpText("🎲 Random Location");
+        setRandomJumpText("🎲 随机位置");
       }, 2000);
     }
   };

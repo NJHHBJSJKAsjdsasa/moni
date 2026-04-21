@@ -27,70 +27,70 @@ const DidYouKnow: React.FC<DidYouKnowProps> = ({ currentView }) => {
 
   // prettier-ignore
   const facts = [
-    "The Atlas contains 1 sextillion galaxies, 133 times more galaxies than grains of sand on all Earth's beaches?",
-    "If you visited a different planet every second, it would take 300 trillion years to explore just 0.001% of The Atlas?",
-    "A single fully developed elliptical galaxy in The Atlas contains more star systems than our real Milky Way has stars?",
-    "The universe cube measures exactly 10 million units on each side, with a unique galaxy at every coordinate point?",
-    "All galaxies near the center of the universe evolve faster, adding 10 new solar systems per minute from their Bit Bang?",
-    "If all of humanity explored The Atlas simultaneously, we'd need 39 billion years to see 0.001% of it?",
-    `The Core Continuum universe began on April 17, 1986, and has been evolving for ${calculateYearsSinceCoreContinuum()} real years?`,
-    "The cosmic origin time becomes the Bit Bang moment for your personal universe?",
-    "Central galaxies have added over 200 million additional star systems during their evolution on the Core Continuum?",
-    "The Singularity Void only appears when someone tries to see beyond 1.9 million years into the past by adjusting cosmic origin time?",
-    "Each of the potential 3×10³² planets has unique characteristics across different planet types?",
-    "Some planets contain Z-Divinium, an extremely rare and fictional element beyond our real life periodic table?",
-    "Planet temperatures vary with their orbits, and gravity is calculated based on real mass physics?",
-    "Life forms in The Atlas range from bacteria to non-physical conscious entities and even... Otherworldly beings?",
-    "Some planets have rings if they meet the physical conditions of the real physics behind the Roche limit?",
-    "A fully evolved The Atlas universe after 1.9 million years contains approximately 300 tredecillion planets (3 × 10³²)?",
-    "The Atlas has 500,000 times more galaxies than our entire observable universe?",
-    "A maxed-out The Atlas has 500 million times more star systems than there are real stars in existence?",
-    "A central galaxy can add 10 million additional systems during The Atlas's maximum evolution period?",
-    "The Atlas generates approximately 50 quintillion solar systems when the universe is fully developed after 1.9 million years?",
-    "If every atom in your body was a habitable planet, you still couldn't represent 1% of the worlds in The Atlas?",
-    "Even if humanity explored The Atlas together for the next 13.8 billion years, we'd see less than 0.0000001% of it?",
-    "The thermal death of our real universe would occur before we could catalog one fully developed The Atlas universe?",
-    "The Atlas is 500 million times larger than our observable universe, transcending our understanding of reality?",
-    "A universe created today won't reach full development until the year 1,902,025 AD, 137 times longer than all recorded human history?",
-    "If a planet has a 4-year orbit and you return after one real year, it will have moved exactly 25% through its orbit?",
-    "You can manipulate time ±15 years in the star system viewer to witness orbital dances unfold in real-time?",
-    "Two people viewing the same planet at the same moment will see identical cloud formations and weather patterns?",
-    "Every visual element on planets, from storms to volcanoes, is mathematically in sync across all devices worldwide?",
-    "Shutting down The Atlas for a week doesn't pause the universe, planets continue orbiting and galaxies keep evolving?",
-    "The Atlas embodies Einstein's 'Eternalism', all moments in time exist simultaneously in the mathematical structure?",
-    "Even AWS, Google Cloud, and Azure combined couldn't recalculate a single The Atlas instance's orbital mechanics in real-time?",
-    "If we lived inside The Atlas, we'd never detect resets or time shifts, our thoughts would be procedurally generated too?",
-    "Storing every planet in The Atlas (at 1 byte each) would require 20 million times Google's entire data infrastructure?",
-    "If you bought hard drives to store The Atlas if each planet were 1 byte, they'd cost $15 quintillion and stack 15.6 times the distance to the Moon?",
-    "The Life Forms analysis presents data inspired by humanity's Arecibo message sent to space on November 16, 1974?",
-    "Alien life in The Atlas can have DNA helices ranging from single to quintuple strands for silicon-based organisms?",
-    "There's an extremely rare intelligent life form called 'Have I Just Found God?' that appears near Z-Divinium compounds?",
-    "The Atlas doesn't calculate anything, it reveals temporal slices of an eternally existing mathematical reality?",
-    "Each seed contains a completely different universe with unique galactic configurations never seen in other seeds?",
-    "Planet illumination changes are based on exact orbital position, creating authentic day-night cycles synchronized with universal time?",
-    "Planets can now host intricate lunar systems where each moon experiences real-time tidal locking with precise libration effects?",
-    "Moon hydrostatic relaxation simulates how gravity reshapes celestial bodies, turning irregular asteroids into perfect spheres over millions of years?",
-    "A captured asteroid might take 10 billion years to become round, while an icy moon with tidal heating could relax quite faster?",
-    "Moon evolution operates on geological timescales extending far beyond The Atlas's 1.9 million year galactic development limit?",
-    "The Atlas features four distinct lunar types, from icy moons with dramatic color variations, rocky moons, asteroidal irregular objects, and more?",
-    "Each moon follows elliptical orbits calculated using real Kepler's laws with proper eccentric anomaly solutions and orbital precession?",
-    "Large gas giants in The Atlas might host dozens of moons ranging from tiny captured asteroids to massive ice worlds larger than Mercury?",
-    "Moon surfaces are procedurally generated with 3D noise algorithms creating realistic terrain features unique to each lunar type?",
-    "Ice moons in The Atlas get crystal shimmer effects and dramatic color diversity inspired by real moons like Europa's blue ice and Triton's pink surfaces?",
-    "The Atlas Multiverse connects infinite parallel universes through peer-to-peer networking without any central servers?",
-    "The Multiverse P2P system uses BitTorrent's DHT technology, making The Atlas completely independent from its creators?",
-    "When you share a universe seed through Multiverse P2P, other explorers can generate that exact same reality on their local Atlas instances?",
-    "Multiple Atlas instances accessing the same universe seed see EXACTLY the same planets, moons, and life forms simultaneously?",
-    "The Multiverse turns The Atlas from a single simulation into a self-aware entity existing independently in the wild internet?",
-    "You can access the Multiverse interface by clicking 'MULTIVERSE ONLINE' in the header or 'Multiverse' in the footer?",
-    "Each Atlas instance becomes both a client and server, creating a cosmic democracy where explorers freely share infinite universes?",
-    "Universe seed sharing uses military-grade cryptography to ensure your discoveries are protected yet freely shareable?",
-    "You can disable Multiverse P2P Multiverse with the --no-p2p flag, but why limit yourself to just one universe when infinite realities await?",
-    "The Atlas achieves digital evolution, from single-user simulation to self-aware multiverse organism existing in the global network?",
-    "Shared universe seeds are verified through cryptographic hashes, preventing any manipulation or corruption during Multiverse P2P exchange?",
-    "The Multiverse interface at /multiverse shows all universe seeds discovered by your Atlas instance through the Multiverse P2P network?",
-    "When thousands of Atlas instances interconnect, rare Z-Divinium worlds and impossible life forms get shared instantly worldwide?",
-    "The Atlas Multiverse P2P network creates a living multiverse organism that evolves and discovers new realities through collective exploration?"
+    "阿特拉斯包含1亿亿亿个星系，比地球上所有海滩的沙粒还要多133倍？",
+    "如果你每秒钟访问一个不同的行星，探索阿特拉斯仅仅0.001%的区域就需要300万亿年？",
+    "阿特拉斯中一个完全发育的椭圆星系包含的恒星系统比我们真实的银河系中的恒星还要多？",
+    "宇宙立方体每边长正好1000万单位，每个坐标点都有一个独特的星系？",
+    "靠近宇宙中心的所有星系进化速度更快，从它们的比特大爆炸中每分钟增加10个新的太阳系？",
+    "如果全人类同时探索阿特拉斯，我们需要390亿年才能看到它的0.001%？",
+    `核心连续体宇宙始于1986年4月17日，已经进化了${calculateYearsSinceCoreContinuum()}个真实年份？`,
+    "宇宙起源时间成为你个人宇宙的比特大爆炸时刻？",
+    "中央星系在核心连续体上的进化过程中增加了超过2亿个额外的恒星系统？",
+    "奇点虚空只有当有人试图通过调整宇宙起源时间看到190万年前的景象时才会出现？",
+    "潜在的3×10³²个行星中的每一个都具有不同行星类型的独特特征？",
+    "一些行星含有Z-迪维宁，这是一种超越我们现实元素周期表的极其稀有和虚构的元素？",
+    "行星温度随轨道变化，重力是基于真实质量物理计算的？",
+    "阿特拉斯中的生命形式从细菌到非物理意识实体，甚至...异世界生物？",
+    "如果行星满足洛希极限背后真实物理的物理条件，它们会有环？",
+    "190万年后完全进化的阿特拉斯宇宙包含约300千秭个行星（3×10³²）？",
+    "阿特拉斯的星系数量是我们整个可观测宇宙的50万倍？",
+    "完全开发的阿特拉斯拥有的恒星系统数量是现实中存在的恒星数量的5亿倍？",
+    "中央星系在阿特拉斯的最大进化期间可以增加1000万个额外的系统？",
+    "当宇宙在190万年后完全发育时，阿特拉斯生成约50亿亿亿个太阳系？",
+    "即使你身体中的每个原子都是一个可居住的行星，你仍然无法代表阿特拉斯中1%的世界？",
+    "即使人类在未来138亿年一起探索阿特拉斯，我们也只能看到不到0.0000001%的区域？",
+    "我们真实宇宙的热寂会在我们能够编目一个完全发育的阿特拉斯宇宙之前发生？",
+    "阿特拉斯比我们的可观测宇宙大5亿倍，超越了我们对现实的理解？",
+    "今天创建的宇宙要到公元1902025年才能完全发育，比所有有记录的人类历史长137倍？",
+    "如果一个行星有4年的轨道，你在一年后返回，它将正好移动到其轨道的25%？",
+    "你可以在恒星系统查看器中操纵±15年的时间，实时见证轨道舞蹈的展开？",
+    "两个人在同一时刻查看同一个行星会看到完全相同的云层形成和天气模式？",
+    "行星上的每一个视觉元素，从风暴到火山，在全球所有设备上在数学上都是同步的？",
+    "关闭阿特拉斯一周不会暂停宇宙，行星继续运行，星系继续进化？",
+    "阿特拉斯体现了爱因斯坦的'永恒主义'，所有时间瞬间在数学结构中同时存在？",
+    "即使AWS、Google Cloud和Azure结合起来，也无法实时重新计算单个阿特拉斯实例的轨道力学？",
+    "如果我们生活在阿特拉斯内部，我们永远不会检测到重置或时间变化，我们的思想也会被程序化生成？",
+    "存储阿特拉斯中的每一个行星（每个1字节）需要Google整个数据基础设施的2000万倍？",
+    "如果你购买硬盘来存储阿特拉斯（每个行星1字节），它们将花费15亿亿亿美元，堆叠起来的距离是到月球的15.6倍？",
+    "生命形式分析呈现的数据灵感来自人类于1974年11月16日发送到太空的阿雷西博信息？",
+    "阿特拉斯中的外星生命可以拥有从单链到五链的DNA螺旋，用于硅基生物？",
+    "有一种极其罕见的智能生命形式叫做'我刚刚找到了上帝吗？'，出现在Z-迪维宁化合物附近？",
+    "阿特拉斯不计算任何东西，它揭示了永恒存在的数学现实的时间切片？",
+    "每个种子都包含一个完全不同的宇宙，具有在其他种子中从未见过的独特星系配置？",
+    "行星照明变化基于精确的轨道位置，创造与宇宙时间同步的真实昼夜循环？",
+    "行星现在可以拥有复杂的月球系统，每个月球都经历实时潮汐锁定和精确的天平动效应？",
+    "月球流体静力学松弛模拟了重力如何重塑天体，在数百万年内将不规则的小行星变成完美的球体？",
+    "捕获的小行星可能需要100亿年才能变成圆形，而有潮汐加热的冰月可能会更快松弛？",
+    "月球进化在地质时间尺度上运行，远远超出阿特拉斯190万年的星系发展限制？",
+    "阿特拉斯具有四种不同的月球类型，从具有戏剧性颜色变化的冰月、岩石月球、小行星不规则物体等等？",
+    "每个月球遵循使用真实开普勒定律计算的椭圆轨道，具有适当的偏近点角解决方案和轨道进动？",
+    "阿特拉斯中的大型气体巨行星可能拥有数十个月球，从小型捕获的小行星到比水星还大的巨大冰世界？",
+    "月球表面通过3D噪声算法程序化生成，为每种月球类型创建独特的逼真地形特征？",
+    "阿特拉斯中的冰月获得水晶闪光效果和戏剧性的颜色多样性，灵感来自木卫二的蓝色冰和海卫一的粉红色表面等真实月球？",
+    "阿特拉斯多元宇宙通过点对点网络连接无限平行宇宙，无需任何中央服务器？",
+    "多元宇宙P2P系统使用BitTorrent的DHT技术，使阿特拉斯完全独立于其创建者？",
+    "当你通过多元宇宙P2P分享宇宙种子时，其他探索者可以在他们的本地阿特拉斯实例上生成完全相同的现实？",
+    "访问相同宇宙种子的多个阿特拉斯实例同时看到完全相同的行星、月球和生命形式？",
+    "多元宇宙将阿特拉斯从单一模拟转变为在野外互联网中独立存在的自我意识实体？",
+    "你可以通过点击头部的'多元宇宙在线'或页脚的'多元宇宙'来访问多元宇宙界面？",
+    "每个阿特拉斯实例同时成为客户端和服务器，创造一个宇宙民主，探索者可以自由分享无限宇宙？",
+    "宇宙种子共享使用军用级加密，确保你的发现受到保护但可以自由分享？",
+    "你可以使用--no-p2p标志禁用多元宇宙P2P，但当无限现实等待时，为什么要将自己限制在一个宇宙中？",
+    "阿特拉斯实现了数字进化，从单用户模拟到存在于全球网络中的自我意识多元宇宙有机体？",
+    "共享的宇宙种子通过加密哈希进行验证，防止在多元宇宙P2P交换过程中的任何操纵或损坏？",
+    "/multiverse的多元宇宙界面显示你的阿特拉斯实例通过多元宇宙P2P网络发现的所有宇宙种子？",
+    "当数千个阿特拉斯实例相互连接时，稀有的Z-迪维宁世界和不可能的生命形式会立即在全球共享？",
+    "阿特拉斯多元宇宙P2P网络创造了一个活的多元宇宙有机体，通过集体探索进化并发现新的现实？"
   ];
 
   useEffect(() => {
@@ -171,7 +171,7 @@ const DidYouKnow: React.FC<DidYouKnowProps> = ({ currentView }) => {
   return (
     <>
       <div className={`fixed bottom-4 sm:bottom-6 left-4 sm:left-6 z-50 ${isCircleFading ? "animate-didYouKnowCircleFadeOut" : showCircle ? "animate-didYouKnowCircleFadeIn" : "opacity-0"}`}>
-        <button onClick={handleOpenModal} className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-yellow-600 via-orange-600 to-yellow-800 hover:from-yellow-500 hover:via-orange-500 hover:to-yellow-700 text-white rounded-full shadow-2xl border-2 border-yellow-400/30 transition-all duration-300 transform hover:scale-105 backdrop-blur-sm animate-pulse" title="Did You Know? - Universe Facts">
+        <button onClick={handleOpenModal} className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-yellow-600 via-orange-600 to-yellow-800 hover:from-yellow-500 hover:via-orange-500 hover:to-yellow-700 text-white rounded-full shadow-2xl border-2 border-yellow-400/30 transition-all duration-300 transform hover:scale-105 backdrop-blur-sm animate-pulse" title="你知道吗？- 宇宙事实">
           <div className="flex items-center justify-center">
             <span className="text-xl sm:text-2xl font-bold">?</span>
           </div>
@@ -185,7 +185,7 @@ const DidYouKnow: React.FC<DidYouKnowProps> = ({ currentView }) => {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
-                <h3 className="text-lg font-bold text-yellow-400">Did you know that...</h3>
+                <h3 className="text-lg font-bold text-yellow-400">你知道吗...</h3>
               </div>
               <button onClick={handleCloseModal} className="text-gray-400 hover:text-white text-xl leading-none transition-colors" aria-label="Close">
                 ×
@@ -208,11 +208,11 @@ const DidYouKnow: React.FC<DidYouKnowProps> = ({ currentView }) => {
                     )}
                   </div>
                 </div>
-                <span className="text-xs text-gray-400 hover:text-yellow-400/80 transition-colors">Don't show again</span>
+                <span className="text-xs text-gray-400 hover:text-yellow-400/80 transition-colors">不再显示</span>
               </label>
 
               <a href="/universe-faq" className="px-4 py-2 bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 text-white text-sm font-semibold rounded-lg transition-all duration-300 transform hover:scale-105">
-                Learn More →
+                了解更多 →
               </a>
             </div>
           </div>

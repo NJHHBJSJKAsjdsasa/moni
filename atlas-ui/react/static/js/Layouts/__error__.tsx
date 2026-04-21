@@ -33,7 +33,7 @@ const ErrorLayout: React.FC<ErrorLayoutProps> = ({ version, message }) => {
           </div>
 
           <div className="space-y-4">
-            <h1 className="text-2xl sm:text-3xl font-bold text-red-400">System Error</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-red-400">系统错误</h1>
             <p className="text-gray-300 text-lg leading-relaxed">{message}</p>
           </div>
 
@@ -42,7 +42,7 @@ const ErrorLayout: React.FC<ErrorLayoutProps> = ({ version, message }) => {
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
               </svg>
-              Return to Home
+              返回首页
             </a>
           </div>
         </div>

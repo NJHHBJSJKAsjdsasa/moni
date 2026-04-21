@@ -95,15 +95,15 @@ const Pagination: React.FC<PaginationProps> = ({ page, prevPage, nextPage, finis
     <div className="bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 shadow-2xl p-4 sm:p-6 mb-8">
       <div className="flex justify-center items-center gap-2 sm:gap-4 flex-wrap">
         {page !== 1 && (
-          <button onClick={() => (window.location.href = "/galaxy/1")} className={`${baseClasses} ${inactiveClasses}`} title="First page">
-            <span className="hidden sm:inline">First</span>
+          <button onClick={() => (window.location.href = "/galaxy/1")} className={`${baseClasses} ${inactiveClasses}`} title="第一页">
+            <span className="hidden sm:inline">第一页</span>
             <span className="sm:hidden">«</span>
           </button>
         )}
 
         {prevPage && (
-          <button onClick={() => (window.location.href = `/galaxy/${prevPage}`)} className={`${baseClasses} ${inactiveClasses}`} title="Previous page">
-            <span className="hidden sm:inline">Previous</span>
+          <button onClick={() => (window.location.href = `/galaxy/${prevPage}`)} className={`${baseClasses} ${inactiveClasses}`} title="上一页">
+            <span className="hidden sm:inline">上一页</span>
             <span className="sm:hidden">‹</span>
           </button>
         )}
@@ -167,22 +167,22 @@ const Pagination: React.FC<PaginationProps> = ({ page, prevPage, nextPage, finis
         })()}
 
         {nextPage && (
-          <button onClick={() => (window.location.href = `/galaxy/${nextPage}`)} className={`${baseClasses} ${inactiveClasses}`} title="Next page">
-            <span className="hidden sm:inline">Next</span>
+          <button onClick={() => (window.location.href = `/galaxy/${nextPage}`)} className={`${baseClasses} ${inactiveClasses}`} title="下一页">
+            <span className="hidden sm:inline">下一页</span>
             <span className="sm:hidden">›</span>
           </button>
         )}
 
         {page !== finish && (
-          <button onClick={() => (window.location.href = `/galaxy/${finish}`)} className={`${baseClasses} ${inactiveClasses}`} title="Last page">
-            <span className="hidden sm:inline">Last</span>
+          <button onClick={() => (window.location.href = `/galaxy/${finish}`)} className={`${baseClasses} ${inactiveClasses}`} title="最后一页">
+            <span className="hidden sm:inline">最后一页</span>
             <span className="sm:hidden">»</span>
           </button>
         )}
       </div>
 
       <div className="text-center mt-4 text-sm text-gray-400">
-        Page {page} of {finish}
+        第 {page} 页，共 {finish} 页
       </div>
     </div>
   );

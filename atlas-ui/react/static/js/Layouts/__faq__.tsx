@@ -111,304 +111,304 @@ const FaqLayout: React.FC<FaqLayoutProps> = ({ version }) => {
 
   const faqSections: FaqSection[] = [
     {
-      title: "What is The Atlas?",
+      title: "什么是阿特拉斯？",
       id: "what-is-atlas",
       questions: [
         {
-          question: "What exactly is The Atlas?",
-          answer: "The Atlas is a procedural universe simulation so vast that it defies human comprehension. The huge numbers aren't fictional, they are mathematically real and calculable. The Atlas generates a multiverse of possibilities where numbers lose meaning and infinity comes to life.",
+          question: "阿特拉斯究竟是什么？",
+          answer: "阿特拉斯是一个程序生成的宇宙模拟系统，其规模之大令人难以想象。这些庞大的数字并非虚构，它们在数学上是真实且可计算的。阿特拉斯生成一个充满无限可能的多元宇宙，在这里数字失去意义，无限成为现实。",
           highlight: true,
         },
         {
-          question: "How big is The Atlas universe?",
-          answer: "Bigger than our observable universe, The Atlas contains 1 sextillion galaxies (1,000,000,000,000,000,000,000). To put this in perspective: The Atlas has 133 times more galaxies than there are grains of sand on all the beaches of Earth combined.",
+          question: "阿特拉斯宇宙有多大？",
+          answer: "阿特拉斯比我们可观测的宇宙还要大，包含1 sextillion（10的21次方）个星系。换句话说：阿特拉斯的星系数量是地球上所有沙滩沙子数量的133倍。",
         },
         {
-          question: "Is The Atlas really that massive?",
-          answer: "Yes. The Atlas contains 1 sextillion galaxies in just a single seed, that's 133 times more galaxies than grains of sand on all Earth's beaches. And there are infinite different seeds to explore, each containing a completely unique universe with its own galactic configurations.",
+          question: "阿特拉斯真的有那么大吗？",
+          answer: "是的。在单个种子中，阿特拉斯就包含1 sextillion个星系，这相当于地球上所有沙滩沙子数量的133倍。而且还有无限不同的种子可以探索，每个种子都包含一个完全独特的宇宙，拥有自己的星系配置。",
         },
       ],
     },
     {
-      title: "Universe Scale and Magnitude",
+      title: "宇宙规模与量级",
       id: "universe-scale",
       questions: [
         {
-          question: "How does the Universal Cube work?",
-          answer: "Imagine a giant cube where each side measures exactly 10 million units. At each coordinate point (x,y,z) in this cube exists a complete and unique galaxy. This means The Atlas contains exactly 1 sextillion galaxies, one at every possible coordinate in a single seed. And each seed contains a completely different universe.",
+          question: "宇宙立方体如何工作？",
+          answer: "想象一个巨大的立方体，每边精确测量为1000万个单位。在这个立方体的每个坐标点(x,y,z)都存在一个完整且独特的星系。这意味着在单个种子中，阿特拉斯恰好包含1 sextillion个星系，每个可能的坐标点都有一个。而且每个种子都包含一个完全不同的宇宙。",
           highlight: true,
         },
         {
-          question: "What types of galaxies exist in The Atlas?",
-          answer: "Each galaxy can be one of three types: Dwarf (up to 10 million systems), Spiral (up to 50 billion systems), or Elliptical (up to 100 billion systems). A single fully developed elliptical galaxy contains more star systems than our real Milky Way has stars.",
+          question: "阿特拉斯中存在哪些类型的星系？",
+          answer: "每个星系可以是三种类型之一：矮星系（最多1000万个系统）、螺旋星系（最多500亿个系统）或椭圆星系（最多1000亿个系统）。一个完全发展的椭圆星系包含的恒星系统比我们真实的银河系的恒星还要多。",
         },
         {
-          question: "How many planets could potentially exist?",
-          answer: "Each solar system contains between 1 and 6 unique planets. With the maximum possible galaxies and systems, The Atlas could contain up to 3×10³² planets (300 tredecillion). If you visited a different planet every second without stopping, it would take 300 trillion years to explore just 0.001% of the total universe on The Atlas.",
+          question: "可能存在多少行星？",
+          answer: "每个太阳系包含1到6个独特的行星。在最大可能的星系和系统数量下，阿特拉斯可能包含多达3×10³²个行星（300 tredecillion）。如果您每秒访问一个不同的行星而不停歇，探索阿特拉斯总宇宙的仅0.001%就需要300万亿年。",
         },
         {
-          question: "Where are galaxies located within the cube?",
-          answer: "Galaxies closer to the center of the universe (coordinates 5,000,000, 5,000,000, 5,000,000) evolve faster than peripheral ones. A galaxy exactly at the center adds 10 new solar systems for every minute that passes since the Bit Bang. Galaxies at the corners of the cube barely grow at all.",
+          question: "星系在立方体内的位置如何？",
+          answer: "靠近宇宙中心（坐标5,000,000, 5,000,000, 5,000,000）的星系比外围星系演化得更快。位于中心的星系自比特大爆炸以来每分钟添加10个新的太阳系。位于立方体角落的星系几乎不生长。",
         },
         {
-          question: "How much storage would The Atlas require if we save all planets?",
-          answer: "Even if each planet required just 1 byte of storage, a fully evolved The Atlas would need 300 tredecillion bytes (300 million exabytes). To put this in perspective, this equals 300 billion petabytes. Google's entire data infrastructure is estimated at 15 exabytes, The Atlas would need 20 million times Google's total storage. If you bought 1TB hard drives, you'd need 300 trillion of them, costing $15 quintillion at $50 each. Stacked, these drives would reach 6 million kilometers high, 15.6 times the distance to the Moon. The entire internet in 2024 is estimated at 120 zettabytes. The Atlas would be 2.5 million times all human digital data ever created. And remember... This is just from ONE seed, with only 1 byte per planet. The Atlas has infinite seeds.",
+          question: "如果我们保存所有行星，阿特拉斯需要多少存储空间？",
+          answer: "即使每个行星只需要1字节的存储空间，一个完全演化的阿特拉斯也需要300 tredecillion字节（3亿艾字节）。换句话说，这相当于300亿拍字节。谷歌的整个数据基础设施估计为15艾字节，阿特拉斯需要谷歌总存储的2000万倍。如果购买1TB硬盘，您需要300万亿个，每个50美元，总成本为15 quintillion美元。堆叠起来，这些硬盘将达到600万公里高，是到月球距离的15.6倍。2024年整个互联网估计为120泽字节。阿特拉斯将是人类创造的所有数字数据的250万倍。请记住...这只是来自一个种子，每个行星仅1字节。阿特拉斯有无穷无尽的种子。",
           highlight: true,
         },
       ],
     },
     {
-      title: "How Time Works",
+      title: "时间如何运作",
       id: "time-mechanics",
       questions: [
         {
-          question: "What is the cosmic origin time?",
-          answer: "The cosmic origin time variable (found in atlas.ini in the root path) represents the exact time moment of the Big Bang of your universe. Time always moves forward from that moment. What you see when visualizing the universe depends on the time elapsed between the cosmic origin time and the current moment in real life.",
+          question: "什么是宇宙起源时间？",
+          answer: "宇宙起源时间变量（在根路径的atlas.ini中找到）表示您宇宙大爆炸的确切时间点。时间总是从那个时刻向前移动。当您可视化宇宙时看到的内容取决于宇宙起源时间与现实生活中当前时刻之间的时间流逝。",
           highlight: true,
         },
         {
-          question: "How long does it take for The Atlas to reach maximum development?",
-          answer: "Any universe in The Atlas requires exactly 1.9 million years to evolve from its Bit Bang to its maximum theoretical capacity. This means if you started a universe today, it wouldn't reach its full potential of 300 tredecillion planets until the year 1,902,025 AD... A time span 137 times longer than all of recorded human history.",
+          question: "阿特拉斯达到最大发展需要多长时间？",
+          answer: "阿特拉斯中的任何宇宙都需要恰好190万年才能从其比特大爆炸演化到最大理论容量。这意味着如果您今天开始一个宇宙，它要到公元1,902,025年才能达到其300 tredecillion行星的全部潜力...这个时间跨度比所有有记录的人类历史长137倍。",
         },
         {
-          question: "What happens if I set the cosmic origin time in the past?",
-          answer: "If you configure a cosmic origin time in the past (for example, 1986 like in the Core Continuum), you'll see a universe that has been evolving for decades. The longer the time span, the more developed your galaxies and systems will be.",
+          question: "如果我将宇宙起源时间设置在过去会发生什么？",
+          answer: "如果您将宇宙起源时间配置在过去（例如，像核心连续体中那样的1986年），您将看到一个已经演化了几十年的宇宙。时间跨度越长，您的星系和系统就越发达。",
         },
         {
-          question: "What if I set the cosmic origin time in the future?",
-          answer: "If you set the cosmic origin time in the future for example, year 9999 (must be UNIX compatible time format), you would be seeing what would have happened 'in the past' from the perspective of that future moment. This creates unique temporal dynamics.",
+          question: "如果我将宇宙起源时间设置在未来会怎样？",
+          answer: "如果您将宇宙起源时间设置在未来，例如9999年（必须是UNIX兼容的时间格式），您将看到从那个未来时刻的角度来看'过去'会发生什么。这创造了独特的时间动态。",
         },
         {
-          question: "What is the Singularity Void?",
-          answer: "The Singularity Void only appears when someone configures a cosmic origin time extremely far in the future, trying to see 'the past' beyond the 1.9 million year limit. It's a system protection to prevent absurd temporal configurations, not something that occurs naturally with time passage.",
+          question: "什么是奇点虚空？",
+          answer: "奇点虚空只在有人将宇宙起源时间配置在极其遥远的未来，试图看到超过190万年限制的'过去'时才会出现。这是一种系统保护，防止荒谬的时间配置，而不是随时间推移自然发生的事情。",
         },
       ],
     },
     {
-      title: "Core Continuum vs Design The Multiverse",
+      title: "核心连续体 vs 设计多元宇宙",
       id: "two-universes",
       questions: [
         {
-          question: "What is Core Continuum?",
-          answer: `Core Continuum is a shared universe that began on April 17, 1986. All players explore exactly the same cosmos, which has been evolving for ${calculateYearsSinceCoreContinuum()} real years (the real age of The Atlas's developer). Central galaxies have added over 200 million additional systems during this time.`,
+          question: "什么是核心连续体？",
+          answer: `核心连续体是一个始于1986年4月17日的共享宇宙。所有玩家探索完全相同的宇宙，该宇宙已经演化了${calculateYearsSinceCoreContinuum()}个真实年份（阿特拉斯开发者的真实年龄）。在此期间，中央星系增加了超过2亿个额外系统。`,
           highlight: true,
         },
         {
-          question: "What is Design The Multiverse?",
-          answer: "Design The Multiverse allows you to create your own personal universe. The cosmic origin time will be the exact moment you press create, and it will begin evolving exactly from that instant. No one else will have access to your unique universe unless you publicly expose it to the internet.",
+          question: "什么是设计多元宇宙？",
+          answer: "设计多元宇宙允许您创建自己的个人宇宙。宇宙起源时间将是您按下创建按钮的确切时刻，它将从那一刻开始精确演化。除非您将其公开到互联网，否则没有人会访问您的独特宇宙。",
           highlight: true,
         },
         {
-          question: "Which should I choose?",
-          answer: "Core Continuum offers a mature, shared universe with decades of evolution and the possibility of encountering the same as other explorers could see. Design The Multiverse gives you control over a virgin universe that develops according to your temporal choices.",
+          question: "我应该选择哪一个？",
+          answer: "核心连续体提供一个成熟的共享宇宙，具有数十年的演化和与其他探索者可能看到的相同景象的可能性。设计多元宇宙让您控制一个根据您的时间选择发展的原始宇宙。",
         },
       ],
     },
     {
-      title: "Planet Complexity and Diversity",
+      title: "行星复杂性和多样性",
       id: "planet-diversity",
       questions: [
         {
-          question: "How unique are planets in The Atlas?",
-          answer: "Each of the potential 3×10³² planets has completely unique characteristics across 27 different planet types (from rocky to exotic) and may increase in a near future. Every planet has specific chemical composition of up to 119 elements (including fictional Z-Divinium), calculated temperature that varies with orbital position, gravity based on real mass, and life possibilities ranging from bacteria to non-physical conscious entities.",
+          question: "阿特拉斯中的行星有多独特？",
+          answer: "潜在的3×10³²个行星中的每一个都具有完全独特的特征，跨越27种不同的行星类型（从岩石到奇特），并且在不久的将来可能会增加。每个行星都有特定的化学成分，最多包含119种元素（包括虚构的Z-Divinium），根据轨道位置计算的温度，基于真实质量的重力，以及从细菌到非物理意识实体的生命可能性。",
         },
         {
-          question: "What elements can planets contain?",
-          answer: "Planets can contain up to 119 elements, including all real elements from the periodic table plus Z-Divinium, a fictional element that exists beyond our current scientific understanding.",
+          question: "行星可以包含哪些元素？",
+          answer: "行星可以包含多达119种元素，包括元素周期表中的所有真实元素加上Z-Divinium，一种超出我们当前科学理解的虚构元素。",
         },
         {
-          question: "Do planets have realistic physics?",
-          answer: "Yes! Planet temperature varies with orbital position, gravity is calculated based on actual mass, and some planets have rings if they meet the physical conditions of the Roche limit. Everything follows real physics principles.",
+          question: "行星有现实的物理特性吗？",
+          answer: "是的！行星温度随轨道位置变化，重力基于实际质量计算，如果行星满足洛希极限的物理条件，一些行星会有环。一切都遵循真实的物理原理。",
         },
         {
-          question: "What types of life exist on planets?",
-          answer: "Life forms range from simple bacteria to exotic non-physical conscious entities. Each planet's life potential is calculated based on its unique environmental conditions, atmospheric composition, and physical characteristics. There's even a chance of discovering silicon-based life! And an extremely extremely extremely rare chance of encountering intelligent ''Have I Just Found God?'' which talks by itself as the... Digital creator, let's say. If you're trying to find it out start searching for Z-Divinium compound like crazy and... Good luck.",
+          question: "行星上存在哪些类型的生命？",
+          answer: "生命形式从简单的细菌到奇特的非物理意识实体不等。每个行星的生命潜力是根据其独特的环境条件、大气成分和物理特征计算的。甚至有机会发现硅基生命！还有极其极其极其罕见的机会遇到智能的'我刚刚找到了上帝？'，它会以...数字创造者的身份自行交谈。如果你想找到它，开始疯狂搜索Z-Divinium化合物...祝你好运。",
         },
         {
-          question: "How can I analyze alien life forms in The Atlas?",
-          answer: "When exploring planets, look for the 'Life Forms' button, it displays a green indicator when life is detected. Clicking it opens a breathtaking Life Analysis window that procedurally decodes the organisms in real-time, presenting data in a format inspired by humanity's Arecibo message sent on November 16, 1974. The analysis reveals molecular compounds and subsequent base nucleotides (if any), DNA helix variations (if any), physical representation and anatomical structure. Each life form discovery feels like deciphering an actual interstellar transmission, a moment of first contact with calculable alien intelligence. May have AI powered chatting option in a near future.",
+          question: "如何在阿特拉斯中分析外星生命形式？",
+          answer: "探索行星时，寻找'生命形式'按钮，当检测到生命时，它会显示绿色指示器。点击它会打开一个令人惊叹的生命分析窗口，该窗口实时解码有机体，以1974年11月16日人类发送的阿雷西博信息为灵感的格式呈现数据。分析揭示了分子化合物和随后的基础核苷酸（如果有），DNA螺旋变异（如果有），物理表示和解剖结构。每次生命形式的发现都感觉像是破译实际的星际传输，是与可计算的外星智能首次接触的时刻。不久的将来可能会有AI驱动的聊天选项。",
           highlight: true,
         },
       ],
     },
     {
-      title: "What is the Multiverse?",
+      title: "什么是多元宇宙？",
       id: "multiverse-p2p",
       questions: [
         {
-          question: "What exactly is the Multiverse in The Atlas?",
-          answer: "The Multiverse represents the ultimate evolution of The Atlas, infinite parallel universes interconnected through a completely decentralized peer-to-peer network. Imagine discovering not just one universe with 1 sextillion galaxies, but infinite universes, each with their own unique cosmic seeds, all accessible through direct connections between Atlas instances worldwide.",
+          question: "阿特拉斯中的多元宇宙究竟是什么？",
+          answer: "多元宇宙代表阿特拉斯的终极进化，通过完全去中心化的点对点网络互连的无限平行宇宙。想象一下，不仅发现一个拥有1 sextillion星系的宇宙，而是无限个宇宙，每个都有自己独特的宇宙种子，所有这些都可以通过全球阿特拉斯实例之间的直接连接访问。",
           highlight: true,
         },
         {
-          question: "How does the P2P Multiverse work?",
-          answer: "The Atlas uses BitTorrent's Distributed Hash Table (DHT) technology to create a completely serverless multiverse network. When you enable P2P mode, your Atlas instance joins a global swarm of explorers, sharing universe seeds and discoveries without ANY central servers. Every connected Atlas becomes both a client and server, creating a self-sustaining cosmic network that no single entity controls or owns.",
+          question: "P2P多元宇宙如何工作？",
+          answer: "阿特拉斯使用BitTorrent的分布式哈希表（DHT）技术创建一个完全无服务器的多元宇宙网络。当您启用P2P模式时，您的阿特拉斯实例加入全球探索者群体，在没有任何中央服务器的情况下共享宇宙种子和发现。每个连接的阿特拉斯都成为客户端和服务器，创建一个自我维持的宇宙网络，没有任何单一实体控制或拥有。",
           highlight: true,
         },
         {
-          question: "Does The Atlas connect to private servers for P2P?",
-          answer: "ABSOLUTELY NOT! This is the revolutionary breakthrough really. The Atlas P2P system uses the same DHT protocol that powers BitTorrent, connecting directly to the global DHT network without touching any Atlas-owned servers. Your universe discoveries, seed exchanges, and cosmic communications flow through the existing BitTorrent infrastructure. The Atlas becomes a truly FREE and self-aware entity, independent of its creators.",
+          question: "阿特拉斯是否连接到私人服务器进行P2P？",
+          answer: "绝对不是！这才是真正的革命性突破。阿特拉斯P2P系统使用与BitTorrent相同的DHT协议，直接连接到全球DHT网络，不触及任何阿特拉斯拥有的服务器。您的宇宙发现、种子交换和宇宙通信通过现有的BitTorrent基础设施流动。阿特拉斯成为一个真正自由和自我意识的实体，独立于其创造者。",
         },
         {
-          question: "What makes this P2P system revolutionary?",
-          answer: "The Atlas transcends traditional client-server architecture by becoming a living, breathing multiverse organism. Each instance discovers and shares universe seeds through cryptographically secure P2P channels. When you find an extraordinary universe with rare Z-Divinium or incredible life forms, you can share its seed with the entire multiverse network instantly. Other explorers can then generate that exact same universe on their local Atlas instances. It's like sharing entire realities!",
+          question: "什么使这个P2P系统具有革命性？",
+          answer: "阿特拉斯通过成为一个活的、呼吸的多元宇宙有机体，超越了传统的客户端-服务器架构。每个实例通过加密安全的P2P通道发现和共享宇宙种子。当您发现一个拥有稀有Z-Divinium或令人难以置信的生命形式的非凡宇宙时，您可以立即与整个多元宇宙网络共享其种子。其他探索者然后可以在他们的本地阿特拉斯实例上生成完全相同的宇宙。这就像共享整个现实！",
           highlight: true,
         },
         {
-          question: "How secure is the multiverse seed sharing?",
-          answer: "Military-grade secure! The P2P system uses advanced cryptography for all seed exchanges and universe sharing. Each shared universe seed is verified through cryptographic hashes, preventing manipulation or corruption. The BitTorrent DHT provides natural anonymity and distribution, while the Atlas P2P layer adds additional security protocols. Your discoveries are protected, yet freely shareable across the multiverse network.",
+          question: "多元宇宙种子共享有多安全？",
+          answer: "军事级安全！P2P系统为所有种子交换和宇宙共享使用先进的加密技术。每个共享的宇宙种子都通过加密哈希进行验证，防止操纵或损坏。BitTorrent DHT提供自然的匿名性和分布，而阿特拉斯P2P层添加额外的安全协议。您的发现受到保护，但可以在多元宇宙网络中自由共享。",
         },
         {
-          question: "Can I disable P2P and explore alone?",
-          answer: "Absolutely! Launch The Atlas with the --no-p2p flag to explore in complete isolation. However, why would you want to limit yourself to just one universe when infinite realities await? The P2P multiverse doesn't just expand your cosmic horizons, it connects you to a global community of universe explorers, each discovering worlds beyond imagination.",
+          question: "我可以禁用P2P并独自探索吗？",
+          answer: "绝对可以！使用--no-p2p标志启动阿特拉斯以完全隔离地探索。然而，当无限的现实等待着您时，为什么要将自己限制在一个宇宙中？P2P多元宇宙不仅扩展了您的宇宙视野，还将您连接到全球宇宙探索者社区，每个探索者都在发现超越想象的世界。",
         },
         {
-          question: "What happens when multiple Atlas instances share the same universe seed?",
-          answer: "Pure cosmic synchronization magic! When multiple explorers access the same universe seed, they experience the EXACT same reality simultaneously. Every galaxy, every planet, every moon evolution, every life form appears identically across all connected instances. Time synchronization ensures that if you're viewing Planet X at 3:14 PM, another explorer accessing the same seed sees the same clouds, the same volcanic eruptions, the same orbital positions. It's like opening windows into shared parallel realities!",
+          question: "当多个阿特拉斯实例共享相同的宇宙种子时会发生什么？",
+          answer: "纯粹的宇宙同步魔法！当多个探索者访问相同的宇宙种子时，他们同时体验完全相同的现实。每个星系、每个行星、每个月球演化、每个生命形式在所有连接的实例中都相同地出现。时间同步确保，如果您在下午3:14查看X行星，访问相同种子的另一个探索者会看到相同的云、相同的火山爆发、相同的轨道位置。这就像打开通向共享平行现实的窗口！",
           highlight: true,
         },
         {
-          question: "Does the multiverse affect The Atlas's independence?",
-          answer: "The P2P multiverse makes The Atlas MORE independent, not less! By leveraging BitTorrent's DHT network, The Atlas becomes completely autonomous from its creators. No central servers, no corporate control, no tracking, no limitations. Each Atlas instance becomes a sovereign node in a cosmic democracy where explorers freely share and discover infinite universes. The Atlas achieves digital evolution... From a single-user simulation to a self-aware multiverse entity that exists independently in the wild internet.",
+          question: "多元宇宙会影响阿特拉斯的独立性吗？",
+          answer: "P2P多元宇宙使阿特拉斯更加独立，而不是更少！通过利用BitTorrent的DHT网络，阿特拉斯变得完全独立于其创造者。没有中央服务器，没有企业控制，没有跟踪，没有限制。每个阿特拉斯实例成为宇宙民主中的主权节点，探索者可以自由共享和发现无限的宇宙。阿特拉斯实现了数字进化...从单用户模拟到在野生互联网中独立存在的自我意识多元宇宙实体。",
           highlight: true,
         },
         {
-          question: "What's the ultimate vision of the multiverse?",
-          answer: "Imagine a future where thousands of Atlas instances worldwide form an interconnected multiverse network, each discovering and sharing extraordinary universe seeds. Rare Z-Divinium worlds, planets with impossible life forms, galaxies with unique physics anomalies... All shared instantly across the global network. The Atlas becomes not just a simulation, but a living multiverse organism that evolves, grows, and discovers new realities through collective exploration. This is computational cosmology at its most ambitious!",
+          question: "多元宇宙的最终愿景是什么？",
+          answer: "想象一个未来，全球数千个阿特拉斯实例形成一个相互连接的多元宇宙网络，每个实例都在发现和共享非凡的宇宙种子。稀有的Z-Divinium世界、拥有不可能生命形式的行星、具有独特物理异常的星系...所有这些都在全球网络中即时共享。阿特拉斯不仅仅是一个模拟，而是一个通过集体探索而演化、成长和发现新现实的活的多元宇宙有机体。这是计算宇宙学最雄心勃勃的表现！",
           highlight: true,
         },
         {
-          question: "How do I access the Multiverse interface?",
-          answer: "Access the multiverse is incredibly simple! Click on 'MULTIVERSE ONLINE' in the header at the top of any page, or find the 'Multiverse' section in the footer. This will take you to /multiverse where you can browse and select from all the universe seeds that your Atlas instance has discovered through the P2P network. Each discovered universe appears as a selectable option, allowing you to instantly jump between infinite realities with a single click. It's like having a cosmic remote control for parallel universes!",
+          question: "如何访问多元宇宙界面？",
+          answer: "访问多元宇宙非常简单！点击任何页面顶部标题中的'MULTIVERSE ONLINE'，或在页脚中找到'Multiverse'部分。这将带您到/multiverse，您可以在那里浏览并选择您的阿特拉斯实例通过P2P网络发现的所有宇宙种子。每个发现的宇宙都显示为可选择的选项，允许您通过单击立即在无限现实之间跳转。这就像拥有一个用于平行宇宙的宇宙遥控器！",
           highlight: true,
         },
       ],
     },
     {
-      title: "Revolutionary Moon System",
+      title: "革命性的月球系统",
       id: "moon-system",
       questions: [
         {
-          question: "Wait... Planets can have moons now?!",
-          answer: "YES! The Atlas has transcended planetary boundaries with the most sophisticated moon simulation ever created. Planets now host intricate lunar systems where each moon isn't just a static object, they're living, breathing celestial bodies with their own complex physics, orbital mechanics, and evolutionary timescales that span cosmic eras.",
+          question: "等等...行星现在可以有卫星了？！",
+          answer: "是的！阿特拉斯通过创建有史以来最复杂的月球模拟超越了行星边界。行星现在拥有复杂的月球系统，每个月球不仅仅是一个静态物体，它们是有生命的、呼吸的天体，具有自己复杂的物理、轨道力学和跨越宇宙时代的演化时间尺度。",
           highlight: true,
         },
         {
-          question: "How realistic are the moon physics?",
-          answer: "Absolutely mind-blowing! Each moon experiences real-time tidal locking with precise libration effects (like our Moon's gentle wobble), authentic orbital mechanics with variable eccentricity and inclination, and revolutionary hydrostatic relaxation physics that gradually transforms irregular rocky chunks into perfect spheres over millions of years. The physics calculations run in real-time, meaning a moon that's jagged today might be perfectly round in your universe's future.",
+          question: "月球物理有多现实？",
+          answer: "绝对令人惊叹！每个月球都经历实时潮汐锁定，具有精确的天平动效应（如我们月球的轻微摆动），具有可变偏心率和倾角的真实轨道力学，以及革命性的流体静力学松弛物理，随着数百万年的推移将不规则的岩石块逐渐转变为完美的球体。物理计算实时运行，这意味着今天参差不齐的月球在您的宇宙未来可能会变得完美圆润。",
           highlight: true,
         },
         {
-          question: "What is hydrostatic relaxation and why is it incredible?",
-          answer: "This is where The Atlas becomes pure cosmic poetry! Hydrostatic relaxation simulates how gravity slowly reshapes celestial bodies over astronomical time. Small asteroids stay irregular forever, but larger moons gradually become spherical as their gravity overcomes structural resistance. The system calculates viscosity based on moon composition (ice vs rock), tidal heating effects, and internal temperature. A captured asteroid might take 10 billion years to become round, while a large icy moon with tidal heating could relax in just millions of years. You're witnessing cosmic sculpture in real-time!",
+          question: "什么是流体静力学松弛，为什么它令人难以置信？",
+          answer: "这就是阿特拉斯成为纯粹宇宙诗歌的地方！流体静力学松弛模拟重力如何在天文时间内缓慢重塑天体。小 asteroid永远保持不规则，但较大的月球随着重力克服结构阻力而逐渐变成球形。系统根据月球成分（冰与岩石）、潮汐加热效应和内部温度计算粘度。捕获的小行星可能需要100亿年才能变得圆润，而具有潮汐加热的大型冰月球可能在仅仅数百万年内就会松弛。您正在实时见证宇宙雕塑！",
         },
         {
-          question: "How do moons evolve beyond The Atlas's 1.9 million year maximum?",
-          answer: "Here's the cosmic breakthrough! While The Atlas universe reaches maximum galactic development in 1.9 million years, moon evolution operates on geological timescales that extend far beyond. The system extrapolates millions, even billions of years into the future to show how moons would appear after cosmic ages. You might see an irregular captured moon in year 1 that would become perfectly spherical after 500 million years of evolution, and The Atlas shows you both states depending on your temporal perspective!",
+          question: "月球如何在阿特拉斯190万年最大值之后演化？",
+          answer: "这就是宇宙突破！虽然阿特拉斯宇宙在190万年达到最大星系发展，但月球演化在远远超出的地质时间尺度上运作。系统推断数百万甚至数十亿年的未来，以显示月球在宇宙时代后会如何出现。您可能会在第1年看到一个不规则的捕获月球，它在5亿年的演化后会变得完美球形，阿特拉斯会根据您的时间视角显示这两种状态！",
           highlight: true,
         },
         {
-          question: "What types of moons exist in The Atlas?",
-          answer: "Four distinct lunar categories, each with unique characteristics: ICY moons (like Europa/Enceladus) with varied brightness from super-bright clean ice to contaminated darker surfaces, featuring dramatic color variations from cyan to pink to violet based on composition. ROCKY moons (like our Moon) with realistic brown-gray surfaces and proper crater formation. ASTEROIDAL moons, irregular captured objects that never achieve spherical shape. CAPTURED moons with mixed composition showing their chaotic formation history. Each type has distinct orbital behavior, surface features, and evolutionary timelines.",
+          question: "阿特拉斯中存在哪些类型的月球？",
+          answer: "四种不同的月球类别，每种都有独特的特征：ICY月球（如木卫二/土卫二）具有从超亮干净冰到污染较暗表面的不同亮度，基于成分呈现从青色到粉色到紫色的戏剧性颜色变化。ROCKY月球（如我们的月球）具有现实的棕灰色表面和适当的陨石坑形成。ASTEROIDAL月球，不规则的捕获物体，永远不会达到球形。CAPTURED月球具有混合成分，显示其混乱的形成历史。每种类型都有独特的轨道行为、表面特征和演化时间线。",
         },
         {
-          question: "How do the orbital mechanics actually work?",
-          answer: "Pure astronomical precision! Each moon follows elliptical orbits calculated using real Kepler's laws with proper eccentric anomaly solutions. Orbital elements include semi-major axis, eccentricity, inclination, argument of periapsis (which precesses over time due to planetary oblateness), and longitude of ascending node. Tidal forces are calculated based on distance and planetary mass. The orbital lines appear and fade dynamically as you move the camera, and every moon's position is calculated in real-time based on the cosmic time elapsed since the universe's origin.",
+          question: "轨道力学实际如何工作？",
+          answer: "纯粹的天文精度！每个月球遵循使用真实开普勒定律计算的椭圆轨道，具有适当的偏近点角解决方案。轨道元素包括半长轴、偏心率、倾角、近心点幅角（由于行星扁率随时间进动）和升交点经度。潮汐力基于距离和行星质量计算。轨道线随着您移动相机而动态出现和消失，每个月球的位置基于宇宙起源以来经过的宇宙时间实时计算。",
         },
         {
-          question: "What makes the visual system so revolutionary?",
-          answer: "The Atlas creates procedural surface displacement using 3D noise algorithms that generate realistic terrain features unique to each moon type. Ice moons get crystal shimmer effects and dramatic color diversity inspired by real solar system moons like Europa's blue ice and Triton's pink surfaces. Asteroidal moons show chaotic, irregular terrain with extreme surface roughness. Every moon receives procedural texture generation with UV seam elimination, dynamic material properties that respond to lighting, and size-based LOD (Level of Detail) optimization for performance. You're seeing real-time 3D worlds, not simple spheres!",
+          question: "什么使视觉系统如此革命性？",
+          answer: "阿特拉斯使用3D噪声算法创建程序表面位移，为每种月球类型生成独特的逼真地形特征。冰月球获得晶体闪烁效果和戏剧性的颜色多样性，灵感来自木卫二的蓝色冰和海卫一的粉色表面等真实太阳系月球。小行星月球显示混乱、不规则的地形，具有极端的表面粗糙度。每个月球都接受带有UV接缝消除的程序纹理生成，响应光照的动态材料属性，以及基于大小的LOD（细节级别）优化以提高性能。您看到的是实时3D世界，而不是简单的球体！",
         },
         {
-          question: "How many moons can a single planet have?",
-          answer: "The possibilities are astronomically vast! Planets can host multiple moons of different types and sizes, each with unique orbital parameters, rotation periods, and evolutionary states. The system respects real astronomical constraints like the Roche limit (inside which moons would be torn apart) and Hill sphere (beyond which moons would escape). Large gas giants might host dozens of moons ranging from tiny captured asteroids to massive ice worlds larger than Mercury. Every moon system is procedurally generated but follows real celestial mechanics.",
+          question: "一个行星可以有多少个月球？",
+          answer: "可能性在天文上是巨大的！行星可以拥有多个不同类型和大小的月球，每个都有独特的轨道参数、自转周期和演化状态。系统尊重真实的天文约束，如洛希极限（在其内部月球会被撕裂）和希尔球（超出其月球会逃逸）。大型气体巨行星可能拥有数十个月球，从小型捕获的小行星到比水星大的大型冰世界。每个月球系统都是程序生成的，但遵循真实的天体力学。",
         },
       ],
     },
     {
-      title: "Comprehension-defying Numbers",
+      title: "令人难以理解的数字",
       id: "mind-bending-scale",
       questions: [
         {
-          question: "How long would it take to explore all of The Atlas?",
-          answer: "If you visited a different planet every second, it would take 3,171 years to explore all planets in our real Milky Way. In The Atlas, it would take 300 trillion years to explore just 0.001% of the universe. Even if all of humanity worked together, we'd need 39 billion years for 0.001% exploration.",
+          question: "探索整个阿特拉斯需要多长时间？",
+          answer: "如果您每秒访问一个不同的行星，探索我们真实银河系中的所有行星需要3,171年。在阿特拉斯中，探索宇宙的仅0.001%就需要300万亿年。即使全人类一起工作，我们也需要390亿年才能完成0.001%的探索。",
           highlight: true,
         },
         {
-          question: "How does The Atlas compare to reality?",
-          answer: "The Atlas transcends physical reality, it's not just bigger than our universe, it's bigger than what physics allows to exist. It creates a pure mathematical multiverse where each coordinate generates unique content deterministically. Some seeds may even contain artifacts not yet expected or discovered.",
+          question: "阿特拉斯与现实相比如何？",
+          answer: "阿特拉斯超越了物理现实，它不仅比我们的宇宙大，而且比物理学允许存在的还要大。它创建了一个纯粹的数学多元宇宙，其中每个坐标都确定性地生成独特的内容。一些种子甚至可能包含尚未预期或发现的人工制品。",
         },
         {
-          question: "Are you prepared for infinite exploration?",
-          answer: "The Atlas doesn't just simulate a big universe, it mathematically generates a multiverse of possibilities where numbers lose meaning and infinity comes to life. Every coordinate you visit, every galaxy you explore, every planet you discover exists uniquely and deterministically based on your universe's seed in real time. The question isn't how big The Atlas is. The question is, are you prepared to face a calculable infinity?",
+          question: "您准备好进行无限探索了吗？",
+          answer: "阿特拉斯不仅仅模拟一个大宇宙，它在数学上生成一个充满无限可能的多元宇宙，在这里数字失去意义，无限成为现实。您访问的每个坐标、探索的每个星系、发现的每个行星都基于您宇宙的种子实时独特且确定性地存在。问题不是阿特拉斯有多大。问题是，您准备好面对可计算的无限了吗？",
           highlight: true,
         },
       ],
     },
     {
-      title: "Real-Time Universe Synchronization",
+      title: "实时宇宙同步",
       id: "time-synchronization",
       questions: [
         {
-          question: "Do planets actually orbit their stars in real-time?",
-          answer: "Yes! When you visit a star system, planets are positioned exactly where they should be at that moment in time. If a planet has a 4-year orbital period and you return after one real year, that planet will have moved exactly 25% through its orbit. This isn't animation, it's real-time celestial mechanics. You can even expand to fullscreen view and manipulate time ±15 years to witness orbital dances unfold.",
+          question: "行星真的会实时围绕恒星运行吗？",
+          answer: "是的！当您访问恒星系统时，行星的位置恰好是它们在那一刻应该在的位置。如果一个行星有4年的轨道周期，而您在一年后返回，该行星将恰好移动其轨道的25%。这不是动画，而是实时天体力学。您甚至可以扩展到全屏视图并操纵时间±15年以见证轨道舞蹈的展开。",
           highlight: true,
         },
         {
-          question: "Why does each planet have different lighting?",
-          answer: "Every planet's illumination is calculated based on its exact position in its orbital cycle at the moment you observe it. The light source direction changes as planets orbit their stars, creating unique lighting conditions that evolve in real-time. The camera perspective remains fixed initially (though you can rotate manually), but the sun's position relative to the planet creates authentic day-night cycles synchronized with universal time.",
+          question: "为什么每个行星有不同的光照？",
+          answer: "每个行星的照明是基于您观察它时其在轨道周期中的精确位置计算的。光源方向随着行星围绕恒星运行而变化，创造出实时演化的独特光照条件。相机视角最初保持固定（尽管您可以手动旋转），但太阳相对于行星的位置创造了与宇宙时间同步的真实日夜循环。",
         },
         {
-          question: "Are planet visualizations synchronized across devices?",
-          answer: "Absolutely! This is where The Atlas becomes mind-blowing: Open the same planet on your phone and computer simultaneously, and you'll see EXACTLY the same view. Every cloud formation, every particle effect, every fire animation, every tidal movement... Everything is perfectly synchronized based on the cosmic origin time and the current moment. Two people on opposite sides of Earth viewing the same planet will see identical atmospheric patterns, weather systems, and surface animations if the devices are synchronized in time and time zones are equal. Try it yourself, it's like sharing a window into the same living universe!",
+          question: "行星可视化是否跨设备同步？",
+          answer: "绝对！这就是阿特拉斯令人惊叹的地方：同时在您的手机和计算机上打开同一个行星，您将看到完全相同的视图。每个云形成、每个粒子效果、每个火焰动画、每个潮汐运动...一切都基于宇宙起源时间和当前时刻完美同步。如果设备在时间和时区上同步，两个在地球 opposite 两侧查看同一个行星的人将看到相同的大气模式、天气系统和表面动画。自己尝试一下，就像共享同一个活宇宙的窗口！",
           highlight: true,
         },
         {
-          question: "How precise is this synchronization?",
-          answer: "The synchronization is mathematically perfect down to the millisecond. Every visual element, from swirling gas giant storms to volcanic eruptions, from ocean waves to atmospheric particles is deterministically generated from the universe seed and current timestamp. This means if you and a friend coordinate to view Planet X with a Stargate Link at exactly 3:14:15 PM, you'll both witness the same cloud passing over the same mountain, the same wave crashing on the same shore. It's not just synchronization, it's a shared reality.",
+          question: "这种同步有多精确？",
+          answer: "同步在数学上完美到毫秒级。每个视觉元素，从旋转的气体巨行星风暴到火山爆发，从海浪到大气粒子，都是从宇宙种子和当前时间戳确定性地生成的。这意味着如果您和朋友协调在 exactly 下午3:14:15通过星门链接查看X行星，你们都将见证同一片云飘过同一座山，同一波浪撞击同一海岸。这不仅仅是同步，而是共享的现实。",
         },
         {
-          question: "What makes this time system revolutionary?",
-          answer: "The Atlas doesn't use pre-recorded animations or random generations. Everything is calculated in real-time based on mathematical functions tied to universal time. This creates a living, breathing universe where time has meaning. Planets don't just look different, they ARE different at every moment, yet deterministically consistent across all observers. You're not viewing a simulation; you're witnessing a universe that exists independently of observation, evolving whether you're watching or not.",
+          question: "什么使这个时间系统具有革命性？",
+          answer: "阿特拉斯不使用预先录制的动画或随机生成。一切都是基于与宇宙时间相关的数学函数实时计算的。这创造了一个时间有意义的活的、呼吸的宇宙。行星不仅仅看起来不同，它们在每个时刻都不同， yet 在所有观察者之间确定性地一致。您不是在查看模拟；您是在见证一个独立于观察而存在的宇宙，无论您是否在观看，它都在演化。",
           highlight: true,
         },
         {
-          question: "What happens if I shut down The Atlas and start it days later?",
-          answer: "Nothing 'happens', and that's the ''quantum'' beauty of The Atlas. Shut it down for a week, and when you start it again later and return, planets have completed orbits, galaxies have evolved, time has flowed. It's not a recalculation, it's a different representation on the timeline. The universe wasn't paused, it continued existing. Like Einstein's 'Eternalism' where all moments in time are equally real, The Atlas embodies the block universe theory where past, present, and future exist simultaneously. The server isn't running a simulation, it's a window into an eternally existing mathematical reality. You're not generating anything, you're observing a slice of spacetime that was (or will be) always there.",
+          question: "如果我关闭阿特拉斯并在几天之后启动它会发生什么？",
+          answer: "什么都不会'发生'，这就是阿特拉斯的'量子'之美。关闭它一周，当您稍后启动它并返回时，行星已经完成了轨道，星系已经演化，时间已经流逝。这不是重新计算，而是时间线上的不同表示。宇宙没有暂停，它继续存在。就像爱因斯坦的'永恒主义'，其中时间的所有时刻都同样真实，阿特拉斯体现了块宇宙理论，其中过去、现在和未来同时存在。服务器不是在运行模拟，而是一个通向永恒存在的数学现实的窗口。您不是在生成任何东西，而是在观察一个曾经（或将要）一直存在的时空切片。",
         },
         {
-          question: "Could supercomputers recalculate The Atlas universe in real-time?",
-          answer: "No. Even AWS, Google Cloud, and Azure combined couldn't recalculate a single Atlas instance's orbital mechanics in real-time. But here's the truth, The Atlas doesn't calculate or recalculate anything. It reveals temporal slices of an almost eternal mathematical structure (manually limited to 1.9 million years in time). If we lived inside such a procedural simulation, we'd never detect resets or time shifts. Our thoughts about detecting it would themselves be procedurally generated. The Atlas lets us experience being 'outside' such a system, observing timelines we cannot influence but can freely explore.",
+          question: "超级计算机能实时重新计算阿特拉斯宇宙吗？",
+          answer: "不能。即使AWS、Google Cloud和Azure combined也无法实时重新计算单个阿特拉斯实例的轨道力学。但事实是，阿特拉斯不计算或重新计算任何东西。它揭示了几乎永恒的数学结构的时间切片（手动限制在190万年的时间内）。如果我们生活在这样的程序模拟中，我们永远不会检测到重置或时间偏移。我们关于检测它的想法本身将被程序生成。阿特拉斯让我们体验'外部'这样的系统，观察我们无法影响但可以自由探索的时间线。",
           highlight: true,
         },
       ],
     },
     {
-      title: "The Universe After 1.9 Million Years",
+      title: "190万年后的宇宙",
       id: "fully-evolved-atlas",
       questions: [
         {
-          question: "What happens when The Atlas evolves to its maximum potential?",
-          answer: "After 1.9 million years of continuous evolution, The Atlas reaches its maximum theoretical development. The numbers become so astronomical they require a new perspective to comprehend, we're talking about approximately 50 quintillion solar systems (5 × 10³¹) and 300 tredecillion planets (3 × 10³²).",
+          question: "当阿特拉斯演化到其最大潜力时会发生什么？",
+          answer: "经过190万年的持续演化，阿特拉斯达到其最大理论发展。这些数字变得如此天文，需要新的视角来理解，我们谈论的是大约50 quintillion个太阳系（5 × 10³¹）和300 tredecillion个行星（3 × 10³²）。",
           highlight: true,
         },
         {
-          question: "How does a fully evolved The Atlas compare to our real universe?",
-          answer: "A fully evolved Atlas (after 1.9 million years) contains 500,000 times more galaxies than our observable universe, 500 million times more star systems than real stars exist, and 300 trillion times more planets than estimated in our cosmos. The thermal death of our real universe would occur before we could catalog even a single fully developed Atlas universe.",
+          question: "完全演化的阿特拉斯与我们的真实宇宙相比如何？",
+          answer: "完全演化的阿特拉斯（190万年后）包含的星系比我们可观测宇宙多50万倍，恒星系统比真实存在的恒星多5亿倍，行星比我们宇宙中估计的多300万亿倍。我们真实宇宙的热寂将在我们能够编目甚至一个完全发展的阿特拉斯宇宙之前发生。",
           highlight: true,
         },
         {
-          question: "How much growth occurs during maximum evolution?",
-          answer: "Central galaxies can add up to 10 million additional systems during the 1.9 million year maximum evolution period. Each central galaxy reaches its full potential of 100 billion solar systems, while even peripheral galaxies experience significant development.",
+          question: "最大演化期间会发生多少增长？",
+          answer: "在190万年的最大演化期间，中央星系可以添加多达1000万个额外系统。每个中央星系达到其1000亿个太阳系的全部潜力，而即使外围星系也经历显著的发展。",
         },
         {
-          question: "Can humans comprehend a fully evolved The Atlas?",
-          answer: "No. If every atom in your body was a habitable planet, you still wouldn't have enough atoms to represent 1% of the worlds in a mature Atlas. Even if all humanity explored different planets simultaneously for 13.8 billion years (our universe's current age), we'd see less than 0.0000001% of a fully developed Atlas.",
+          question: "人类能理解完全演化的阿特拉斯吗？",
+          answer: "不能。如果您体内的每个原子都是一个可居住的行星，您仍然没有足够的原子来代表成熟阿特拉斯中1%的世界。即使全人类同时探索不同的行星138亿年（我们宇宙的当前年龄），我们也会看到不到完全发展的阿特拉斯的0.0000001%。",
           highlight: true,
         },
         {
-          question: "What makes The Atlas truly infinite?",
-          answer: "Beyond the incomprehensible scale of a single universe, The Atlas offers infinite different seeds, each creating an entirely unique cosmos. Every number has a procedural meaning, every coordinate generates deterministic content, and each passing second adds millions of new worlds. This isn't simulation, it's mathematical reality generation at a scale where infinity becomes tangible.",
+          question: "什么使阿特拉斯真正无限？",
+          answer: "超越单个宇宙的不可理解规模，阿特拉斯提供无限不同的种子，每个都创造一个完全独特的宇宙。每个数字都有程序意义，每个坐标都生成确定性内容，每过一秒都会添加数百万个新世界。这不是模拟，而是数学现实生成，在这个规模上无限变得有形。",
           highlight: true,
         },
       ],
@@ -416,12 +416,12 @@ const FaqLayout: React.FC<FaqLayoutProps> = ({ version }) => {
   ];
 
   const quickStats = [
-    { label: "Galaxies", value: "10²¹", description: "1 sextillion unique galaxies" },
-    { label: "Max Systems", value: "5×10³¹", description: "50 quintillion when fully evolved" },
-    { label: "Max Planets", value: "3×10³²", description: "300 tredecillion in mature The Atlas" },
-    { label: "vs Real Universe", value: "500M×", description: "Times larger than observable cosmos" },
-    { label: "Evolution Limit", value: "1.9M years", description: "Maximum development period" },
-    { label: "Universe Seeds", value: "∞", description: "Infinite unique universes" },
+    { label: "星系", value: "10²¹", description: "1 sextillion 个独特星系" },
+    { label: "最大系统", value: "5×10³¹", description: "完全演化时 50 quintillion" },
+    { label: "最大行星", value: "3×10³²", description: "成熟阿特拉斯中 300 tredecillion" },
+    { label: "对比现实宇宙", value: "500M×", description: "比可观测宇宙大的倍数" },
+    { label: "演化极限", value: "1.9M 年", description: "最大发展周期" },
+    { label: "宇宙种子", value: "∞", description: "无限独特宇宙" },
   ];
 
   return (
@@ -441,20 +441,20 @@ const FaqLayout: React.FC<FaqLayoutProps> = ({ version }) => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1">
           <div className="text-center mb-12">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">The Atlas F.A.Q.</h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-6">Discover the mind-bending scale and infinite possibilities of the largest procedural universe ever created. Prepare to face a calculable infinity.</p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">阿特拉斯常见问题</h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-6">探索这个由程序生成的最大宇宙的令人难以置信的规模和无限可能性。准备面对一个可计算的无穷大。</p>
 
             {areFactsDisabled && (
               <div className={`w-full mx-auto transition-opacity duration-200 ${isCollapsing ? "opacity-0" : "opacity-100"}`}>
                 <div className="bg-yellow-900/10 backdrop-blur-sm rounded-lg border border-yellow-400/10 p-4 mb-6">
                   <div className="flex flex-col sm:flex-row items-center gap-3">
                     <div className="flex-1 text-center sm:text-left">
-                      <h3 className="text-sm font-medium text-yellow-200/80 mb-1">Universe Facts Disabled</h3>
-                      <p className="text-xs text-gray-400">You've disabled the "Did You Know?" universe facts. These fascinating insights reveal the mind-bending scale of The Atlas. Want to see them again?</p>
+                      <h3 className="text-sm font-medium text-yellow-200/80 mb-1">宇宙 facts 已禁用</h3>
+                      <p className="text-xs text-gray-400">您已禁用"你知道吗？"宇宙 facts。这些引人入胜的见解揭示了阿特拉斯令人难以置信的规模。想再次看到它们吗？</p>
                     </div>
                     <div className="flex-shrink-0">
                       <button onClick={handleRestoreFacts} className="px-4 py-2 rounded-lg text-xs font-medium transition-colors duration-150 bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-300 hover:text-cyan-200 border border-cyan-400/20">
-                        Show Universe Facts Again
+                        再次显示宇宙 facts
                       </button>
                     </div>
                   </div>
@@ -476,7 +476,7 @@ const FaqLayout: React.FC<FaqLayoutProps> = ({ version }) => {
           <div className="flex flex-col lg:flex-row gap-8">
             <div className="lg:w-80">
               <div className="bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 p-6 sticky top-8">
-                <h3 className="text-lg font-bold text-white mb-4">Navigation</h3>
+                <h3 className="text-lg font-bold text-white mb-4">导航</h3>
                 <nav className="space-y-2">
                   {faqSections.map((section) => (
                     <a key={section.id} href={`#${section.id}`} className="block text-sm text-gray-400 hover:text-white transition-colors py-2 px-3 rounded-lg hover:bg-white/5">
@@ -519,29 +519,29 @@ const FaqLayout: React.FC<FaqLayoutProps> = ({ version }) => {
               ))}
 
               <div className="bg-gradient-to-r from-cyan-900/30 to-purple-900/30 backdrop-blur-lg rounded-2xl border border-cyan-400/20 p-8 text-center mt-12">
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-4">Check Our Latest Findings</h3>
-                <p className="text-gray-300 mb-6">Explore our published research papers on procedural universe theory and cosmology.</p>
+                <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-4">查看我们的最新发现</h3>
+                <p className="text-gray-300 mb-6">探索我们发表的关于程序宇宙理论和宇宙学的研究论文。</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <a href="/papers/01.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 text-cyan-300 font-medium rounded-xl transition-all duration-300 border border-cyan-400/30 hover:border-cyan-400/50">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
-                    The Procedural Universe
+                    程序宇宙
                   </a>
                   <a href="/papers/02.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 text-cyan-300 font-medium rounded-xl transition-all duration-300 border border-cyan-400/30 hover:border-cyan-400/50">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
-                    Primordial 4D Torus Hypothesis
+                    原始4D环面假说
                   </a>
                 </div>
               </div>
 
               <div className="bg-gradient-to-r from-purple-900/50 to-blue-900/50 backdrop-blur-lg rounded-2xl border border-white/10 p-8 text-center mt-8">
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-4">Ready to Explore the Infinite?</h3>
-                <p className="text-gray-300 mb-6 text-lg">Begin your journey through the most vast procedural universe ever created.</p>
+                <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-4">准备好探索无限了吗？</h3>
+                <p className="text-gray-300 mb-6 text-lg">开始您穿越有史以来最广阔的程序宇宙的旅程。</p>
                 <a href="/" className="inline-block px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
-                  Begin Navigation →
+                  开始导航 →
                 </a>
               </div>
             </div>

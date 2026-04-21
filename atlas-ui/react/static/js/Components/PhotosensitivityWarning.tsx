@@ -78,35 +78,35 @@ const PhotosensitivityWarning: React.FC<PhotosensitivityWarningProps> = ({ onPro
           </div>
 
           {/* Title */}
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center tracking-tight px-2">PHOTOSENSITIVITY WARNING</h1>
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center tracking-tight px-2">光敏性警告</h1>
 
           {/* Content */}
           <div className="space-y-2 sm:space-y-3 text-gray-300 px-2">
             <p className="text-sm sm:text-base md:text-lg leading-relaxed text-center">
-              The following experience contains <span className="font-bold text-white">flashing lights</span>,<span className="font-bold text-white"> rapid movements</span>, and
-              <span className="font-bold text-white"> intense 3D visual effects</span>.
+              以下体验包含 <span className="font-bold text-white">闪烁灯光</span>、<span className="font-bold text-white">快速移动</span> 和
+              <span className="font-bold text-white">强烈的3D视觉效果</span>。
             </p>
-            <p className="text-xs sm:text-sm md:text-base leading-relaxed text-center text-gray-400">These may trigger seizures in people with photosensitive epilepsy or similar conditions.</p>
+            <p className="text-xs sm:text-sm md:text-base leading-relaxed text-center text-gray-400">这些可能会触发光敏性癫痫或类似疾病患者的癫痫发作。</p>
           </div>
 
           {/* Countdown */}
           <div className="text-center py-3 sm:py-4 md:py-6">
-            <p className="text-xs sm:text-sm text-gray-400 mb-2 sm:mb-3">Continuing automatically in</p>
+            <p className="text-xs sm:text-sm text-gray-400 mb-2 sm:mb-3">将在以下时间自动继续</p>
             <div className="text-5xl sm:text-6xl md:text-7xl font-bold text-white tabular-nums">{countdown}</div>
           </div>
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4 px-2">
             <button onClick={handleProceedAndSave} className="flex-1 bg-white hover:bg-gray-100 text-black font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg sm:rounded-xl transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-white/50 text-base sm:text-lg">
-              Continue
+              继续
             </button>
             <button onClick={handleEnablePhotosensitivityMode} className="flex-1 bg-gray-800 hover:bg-gray-700 border-2 border-gray-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg sm:rounded-xl transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gray-600/50 text-base sm:text-lg">
-              I'm Photosensitive
+              我有光敏性
             </button>
           </div>
 
           {/* Footer note */}
-          <p className="text-[10px] sm:text-xs text-gray-500 text-center leading-relaxed pt-2 sm:pt-4 px-2">Your preference will be saved. You can change it anytime from the footer settings.</p>
+          <p className="text-[10px] sm:text-xs text-gray-500 text-center leading-relaxed pt-2 sm:pt-4 px-2">您的偏好将被保存。您可以随时从页脚设置中更改它。</p>
         </div>
       </div>
     </div>

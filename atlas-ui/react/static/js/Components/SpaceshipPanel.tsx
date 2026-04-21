@@ -246,7 +246,7 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                  <h3 className="text-white font-bold text-lg">🚀 Spaceship Control</h3>
+                  <h3 className="text-white font-bold text-lg">🚀 飞船控制</h3>
                 </div>
                 <button onClick={handleClose} className="text-gray-400 hover:text-white transition-colors duration-200">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -257,13 +257,13 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
 
               <div className="flex mt-3 space-x-1 overflow-x-auto">
                 <button onClick={() => setActiveTab("stats")} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-200 whitespace-nowrap ${activeTab === "stats" ? "bg-blue-500/30 text-blue-300 border border-blue-500/50" : "text-gray-400 hover:text-white hover:bg-white/10"}`}>
-                  📊 Stats
+                  📊 统计
                 </button>
                 <button onClick={() => setActiveTab("ship")} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-200 whitespace-nowrap ${activeTab === "ship" ? "bg-green-500/30 text-green-300 border border-green-500/50" : "text-gray-400 hover:text-white hover:bg-white/10"}`}>
-                  🚀 Ship
+                  🚀 飞船
                 </button>
                 <button onClick={() => setActiveTab("saved")} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-200 whitespace-nowrap ${activeTab === "saved" ? "bg-purple-500/30 text-purple-300 border border-purple-500/50" : "text-gray-400 hover:text-white hover:bg-white/10"}`}>
-                  📍 Saved ({locationStats?.total || 0})
+                  📍 已保存 ({locationStats?.total || 0})
                 </button>
               </div>
             </div>
@@ -272,13 +272,13 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
               {activeTab === "stats" && (
                 <div className="space-y-2">
                   <div>
-                    <h4 className="text-white font-semibold mb-2 text-xs">🌟 Daily Challenges</h4>
+                    <h4 className="text-white font-semibold mb-2 text-xs">🌟 每日挑战</h4>
 
                     <div className="bg-white/5 rounded p-2 border border-indigo-500/20">
                       {dailyChallenges && (
                         <>
                           <div className="flex items-center justify-between mb-2">
-                            <span className="text-[10px] text-gray-400">Today's Progress</span>
+                            <span className="text-[10px] text-gray-400">今日进度</span>
                             <span className="text-[9px] text-indigo-400">
                               Day {dailyChallenges.dayNumber} • x{DailyChallengesManager.getDayInfo().multiplier}
                             </span>
@@ -293,9 +293,9 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                               };
 
                               const labels = {
-                                galaxies: "Galaxies",
-                                systems: "Systems",
-                                planets: "Planets",
+                                galaxies: "星系",
+                                systems: "系统",
+                                planets: "行星",
                               };
 
                               return (
@@ -316,13 +316,13 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
 
                           <div className="grid grid-cols-2 gap-1 text-[10px]">
                             <div className="bg-black/30 rounded p-1.5 border border-indigo-500/30">
-                              <div className="text-gray-400 text-[9px]">Completed</div>
+                              <div className="text-gray-400 text-[9px]">已完成</div>
                               <div className="text-indigo-400 font-bold">
                                 {dailyChallenges.challenges.filter((c) => c.completed).length}/{dailyChallenges.challenges.length}
                               </div>
                             </div>
                             <div className="bg-black/30 rounded p-1.5 border border-green-500/30">
-                              <div className="text-gray-400 text-[9px]">Atlas Size</div>
+                              <div className="text-gray-400 text-[9px]">阿特拉斯大小</div>
                               <div className="text-green-400 font-bold">{stats ? formatBytes(stats.size) : "0 B"}</div>
                             </div>
                           </div>
@@ -332,13 +332,13 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                   </div>
 
                   <div>
-                    <h4 className="text-white font-semibold mb-2 text-xs">📍 Saved Locations</h4>
+                    <h4 className="text-white font-semibold mb-2 text-xs">📍 已保存位置</h4>
 
                     <div className="bg-white/5 rounded p-2 border border-purple-500/20">
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-[10px] text-gray-400">Storage Usage</span>
+                        <span className="text-[10px] text-gray-400">存储使用</span>
                         <span className="text-[9px] text-purple-400">
-                          {locationStats?.total || 0}/{locationStats?.maxAllowed || 50} slots
+                          {locationStats?.total || 0}/{locationStats?.maxAllowed || 50} 槽位
                         </span>
                       </div>
 
@@ -348,15 +348,15 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
 
                       <div className="grid grid-cols-3 gap-1 text-[10px]">
                         <div className="bg-black/30 rounded p-1 text-center border border-indigo-500/30">
-                          <div className="text-gray-400 text-[9px]">Galaxies</div>
+                          <div className="text-gray-400 text-[9px]">星系</div>
                           <div className="text-indigo-400 font-bold">{locationStats?.galaxies || 0}</div>
                         </div>
                         <div className="bg-black/30 rounded p-1 text-center border border-blue-500/30">
-                          <div className="text-gray-400 text-[9px]">Systems</div>
+                          <div className="text-gray-400 text-[9px]">系统</div>
                           <div className="text-blue-400 font-bold">{locationStats?.systems || 0}</div>
                         </div>
                         <div className="bg-black/30 rounded p-1 text-center border border-purple-500/30">
-                          <div className="text-gray-400 text-[9px]">Planets</div>
+                          <div className="text-gray-400 text-[9px]">行星</div>
                           <div className="text-purple-400 font-bold">{locationStats?.planets || 0}</div>
                         </div>
                       </div>
@@ -366,12 +366,12 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                   </div>
 
                   <div>
-                    <h4 className="text-white font-semibold mb-2 text-xs">💾 Data Management</h4>
+                    <h4 className="text-white font-semibold mb-2 text-xs">💾 数据管理</h4>
 
                     <div className="space-y-2">
                       <div className="bg-white/5 rounded p-2 border border-blue-500/20">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="text-[10px] text-gray-400">Export/Import Atlas Data</span>
+                          <span className="text-[10px] text-gray-400">导出/导入阿特拉斯数据</span>
                           <span className="text-[9px] text-blue-400">
                             {(() => {
                               const summary = DataExportImport.getDataSummary();
@@ -389,14 +389,14 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                                 <path strokeLinejoin="round" d="M12 14V4m0 0l3 3m-3-3L9 7"></path>
                               </g>
                             </svg>
-                            <span>Export</span>
+                            <span>导出</span>
                           </button>
                           <button onClick={() => fileInputRef.current?.click()} className="flex-1 bg-green-500/20 hover:bg-green-500/30 text-green-300 text-[10px] px-2 py-1.5 rounded border border-green-500/50 transition-colors duration-200 flex items-center justify-center gap-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width={14} height={14} viewBox="0 0 24 24">
                               <path fill="currentColor" d="M14.47 10.47a.75.75 0 1 1 1.06 1.06l-3 3a.75.75 0 0 1-1.06 0l-3-3a.75.75 0 1 1 1.06-1.06l1.72 1.72V4a.75.75 0 0 1 1.5 0v8.19z"></path>
                               <path fill="currentColor" d="M20.75 12a.75.75 0 0 0-1.5 0a7.25 7.25 0 1 1-14.5 0a.75.75 0 0 0-1.5 0a8.75 8.75 0 1 0 17.5 0"></path>
                             </svg>
-                            <span>Import</span>
+                            <span>导入</span>
                           </button>
                         </div>
 
@@ -404,9 +404,9 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
 
                         {importError && <div className="mt-2 text-[9px] text-red-400 bg-red-500/10 p-1 rounded">{importError}</div>}
 
-                        {importSuccess && <div className="mt-2 text-[9px] text-green-400 bg-green-500/10 p-1 rounded">Data imported successfully! Reloading...</div>}
+                        {importSuccess && <div className="mt-2 text-[9px] text-green-400 bg-green-500/10 p-1 rounded">数据导入成功！正在重新加载...</div>}
 
-                        <div className="text-[8px] text-gray-500 mt-2">Saves all localStorage keys to .atl file</div>
+                        <div className="text-[8px] text-gray-500 mt-2">将所有localStorage键保存到.atl文件</div>
                       </div>
                     </div>
                   </div>
@@ -417,8 +417,8 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                 <div className="space-y-2">
                   <div>
                     <h4 className="text-white font-semibold mb-2 text-xs flex items-center gap-1">
-                      ⚡ Resources
-                      <div className="text-[10px] text-gray-400">Lv.{spaceshipUpgrade.level}</div>
+                      ⚡ 资源
+                      <div className="text-[10px] text-gray-400">等级.{spaceshipUpgrade.level}</div>
                     </h4>
 
                     <div className="space-y-1 mb-2">
@@ -426,7 +426,7 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                         <div className="flex justify-between text-[10px] mb-0.5">
                           <span className="text-purple-300 flex items-center gap-1">
                             <AntimatterIcon size={12} color="currentColor" />
-                            Antimatter
+                            反物质
                           </span>
                           <span className="text-white font-mono">
                             {spaceshipResources.antimatter}/{spaceshipUpgrade.storage}
@@ -439,7 +439,7 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                         <div className="flex justify-between text-[10px] mb-0.5">
                           <span className="text-cyan-300 flex items-center gap-1">
                             <Element115Icon size={12} color="currentColor" />
-                            Element 115
+                            115号元素
                           </span>
                           <span className="text-white font-mono">
                             {spaceshipResources.element115}/{spaceshipUpgrade.storage}
@@ -452,7 +452,7 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                         <div className="flex justify-between text-[10px] mb-0.5">
                           <span className="text-orange-300 flex items-center gap-1">
                             <DeuteriumIcon size={12} color="currentColor" />
-                            Deuterium
+                            氘
                           </span>
                           <span className="text-white font-mono">
                             {spaceshipResources.deuterium}/{spaceshipUpgrade.storage}
@@ -464,40 +464,40 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                   </div>
 
                   <div>
-                    <h4 className="text-white font-semibold mb-2 text-xs">🔧 Ship Upgrade</h4>
+                    <h4 className="text-white font-semibold mb-2 text-xs">🔧 飞船升级</h4>
 
                     <div className="grid grid-cols-3 gap-1 text-[10px] mb-2">
                       <div className="bg-white/5 rounded p-1 border border-blue-500/20">
-                        <div className="text-gray-400 text-[9px]">Efficiency</div>
+                        <div className="text-gray-400 text-[9px]">效率</div>
                         <div className="text-blue-400 font-bold">{spaceshipUpgrade.efficiency.toFixed(1)}x</div>
                       </div>
                       <div className="bg-white/5 rounded p-1 border border-yellow-500/20">
-                        <div className="text-gray-400 text-[9px]">Storage</div>
+                        <div className="text-gray-400 text-[9px]">存储</div>
                         <div className="text-yellow-400 font-bold">{spaceshipUpgrade.storage}</div>
                       </div>
                       <div className="bg-white/5 rounded p-1 border border-indigo-500/20">
-                        <div className="text-gray-400 text-[9px]">Multiplier</div>
+                        <div className="text-gray-400 text-[9px]">倍率</div>
                         <div className="text-indigo-400 font-bold">{spaceshipUpgrade.multiplier.toFixed(1)}x</div>
                       </div>
                     </div>
 
                     {spaceshipUpgrade.level < 100 && !SpaceshipResourceManager.canAffordUpgrade() && (
                       <div className="bg-red-500/10 border border-red-500/30 rounded p-1.5 mb-2">
-                        <div className="text-[10px] text-red-300 font-semibold mb-0.5">Missing resources:</div>
+                        <div className="text-[10px] text-red-300 font-semibold mb-0.5">缺少资源：</div>
                         <div className="text-[9px] text-red-200 space-y-0.5">
                           {upgradeCost.antimatter > spaceshipResources.antimatter && (
                             <div className="flex items-center gap-1">
-                              • Need {upgradeCost.antimatter - spaceshipResources.antimatter} more <AntimatterIcon size={10} color="currentColor" /> Antimatter
+                              • 需要 {upgradeCost.antimatter - spaceshipResources.antimatter} 更多 <AntimatterIcon size={10} color="currentColor" /> 反物质
                             </div>
                           )}
                           {upgradeCost.element115 > spaceshipResources.element115 && (
                             <div className="flex items-center gap-1">
-                              • Need {upgradeCost.element115 - spaceshipResources.element115} more <Element115Icon size={10} color="currentColor" /> Element 115
+                              • 需要 {upgradeCost.element115 - spaceshipResources.element115} 更多 <Element115Icon size={10} color="currentColor" /> 115号元素
                             </div>
                           )}
                           {upgradeCost.deuterium > spaceshipResources.deuterium && (
                             <div className="flex items-center gap-1">
-                              • Need {upgradeCost.deuterium - spaceshipResources.deuterium} more <DeuteriumIcon size={10} color="currentColor" /> Deuterium
+                              • 需要 {upgradeCost.deuterium - spaceshipResources.deuterium} 更多 <DeuteriumIcon size={10} color="currentColor" /> 氘
                             </div>
                           )}
                         </div>
@@ -522,10 +522,10 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                       className={`w-full px-2 py-1.5 rounded text-[10px] font-medium transition-all duration-200 ${SpaceshipResourceManager.canAffordUpgrade() ? "bg-gradient-to-r from-green-600/30 to-blue-600/30 hover:from-green-600/40 hover:to-blue-600/40 text-green-300 border border-green-500/50 hover:border-green-400/70 cursor-pointer" : "bg-gray-700/30 text-gray-500 border border-gray-600/30 cursor-not-allowed"}`}
                     >
                       {spaceshipUpgrade.level >= 100 ? (
-                        <div className="text-yellow-400">🌟 MAX LEVEL - Ultimate Spaceship!</div>
+                        <div className="text-yellow-400">🌟 最高等级 - 终极飞船！</div>
                       ) : (
                         <div>
-                          <div className="font-bold">Upgrade to Level {spaceshipUpgrade.level + 1}</div>
+                          <div className="font-bold">升级到等级 {spaceshipUpgrade.level + 1}</div>
                           <div className="opacity-80 flex gap-2 justify-center mt-0.5">
                             <span className="text-purple-300 flex items-center gap-0.5">
                               <AntimatterIcon size={10} color="currentColor" />
@@ -554,15 +554,15 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                       <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24">
                         <path fill="currentColor" fillRule="evenodd" d="M3.5 8V6.5l4-3l3 1.5l4-3l6 4.5V8zm-.476 8.124L1.184 9.5h21.632l-1.84 6.624a4.5 4.5 0 0 0-7.364 4.376h-3.224q.111-.483.112-1a4.5 4.5 0 0 0-7.476-3.376M6 22.5a3 3 0 1 0 0-6a3 3 0 0 0 0 6m12 0a3 3 0 1 0 0-6a3 3 0 0 0 0 6" clipRule="evenodd"></path>
                       </svg>
-                      Mining Operations
+                      采矿操作
                     </h4>
 
                     {passiveGeneration.sources.planets === 0 && passiveGeneration.sources.systems === 0 ? (
-                      <div className="text-[10px] text-gray-400">💡 Save planets and systems to enable mining operations</div>
+                      <div className="text-[10px] text-gray-400">💡 保存行星和系统以启用采矿操作</div>
                     ) : (
                       <div>
                         <div className="flex items-center justify-between text-[10px] mb-1">
-                          <span className="text-purple-300">Generating/hour:</span>
+                          <span className="text-purple-300">每小时生成:</span>
                           <div className="flex gap-2">
                             <span className="text-purple-300 flex items-center gap-0.5">
                               <AntimatterIcon size={8} color="currentColor" />+{Math.round(baseGeneration.antimatter * 60)} AM
@@ -577,7 +577,7 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                         </div>
 
                         <div className="flex items-center justify-between text-[10px] mb-2">
-                          <span className="text-gray-400">Ready to collect:</span>
+                          <span className="text-gray-400">准备收集:</span>
                           <div className="flex gap-2">
                             <span className="text-purple-300 flex items-center gap-0.5">
                               <AntimatterIcon size={8} color="currentColor" />+{Math.round(passiveGeneration.antimatter)} AM
@@ -598,8 +598,7 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                           disabled={passiveGeneration.antimatter + passiveGeneration.element115 + passiveGeneration.deuterium === 0}
                           className={`w-full px-2 py-1.5 rounded text-[10px] font-medium transition-all duration-200 ${passiveGeneration.antimatter + passiveGeneration.element115 + passiveGeneration.deuterium > 0 ? "bg-gradient-to-r from-purple-600/30 to-blue-600/30 hover:from-purple-600/40 hover:to-blue-600/40 text-purple-300 border border-purple-500/50 hover:border-purple-400/70 cursor-pointer" : "bg-gray-700/30 text-gray-500 border border-gray-600/30 cursor-not-allowed"}`}
                         >
-                          🚀 Collect From {passiveGeneration.sources.planets}🪐 {passiveGeneration.sources.systems}⭐
-                        </button>
+                          🚀 从 {passiveGeneration.sources.planets}🪐 {passiveGeneration.sources.systems}⭐ 收集
                       </div>
                     )}
                   </div>
@@ -607,8 +606,8 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                   <div className="space-y-1">
                     {savedLocations.length === 0 ? (
                       <div className="text-center py-4">
-                        <div className="text-gray-400 text-xs mb-1">No saved locations</div>
-                        <div className="text-gray-500 text-[10px]">Use the 📍 button to save locations</div>
+                        <div className="text-gray-400 text-xs mb-1">没有保存的位置</div>
+                        <div className="text-gray-500 text-[10px]">使用 📍 按钮保存位置</div>
                       </div>
                     ) : (
                       savedLocations.map((location) => {
@@ -745,7 +744,7 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                             {!canCollect && timeRemaining > 0 && (
                               <div className="mt-1">
                                 <div className="flex items-center justify-between mb-0.5">
-                                  <span className="text-[8px] text-gray-400">Manual mining cooldown</span>
+                                  <span className="text-[8px] text-gray-400">手动采矿冷却</span>
                                   <span className="text-[8px] text-orange-400">{formatTimeRemaining(timeRemaining)}</span>
                                 </div>
                                 <div className="w-full bg-gray-800/50 rounded-full h-1 overflow-hidden">
@@ -757,7 +756,7 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                             {canCollect && locationId && (
                               <div className="mt-1">
                                 <div className="flex items-center justify-between">
-                                  <span className="text-[8px] text-green-400">✓ Ready to mine</span>
+                                  <span className="text-[8px] text-green-400">✓ 准备采矿</span>
                                 </div>
                               </div>
                             )}
@@ -781,7 +780,7 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                     <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24">
                       <path fill="currentColor" fillRule="evenodd" d="M3.5 8V6.5l4-3l3 1.5l4-3l6 4.5V8zm-.476 8.124L1.184 9.5h21.632l-1.84 6.624a4.5 4.5 0 0 0-7.364 4.376h-3.224q.111-.483.112-1a4.5 4.5 0 0 0-7.476-3.376M6 22.5a3 3 0 1 0 0-6a3 3 0 0 0 0 6m12 0a3 3 0 1 0 0-6a3 3 0 0 0 0 6" clipRule="evenodd"></path>
                     </svg>
-                    Mass Collection
+                    批量收集
                   </h3>
                   <button onClick={closeCollectionPopup} className="text-gray-400 hover:text-white transition-colors duration-200">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -792,39 +791,39 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
               </div>
 
               <div className="p-4">
-                <div className="text-sm text-gray-300 mb-4">Collect resources from all your saved mining locations at once.</div>
+                <div className="text-sm text-gray-300 mb-4">一次性从所有保存的采矿位置收集资源。</div>
 
                 <div className="bg-white/5 rounded-lg p-3 mb-4">
-                  <div className="text-xs text-gray-400 mb-2">Available to collect:</div>
+                  <div className="text-xs text-gray-400 mb-2">可收集：</div>
                   <div className="grid grid-cols-3 gap-2 text-xs">
                     <div className="text-center">
                       <div className={`font-bold flex items-center justify-center gap-1 ${passiveGeneration.antimatter > 0 ? "text-purple-300" : "text-gray-500"}`}>
                         <AntimatterIcon size={12} color="currentColor" />+{Math.round(passiveGeneration.antimatter)}
                       </div>
-                      <div className="text-gray-500">Antimatter</div>
+                      <div className="text-gray-500">反物质</div>
                     </div>
                     <div className="text-center">
                       <div className={`font-bold flex items-center justify-center gap-1 ${passiveGeneration.element115 > 0 ? "text-cyan-300" : "text-gray-500"}`}>
                         <Element115Icon size={12} color="currentColor" />+{Math.round(passiveGeneration.element115)}
                       </div>
-                      <div className="text-gray-500">Element 115</div>
+                      <div className="text-gray-500">115号元素</div>
                     </div>
                     <div className="text-center">
                       <div className={`font-bold flex items-center justify-center gap-1 ${passiveGeneration.deuterium > 0 ? "text-orange-300" : "text-gray-500"}`}>
                         <DeuteriumIcon size={12} color="currentColor" />+{Math.round(passiveGeneration.deuterium)}
                       </div>
-                      <div className="text-gray-500">Deuterium</div>
+                      <div className="text-gray-500">氘</div>
                     </div>
                   </div>
                 </div>
 
                 <div className="text-xs text-gray-500 mb-4">
-                  🌟 Sources: {passiveGeneration.sources.planets} Planets, {passiveGeneration.sources.systems} Systems
+                  🌟 来源: {passiveGeneration.sources.planets} 行星, {passiveGeneration.sources.systems} 系统
                 </div>
 
                 <div className="flex gap-3">
                   <button onClick={closeCollectionPopup} className="flex-1 px-4 py-2 rounded-lg text-sm font-medium bg-gray-700/50 text-gray-300 hover:bg-gray-700/70 border border-gray-600/50 transition-all duration-200">
-                    Cancel
+                    取消
                   </button>
                   <button
                     onClick={() => {
@@ -851,7 +850,7 @@ const SpaceshipPanel: React.FC<SpaceshipPanelProps> = ({ currentLocation }) => {
                     }}
                     className="flex-1 px-4 py-2 rounded-lg text-sm font-medium bg-gradient-to-r from-purple-600/30 to-blue-600/30 hover:from-purple-600/40 hover:to-blue-600/40 text-purple-300 border border-purple-500/50 hover:border-purple-400/70 transition-all duration-200"
                   >
-                    🚀 Collect All
+                    🚀 全部收集
                   </button>
                 </div>
               </div>

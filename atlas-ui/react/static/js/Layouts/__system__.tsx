@@ -93,7 +93,7 @@ const SystemLayout: React.FC<SystemLayoutProps> = ({ system, galaxy, system_url,
 
           <div className="w-full px-2 sm:px-4 lg:px-6 py-4 sm:py-8 flex-1">
             <div className="text-center mb-2">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">System '{formatSystemName(system.name)}'</h1>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">系统 '{formatSystemName(system.name)}'</h1>
               <p className="text-[10px] sm:text-xs text-gray-300 flex items-center justify-center gap-x-4 gap-y-1 flex-wrap">
                 <span className="flex items-center gap-1">
                   <GalaxyIcon size={15} color="#ffffffff" />
@@ -123,13 +123,13 @@ const SystemLayout: React.FC<SystemLayoutProps> = ({ system, galaxy, system_url,
             </div>
 
             <div className="mb-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Planets in '{formatSystemName(system.name)}'</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">'{formatSystemName(system.name)}' 中的行星</h2>
               <PlanetsList planets={system.planets} coordinates={coordinates} systemIndex={system_index} />
             </div>
 
             <div className="bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 mb-8 shadow-2xl p-4 sm:p-6 text-center">
               <button onClick={() => (window.location.href = `/galaxy/${page}`)} className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gray-600 via-gray-700 to-gray-600 hover:from-gray-700 hover:via-gray-800 hover:to-gray-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg backdrop-blur-sm">
-                <span className="text-base sm:text-lg">← Back to Galaxy '{formatGalaxyName(galaxy.name)}'</span>
+                <span className="text-base sm:text-lg">← 返回星系 '{formatGalaxyName(galaxy.name)}'</span>
               </button>
             </div>
           </div>

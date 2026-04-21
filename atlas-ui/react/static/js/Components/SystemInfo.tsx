@@ -113,7 +113,7 @@ const SystemInfo: React.FC<SystemInfoProps> = ({ system, galaxy, systemIndex, co
       <div className="absolute top-0 right-0 flex gap-2 z-10">
         <ResourceCollectionButton locationType="system" locationId={system.name} coordinates={galaxy.coordinates.join(",")} systemIndex={systemIndex} className="text-xs" />
         <SaveLocationButton type="system" name={system.name} coordinates={galaxy.coordinates.join(",")} systemIndex={systemIndex} className="text-xs" />
-        <div className="inline-flex items-center bg-green-500/20 border border-green-500/50 text-green-400 text-[10px] font-medium px-1.5 py-0.5 rounded h-[21px] box-border">VISITED</div>
+        <div className="inline-flex items-center bg-green-500/20 border border-green-500/50 text-green-400 text-[10px] font-medium px-1.5 py-0.5 rounded h-[21px] box-border">已访问</div>
       </div>
 
       <div className="flex items-center gap-3 mb-3">

@@ -30,13 +30,13 @@ const OnboardingLayout: React.FC<OnboardingLayoutProps> = ({ version }) => {
   const universeOptions: UniverseOption[] = [
     {
       value: "default",
-      title: "The Core Continuum",
-      description: "Venture into the primordial universe where time and space converge for you, exploring the vast cosmos we all traverse as a single entity.",
+      title: "核心连续体",
+      description: "进入原始宇宙，时间和空间在这里汇聚，探索我们作为一个整体所穿越的广阔宇宙。",
     },
     {
       value: "custom",
-      title: "Design the Multiverse",
-      description: "Generate a personal universe with its own seed and cosmic origin time, a completely unique creation entirely shaped by your decision.",
+      title: "设计多元宇宙",
+      description: "生成一个拥有自己种子和宇宙起源时间的个人宇宙，一个完全由你的决定塑造的独特创造。",
     },
   ];
 
@@ -124,9 +124,9 @@ const OnboardingLayout: React.FC<OnboardingLayoutProps> = ({ version }) => {
             <div className="w-full flex flex-col items-center space-y-4">
               <img src="/static/atlas-logo.jpg" alt="Atlas Logo" className="h-16 w-16 sm:h-20 sm:w-20 rounded-full border-2 border-cyan-400 shadow-lg animate-pulse" />
               <div className="text-center">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">Atlas Initialization Protocol</h1>
-                <p className="text-sm sm:text-base text-gray-300 mt-2">Quantum Navigation System Startup Sequence</p>
-              </div>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">阿特拉斯初始化协议</h1>
+              <p className="text-sm sm:text-base text-gray-300 mt-2">量子导航系统启动序列</p>
+            </div>
             </div>
           </header>
 
@@ -134,8 +134,8 @@ const OnboardingLayout: React.FC<OnboardingLayoutProps> = ({ version }) => {
             <div className="max-w-4xl mx-auto">
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="text-center mb-12">
-                  <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">Will you journey through a shared universe or forge a new one of your own?</p>
-                </div>
+                <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">你是要穿越一个共享的宇宙，还是要打造一个属于自己的新宇宙？</p>
+              </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-12">
                   {universeOptions.map((option) => (
@@ -169,8 +169,8 @@ const OnboardingLayout: React.FC<OnboardingLayoutProps> = ({ version }) => {
 
                           {option.value === "custom" && selectedUniverse === "custom" && (
                             <div className="mt-4 space-y-2" onClick={(e) => e.stopPropagation()}>
-                              <label className="block text-sm text-gray-400">Custom Seed (optional)</label>
-                              <input type="text" value={customSeed} onChange={handleSeedChange} maxLength={20} placeholder="Leave empty for random" className={`w-full px-4 py-2 bg-slate-900/80 border rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 transition-all ${seedError ? "border-red-500 focus:ring-red-500/50" : "border-white/20 focus:ring-cyan-400/50 focus:border-cyan-400"}`} />
+                              <label className="block text-sm text-gray-400">自定义种子 (可选)</label>
+                              <input type="text" value={customSeed} onChange={handleSeedChange} maxLength={20} placeholder="留空则随机" className={`w-full px-4 py-2 bg-slate-900/80 border rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 transition-all ${seedError ? "border-red-500 focus:ring-red-500/50" : "border-white/20 focus:ring-cyan-400/50 focus:border-cyan-400"}`} />
                               <div className="flex justify-between text-xs">
                                 <span className={seedError ? "text-red-400" : "text-transparent"}>{seedError || "."}</span>
                                 <span className="text-gray-500">{customSeed.length}/20</span>
@@ -209,10 +209,10 @@ const OnboardingLayout: React.FC<OnboardingLayoutProps> = ({ version }) => {
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                           </svg>
-                          <span>Initializing...</span>
+                          <span>初始化中...</span>
                         </>
                       ) : (
-                        <span>{selectedUniverse ? "Initialize Protocol" : "Select Universe Type"}</span>
+                        <span>{selectedUniverse ? "初始化协议" : "选择宇宙类型"}</span>
                       )}
                     </span>
                   </button>

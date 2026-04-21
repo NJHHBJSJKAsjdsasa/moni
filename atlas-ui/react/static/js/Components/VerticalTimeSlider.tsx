@@ -188,15 +188,15 @@ export const VerticalTimeSlider: React.FC<VerticalTimeSliderProps> = ({ sliderPo
   const thumbPosition = ((100 - sliderPosition) / 200) * 100;
 
   const zoneMarkers = [
-    { position: 0, label: "+100y", side: "future" },
-    { position: 12.5, label: "+1y", side: "future" },
-    { position: 25, label: "+1mo", side: "future" },
-    { position: 37.5, label: "+1d", side: "future" },
-    { position: 50, label: "NOW", side: "center" },
-    { position: 62.5, label: "-1d", side: "past" },
-    { position: 75, label: "-1mo", side: "past" },
-    { position: 87.5, label: "-1y", side: "past" },
-    { position: 100, label: "-100y", side: "past" },
+    { position: 0, label: "+100年", side: "future" },
+    { position: 12.5, label: "+1年", side: "future" },
+    { position: 25, label: "+1月", side: "future" },
+    { position: 37.5, label: "+1天", side: "future" },
+    { position: 50, label: "现在", side: "center" },
+    { position: 62.5, label: "-1天", side: "past" },
+    { position: 75, label: "-1月", side: "past" },
+    { position: 87.5, label: "-1年", side: "past" },
+    { position: 100, label: "-100年", side: "past" },
   ];
 
   return (
@@ -261,7 +261,7 @@ export const VerticalTimeSlider: React.FC<VerticalTimeSliderProps> = ({ sliderPo
                 minHeight: "32px",
               }}
             >
-              Reset
+              重置
             </button>
           </div>
         </div>

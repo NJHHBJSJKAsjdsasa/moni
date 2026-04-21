@@ -304,7 +304,7 @@ export class SpaceshipResourceManager {
 
     const titleDiv = document.createElement("div");
     titleDiv.className = "text-sm font-bold text-purple-300";
-    titleDiv.textContent = "Mining Operations Complete!";
+    titleDiv.textContent = "采矿操作完成！";
 
     const resourceDiv = document.createElement("div");
     resourceDiv.className = "text-xs text-purple-200 mt-1 flex gap-3";
@@ -524,7 +524,7 @@ export class SpaceshipResourceManager {
 
     const titleDiv = document.createElement("div");
     titleDiv.className = "text-sm font-bold text-amber-300";
-    titleDiv.textContent = "Resource Exchange";
+    titleDiv.textContent = "资源交换";
 
     const exchangeDiv = document.createElement("div");
     exchangeDiv.className = "text-xs text-amber-200 mt-1";

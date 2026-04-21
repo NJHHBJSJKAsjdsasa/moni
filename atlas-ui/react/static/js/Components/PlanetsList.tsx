@@ -20,32 +20,59 @@ const PlanetsList: React.FC<PlanetsListProps> = ({ planets, coordinates, systemI
   const getPlanetColor = (planetType: string): string => {
     const fallbackColors: Record<string, string> = {
       "Gas Giant": "#FFA500",
+      "气态巨行星": "#FFA500",
       Anomaly: "#FFFFFF",
+      "异常行星": "#FFFFFF",
       Rocky: "#808080",
+      "岩石行星": "#808080",
       Icy: "#ADD8E6",
+      "冰态行星": "#ADD8E6",
       Oceanic: "#0000FF",
+      "海洋行星": "#0000FF",
       Desert: "#FFD700",
+      "沙漠行星": "#FFD700",
       Lava: "#FF0000",
+      "熔岩行星": "#FF0000",
       Arid: "#800000",
+      "干旱行星": "#800000",
       Swamp: "#008000",
+      "沼泽行星": "#008000",
       Tundra: "#F0F8FF",
+      "苔原行星": "#F0F8FF",
       Forest: "#006400",
+      "森林行星": "#006400",
       Savannah: "#F4A460",
+      "稀树草原行星": "#F4A460",
       Cave: "#D1D1D1",
+      "洞穴行星": "#D1D1D1",
       Crystalline: "#00FFFF",
+      "结晶行星": "#00FFFF",
       Metallic: "#C0C0C0",
+      "金属行星": "#C0C0C0",
       Toxic: "#800080",
+      "有毒行星": "#800080",
       Radioactive: "#00FF00",
+      "放射性行星": "#00FF00",
       Magma: "#FF4500",
+      "岩浆行星": "#FF4500",
       "Molten Core": "#FF8C00",
+      "熔融核心行星": "#FF8C00",
       Carbon: "#090909",
+      "碳行星": "#090909",
       Diamond: "#87CEFA",
+      "钻石行星": "#87CEFA",
       "Super Earth": "#90EE90",
+      "超级地球": "#90EE90",
       "Sub Earth": "#006400",
+      "亚地球": "#006400",
       "Frozen Gas Giant": "#ADD8E6",
+      "冰冻气态巨行星": "#ADD8E6",
       Nebulous: "#FFC0CB",
+      "星云行星": "#FFC0CB",
       Aquifer: "#00FFFF",
+      "含水层行星": "#00FFFF",
       Exotic: "#FF00FF",
+      "奇异行星": "#FF00FF",
     };
 
     return fallbackColors[planetType] || "#FFFFFF";
@@ -95,7 +122,7 @@ const PlanetsList: React.FC<PlanetsListProps> = ({ planets, coordinates, systemI
 
             <button onClick={() => handlePlanetClick(planet.name)} className="w-full text-left block p-2 sm:p-3 text-gray-200 hover:text-white transition-colors duration-300 rounded-lg">
               <div className="text-center">
-                <div className="text-xs text-gray-400 mb-1">Planet</div>
+                <div className="text-xs text-gray-400 mb-1">行星</div>
                 <div className="text-sm font-semibold text-white truncate group-hover:text-blue-300 transition-colors duration-300">{formatPlanetName(planet.name)}</div>
               </div>
 
@@ -107,8 +134,8 @@ const PlanetsList: React.FC<PlanetsListProps> = ({ planets, coordinates, systemI
 
       {planets.length === 0 && (
         <div className="col-span-full text-center py-12">
-          <div className="text-gray-400 text-lg mb-2">No planets found</div>
-          <div className="text-gray-500 text-sm">This system appears to be empty</div>
+          <div className="text-gray-400 text-lg mb-2">未找到行星</div>
+          <div className="text-gray-500 text-sm">该系统似乎为空</div>
         </div>
       )}
     </div>
