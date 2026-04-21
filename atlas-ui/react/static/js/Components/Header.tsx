@@ -25,8 +25,8 @@ const Header: React.FC = () => {
         <a href="/" className="flex items-center space-x-3 sm:space-x-4">
           <img src="/static/atlas-logo.jpg" alt="Atlas Logo" className="h-10 w-10 sm:h-12 sm:w-12 rounded-full border-2 border-blue-400 shadow-lg" />
           <div>
-            <h1 className="text-xl sm:text-2xl font-bold text-white">The Atlas</h1>
-            <p className="text-xs sm:text-sm text-gray-400 hidden sm:block">Universal Navigation System</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-white">阿特拉斯</h1>
+            <p className="text-xs sm:text-sm text-gray-400 hidden sm:block">宇宙导航系统</p>
           </div>
         </a>
 
@@ -35,7 +35,7 @@ const Header: React.FC = () => {
             <div className="flex items-center space-x-2 text-green-400 relative">
               {isRemoteUniverse ? <MultiverseHeaderConnectedIcon className="w-4 h-4" /> : <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>}
               <div className="relative">
-                <span className="text-xs sm:text-sm font-medium font-mono">{isRemoteUniverse ? glitchText : "MULTIVERSE ONLINE"}</span>
+                <span className="text-xs sm:text-sm font-medium font-mono">{isRemoteUniverse ? glitchText : "多元宇宙在线"}</span>
                 {isRemoteUniverse && (
                   <div className="absolute top-full left-0 w-full h-0.5 bg-green-900 overflow-hidden -mt-0.5 rounded-3xl">
                     <div className="w-full h-full bg-gradient-to-r from-transparent via-green-400 to-transparent animate-pulse-slow relative">
@@ -46,7 +46,7 @@ const Header: React.FC = () => {
               </div>
             </div>
           </a>
-          <div className="text-xs sm:text-sm hidden lg:block text-gray-400">Quantum Navigation Ready</div>
+          <div className="text-xs sm:text-sm hidden lg:block text-gray-400">量子导航就绪</div>
         </div>
       </div>
     </header>

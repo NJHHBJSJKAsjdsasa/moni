@@ -118,20 +118,20 @@ const SystemInfo: React.FC<SystemInfoProps> = ({ system, galaxy, systemIndex, co
 
       <div className="flex items-center gap-3 mb-3">
         <MiningIndicator isOnCooldown={miningState.isOnCooldown} isSaved={miningState.isSaved} isCollecting={miningState.isCollecting} />
-        <h3 className="text-lg sm:text-xl font-bold text-white">Details</h3>
+        <h3 className="text-lg sm:text-xl font-bold text-white">详细信息</h3>
       </div>
 
       <div className="grid grid-cols-3 gap-2 mb-3">
         <div className="bg-white/10 rounded-lg p-2 border border-blue-500/30">
-          <div className="text-xs text-gray-200">System Type</div>
+          <div className="text-xs text-gray-200">系统类型</div>
           <div className="text-sm font-bold text-blue-300 capitalize">{system.star_system_type}</div>
         </div>
         <div className="bg-white/10 rounded-lg p-2 border border-purple-500/30">
-          <div className="text-xs text-gray-200">Planets</div>
+          <div className="text-xs text-gray-200">行星</div>
           <div className="text-sm font-bold text-purple-300">{system.num_planets}</div>
         </div>
         <div className="bg-white/10 rounded-lg p-2 border border-orange-500/30">
-          <div className="text-xs text-gray-200">Stars</div>
+          <div className="text-xs text-gray-200">恒星</div>
           <div className="text-sm font-bold text-orange-300">{system.stars.length}</div>
         </div>
       </div>
@@ -141,12 +141,12 @@ const SystemInfo: React.FC<SystemInfoProps> = ({ system, galaxy, systemIndex, co
       </div>
 
       <div className="bg-white/10 rounded-lg p-2 border border-yellow-500/30">
-        <div className="text-xs text-gray-200 mb-2">Stellar Composition</div>
+        <div className="text-xs text-gray-200 mb-2">恒星组成</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1">
           {system.stars.map((star, index) => (
             <div key={index} className="bg-white/5 rounded p-1.5 border border-yellow-500/20">
               <div className="text-xs text-gray-300 flex items-center gap-2">
-                <span>Star {index + 1}</span>
+                <span>恒星 {index + 1}</span>
                 <span className="font-bold text-yellow-300">{star.Type}</span>
               </div>
               <div className="text-xs text-gray-300">
@@ -158,26 +158,26 @@ const SystemInfo: React.FC<SystemInfoProps> = ({ system, galaxy, systemIndex, co
       </div>
 
       <div className="mt-4 pt-3 border-t border-white/10">
-        <div className="text-xs text-gray-400 mb-2">Technical Data</div>
+        <div className="text-xs text-gray-400 mb-2">技术数据</div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 text-xs">
           <div className="bg-white/5 rounded px-1.5 py-0.5">
-            <span className="text-gray-400">Status:</span>
-            <div className="text-green-400 font-medium">Visited</div>
+            <span className="text-gray-400">状态:</span>
+            <div className="text-green-400 font-medium">已访问</div>
           </div>
           <div className="bg-white/5 rounded px-1.5 py-0.5">
-            <span className="text-gray-400">System:</span>
+            <span className="text-gray-400">系统:</span>
             <div className="text-white truncate font-medium">{formatName(system.name)}</div>
           </div>
           <div className="bg-white/5 rounded px-1.5 py-0.5">
-            <span className="text-gray-400">System ID:</span>
+            <span className="text-gray-400">系统ID:</span>
             <div className="text-white font-medium">#{systemIndex + 1}</div>
           </div>
           <div className="bg-white/5 rounded px-1.5 py-0.5">
-            <span className="text-gray-400">Galaxy:</span>
+            <span className="text-gray-400">星系:</span>
             <div className="text-white truncate font-medium">{formatName(galaxy.name)}</div>
           </div>
           <div className="bg-white/5 rounded px-1.5 py-0.5">
-            <span className="text-gray-400">Coordinates:</span>
+            <span className="text-gray-400">坐标:</span>
             <div className="text-white font-medium">{galaxy.coordinates.join(", ")}</div>
           </div>
         </div>

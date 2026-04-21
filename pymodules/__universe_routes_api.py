@@ -20,7 +20,7 @@ def register_universe_routes(app, universe, config):
         try:
             if not config.is_initialized:
                 if not config.initialize():
-                    return jsonify({"error": "Config not initialized"})
+                    return jsonify({"error": "配置未初始化"})
 
             return jsonify({"success": True, "config_seed": config.seed, "seed_str": config.seed_str, "seed_hash": config.seed_hash, "seed_decimal": str(config.seed), "cosmic_origin_time": config.cosmic_origin_time, "cosmic_origin_datetime": str(config.cosmic_origin_datetime)})
         except Exception as e:
@@ -180,4 +180,4 @@ def register_universe_routes(app, universe, config):
             return jsonify({"success": True, "groups": processed_groups, "total_peers": len(sanitized_peers), "timestamp": int(time.time())})
 
         except Exception as e:
-            return jsonify({"success": False, "error": f"Failed to retrieve peer data: {str(e)}", "peers": []}), 500
+            return jsonify({"success": False, "error": f"获取节点数据失败: {str(e)}", "peers": []}), 500

@@ -187,8 +187,8 @@ const ButtonGroup: React.FC<{
       disabled={!showInitializeJump || isRandomJumping}
     >
       <span className="relative z-10 flex items-center justify-center gap-3">
-        <span className={`text-base sm:text-lg transition-opacity duration-200 ${showInitializeJump && !isRandomJumping ? "opacity-100" : "opacity-0"}`}>🚀 Initialize Jump</span>
-      </span>
+          <span className={`text-base sm:text-lg transition-opacity duration-200 ${showInitializeJump && !isRandomJumping ? "opacity-100" : "opacity-0"}`}>🚀 初始化跳跃</span>
+        </span>
     </button>
     <button
       type="button"
@@ -218,7 +218,7 @@ const ButtonGroup: React.FC<{
             <span className="font-mono text-cyan-300">{randomJumpText}</span>
           </>
         ) : (
-          <span className="text-base sm:text-lg">🎲 Random Location</span>
+          <span className="text-base sm:text-lg">🎲 随机位置</span>
         )}
       </span>
 
@@ -384,7 +384,7 @@ const CoordinateSelector: React.FC<CoordinateSelectorProps> = ({ onCoordinateCha
   const handleRandomLocationJump = async () => {
     setIsRandomJumping(true);
     setShowSpinner(true);
-    setRandomJumpText("Jump Protocol");
+    setRandomJumpText("跳跃协议");
 
     if ((window as any).setRandomLocationActive) {
       (window as any).setRandomLocationActive(true);
@@ -398,7 +398,7 @@ const CoordinateSelector: React.FC<CoordinateSelectorProps> = ({ onCoordinateCha
     try {
       const locationResponse = await fetch("/api/generate-random-location");
       if (!locationResponse.ok) {
-        throw new Error("Failed to generate random location");
+        throw new Error("生成随机位置失败");
       }
 
       const locationData = await locationResponse.json();
@@ -540,7 +540,7 @@ const CoordinateSelector: React.FC<CoordinateSelectorProps> = ({ onCoordinateCha
                     key: "label",
                     className: "px-2 py-1 bg-blue-900/50 text-blue-300 text-[10px] font-mono uppercase rounded border border-blue-500/30 flex-shrink-0",
                   },
-                  "COORDS"
+                  "坐标"
                 ),
                 React.createElement(
                   "span",
@@ -562,7 +562,7 @@ const CoordinateSelector: React.FC<CoordinateSelectorProps> = ({ onCoordinateCha
                     key: "label",
                     className: "px-2 py-1 bg-purple-900/50 text-purple-300 text-[10px] font-mono uppercase rounded border border-purple-500/30 flex-shrink-0",
                   },
-                  "GALAXY"
+                  "星系"
                 ),
                 React.createElement(
                   "span",
@@ -584,7 +584,7 @@ const CoordinateSelector: React.FC<CoordinateSelectorProps> = ({ onCoordinateCha
                     key: "label",
                     className: "px-2 py-1 bg-cyan-900/50 text-cyan-300 text-[10px] font-mono uppercase rounded border border-cyan-500/30 flex-shrink-0",
                   },
-                  "SYSTEM"
+                  "系统"
                 ),
                 React.createElement(
                   "span",
@@ -606,7 +606,7 @@ const CoordinateSelector: React.FC<CoordinateSelectorProps> = ({ onCoordinateCha
                     key: "label",
                     className: "px-2 py-1 bg-pink-900/50 text-pink-300 text-[10px] font-mono uppercase rounded border border-pink-500/30 flex-shrink-0",
                   },
-                  "PLANET"
+                  "行星"
                 ),
                 React.createElement(
                   "span",
@@ -682,7 +682,7 @@ const CoordinateSelector: React.FC<CoordinateSelectorProps> = ({ onCoordinateCha
       if (matrixIntervalId) {
         clearInterval(matrixIntervalId);
       }
-      setRandomJumpText("❌ Jump failed");
+      setRandomJumpText("❌ 跳跃失败");
       setShowSpinner(false);
       setCoordinateGlitchStates({ x: false, y: false, z: false });
       setSlideUpInitializeJump(false);
@@ -715,7 +715,7 @@ const CoordinateSelector: React.FC<CoordinateSelectorProps> = ({ onCoordinateCha
       return (
         <div className={`space-y-3 ${axisClass}`} key={coordinate}>
           <div className="flex items-center justify-between gap-2">
-            <h3 className="text-lg sm:text-xl font-bold text-white truncate flex-1 min-w-0">{label} Coordinate</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-white truncate flex-1 min-w-0">{label}坐标</h3>
             <div className="font-bold flex-shrink-0" style={{ color: "var(--accent-color)" }}>
               {renderGlitchCoordinate(coordinates[coordinate], coordinate)}
             </div>
@@ -774,13 +774,13 @@ const CoordinateSelector: React.FC<CoordinateSelectorProps> = ({ onCoordinateCha
                   <input type="range" id={`${coordinate}-slider`} name={coordinate} min="0" max="10000000" value={coordinates[coordinate]} className="relative z-20 w-full h-3 bg-transparent rounded-xl appearance-none cursor-pointer transition-all duration-200" onChange={(e) => handleSliderChange(coordinate, e.target.value)} />
                   <div className="flex justify-between items-center mt-2 text-xs font-medium">
                     <span className="drop-shadow-sm flex-shrink-0" style={{ color: "var(--text-color)" }}>
-                      The Edge
+                      边缘
                     </span>
                     <span className="text-center truncate flex-1 min-w-0 px-2" style={{ color: "var(--text-color)" }}>
-                      {coordinateOptions[coordinate][selectedIndex >= 0 ? selectedIndex : 0]?.name || "Unknown Region"}
+                      {coordinateOptions[coordinate][selectedIndex >= 0 ? selectedIndex : 0]?.name || "未知区域"}
                     </span>
                     <span className="drop-shadow-sm flex-shrink-0" style={{ color: "var(--text-color)" }}>
-                      The Unknown
+                      未知
                     </span>
                   </div>
                 </div>

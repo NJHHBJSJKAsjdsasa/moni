@@ -188,16 +188,16 @@ const PlanetInfo: React.FC<PlanetInfoProps> = ({ planet, system, galaxy, cosmicO
 
       <div className="flex items-center gap-3 mb-3">
         <MiningIndicator isOnCooldown={miningState.isOnCooldown} isSaved={miningState.isSaved} isCollecting={miningState.isCollecting} />
-        <h3 className="text-lg sm:text-xl font-bold text-white">Details</h3>
+        <h3 className="text-lg sm:text-xl font-bold text-white">详细信息</h3>
       </div>
 
       <div className="grid grid-cols-3 gap-2 mb-3">
         <div className="bg-white/10 rounded-lg p-2 border border-blue-500/30">
-          <div className="text-xs text-gray-200">Type</div>
+          <div className="text-xs text-gray-200">类型</div>
           <div className="text-sm font-bold text-blue-300 capitalize">{planet.planet_type}</div>
         </div>
         <div className="bg-white/10 rounded-lg p-2 border border-purple-500/30">
-          <div className="text-xs text-gray-200">Atmosphere</div>
+          <div className="text-xs text-gray-200">大气</div>
           <div className="text-sm font-bold text-purple-300 capitalize">{planet.atmosphere}</div>
         </div>
         {planet.life_forms !== "None" ? (
@@ -207,58 +207,58 @@ const PlanetInfo: React.FC<PlanetInfoProps> = ({ planet, system, galaxy, cosmicO
               <div className="w-full h-full bg-green-400 rounded-full animate-ping absolute"></div>
             </div>
             {/* Clickable Life Forms div */}
-            <button onClick={() => setShowAreciboModal(true)} className="w-full bg-white/10 hover:bg-green-500/20 rounded-lg p-2 border border-green-500/30 hover:border-green-400 transition-all duration-300 animate-pulse-glow hover:animate-bounce-subtle group cursor-pointer text-left" title="Click to view Arecibo message">
-              <div className="text-xs text-gray-200 group-hover:text-green-200 transition-colors">Life Forms</div>
+            <button onClick={() => setShowAreciboModal(true)} className="w-full bg-white/10 hover:bg-green-500/20 rounded-lg p-2 border border-green-500/30 hover:border-green-400 transition-all duration-300 animate-pulse-glow hover:animate-bounce-subtle group cursor-pointer text-left" title="点击查看阿雷西博信息">
+              <div className="text-xs text-gray-200 group-hover:text-green-200 transition-colors">生命形式</div>
               <div className="text-sm font-bold text-green-300 group-hover:text-green-200 capitalize transition-colors">{planet.life_forms}</div>
             </button>
           </div>
         ) : (
           <div className="bg-white/10 rounded-lg p-2 border border-green-500/30">
-            <div className="text-xs text-gray-200">Life Forms</div>
+            <div className="text-xs text-gray-200">生命形式</div>
             <div className="text-sm font-bold text-green-300 capitalize">{planet.life_forms}</div>
           </div>
         )}
       </div>
 
       <div className="bg-white/10 rounded-lg p-2 border border-orange-500/30 mb-3">
-        <div className="text-xs text-gray-200 mb-2">Physical Properties</div>
+        <div className="text-xs text-gray-200 mb-2">物理属性</div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-1">
           <div className="bg-white/5 rounded p-1.5 border border-orange-500/20">
-            <div className="text-xs text-gray-300">Mass</div>
+            <div className="text-xs text-gray-300">质量</div>
             <div className="text-xs font-bold text-orange-300">{formatMass(planet.mass)}</div>
           </div>
           <div className="bg-white/5 rounded p-1.5 border border-orange-500/20">
-            <div className="text-xs text-gray-300">Diameter</div>
+            <div className="text-xs text-gray-300">直径</div>
             <div className="text-xs font-bold text-orange-300">{formatDistance(planet.diameter)}</div>
           </div>
           <div className="bg-white/5 rounded p-1.5 border border-orange-500/20">
-            <div className="text-xs text-gray-300">Density</div>
+            <div className="text-xs text-gray-300">密度</div>
             <div className="text-xs font-bold text-orange-300">{planet.density.toFixed(2)} kg/m³</div>
           </div>
           <div className="bg-white/5 rounded p-1.5 border border-orange-500/20">
-            <div className="text-xs text-gray-300">Gravity</div>
+            <div className="text-xs text-gray-300">重力</div>
             <div className="text-xs font-bold text-orange-300">{planet.gravity.toFixed(2)} m/s²</div>
           </div>
         </div>
       </div>
 
       <div className="bg-white/10 rounded-lg p-2 border border-cyan-500/30 mb-3">
-        <div className="text-xs text-gray-200 mb-2">Orbital Properties</div>
+        <div className="text-xs text-gray-200 mb-2">轨道属性</div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-1">
           <div className="bg-white/5 rounded p-1.5 border border-cyan-500/20">
-            <div className="text-xs text-gray-300">Radius</div>
+            <div className="text-xs text-gray-300">轨道半径</div>
             <div className="text-xs font-bold text-cyan-300">{planet.orbital_radius.toFixed(2)} AU</div>
           </div>
           <div className="bg-white/5 rounded p-1.5 border border-cyan-500/20">
-            <div className="text-xs text-gray-300">Period</div>
+            <div className="text-xs text-gray-300">轨道周期</div>
             <div className="text-xs font-bold text-cyan-300">{formatPeriod(planet.orbital_period_seconds)}</div>
           </div>
           <div className="bg-white/5 rounded p-1.5 border border-cyan-500/20">
-            <div className="text-xs text-gray-300">Speed</div>
+            <div className="text-xs text-gray-300">轨道速度</div>
             <div className="text-xs font-bold text-cyan-300">{planet.orbital_speed.toFixed(2)} m/s</div>
           </div>
           <div className="bg-white/5 rounded p-1.5 border border-cyan-500/20">
-            <div className="text-xs text-gray-300">Tilt</div>
+            <div className="text-xs text-gray-300">轴倾角</div>
             <div className="text-xs font-bold text-cyan-300">{planet.axial_tilt.toFixed(2)}°</div>
           </div>
         </div>
@@ -266,14 +266,14 @@ const PlanetInfo: React.FC<PlanetInfoProps> = ({ planet, system, galaxy, cosmicO
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
         <div className="bg-white/10 rounded-lg p-2 border border-red-500/30">
-          <div className="text-xs text-gray-200 mb-2">Surface Conditions</div>
+          <div className="text-xs text-gray-200 mb-2">表面条件</div>
           <div className="grid grid-cols-2 gap-1">
             <div className="bg-white/5 rounded p-1.5 border border-red-500/20">
-              <div className="text-xs text-gray-300">Temperature</div>
+              <div className="text-xs text-gray-300">温度</div>
               <div className="text-xs font-bold text-red-300">{formatTemperature(planet.surface_temperature)}</div>
             </div>
             <div className="bg-white/5 rounded p-1.5 border border-red-500/20">
-              <div className="text-xs text-gray-300">Rotation</div>
+              <div className="text-xs text-gray-300">自转周期</div>
               <div className="text-xs font-bold text-red-300">{formatPeriod(planet.rotation_period_seconds)}</div>
             </div>
           </div>
@@ -281,9 +281,9 @@ const PlanetInfo: React.FC<PlanetInfoProps> = ({ planet, system, galaxy, cosmicO
 
         <div className="bg-white/10 rounded-lg p-2 border border-yellow-500/30">
           <div className="flex items-center justify-between mb-2">
-            <div className="text-xs text-gray-200">Elements ({planet.elements.length})</div>
+            <div className="text-xs text-gray-200">元素 ({planet.elements.length})</div>
             <button onClick={() => setShowAllElements(!showAllElements)} className="text-xs text-yellow-400 hover:text-yellow-300 transition-colors duration-300">
-              {showAllElements ? "▲ Collapse" : "▼ Expand"}
+              {showAllElements ? "▲ 收起" : "▼ 展开"}
             </button>
           </div>
 
@@ -304,88 +304,88 @@ const PlanetInfo: React.FC<PlanetInfoProps> = ({ planet, system, galaxy, cosmicO
         </div>
       </div>
 
-      {/* Selected Moon Information */}
+      {/* 选中的月球信息 */}
       {selectedMoon && (
         <div className="mt-3 p-3 bg-blue-500/10 rounded-lg border border-blue-500/30">
           <div className="flex items-center gap-2 mb-3">
             <span className="text-lg">🌙</span>
-            <h4 className="text-sm font-bold text-blue-300">Selected Moon: {selectedMoon.name}</h4>
+            <h4 className="text-sm font-bold text-blue-300">选中的月球: {selectedMoon.name}</h4>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 mb-3">
             <div className="bg-white/5 rounded p-2 border border-blue-500/20">
-              <div className="text-xs text-gray-300">Type</div>
+              <div className="text-xs text-gray-300">类型</div>
               <div className="text-xs font-bold text-blue-300 capitalize">{selectedMoon.properties.type}</div>
             </div>
             <div className="bg-white/5 rounded p-2 border border-blue-500/20">
-              <div className="text-xs text-gray-300">Origin</div>
+              <div className="text-xs text-gray-300">起源</div>
               <div className="text-xs font-bold text-blue-300 capitalize">{selectedMoon.properties.origin.replace("_", " ")}</div>
             </div>
             <div className="bg-white/5 rounded p-2 border border-blue-500/20">
-              <div className="text-xs text-gray-300">Radius</div>
+              <div className="text-xs text-gray-300">半径</div>
               <div className="text-xs font-bold text-blue-300">{selectedMoon.properties.radius_km.toFixed(1)} km</div>
             </div>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 mb-2">
             <div className="bg-white/5 rounded p-2 border border-blue-500/20">
-              <div className="text-xs text-gray-300">Orbital Period</div>
+              <div className="text-xs text-gray-300">轨道周期</div>
               <div className="text-xs font-bold text-blue-300">{formatPeriod(selectedMoon.orbit.orbital_period_seconds)}</div>
             </div>
             <div className="bg-white/5 rounded p-2 border border-blue-500/20">
-              <div className="text-xs text-gray-300">Distance</div>
+              <div className="text-xs text-gray-300">距离</div>
               <div className="text-xs font-bold text-blue-300">{(selectedMoon.orbit.semi_major_axis_km / 1000).toFixed(0)}k km</div>
             </div>
             <div className="bg-white/5 rounded p-2 border border-blue-500/20">
-              <div className="text-xs text-gray-300">Eccentricity</div>
+              <div className="text-xs text-gray-300">偏心率</div>
               <div className="text-xs font-bold text-blue-300">{selectedMoon.orbit.eccentricity.toFixed(3)}</div>
             </div>
           </div>
 
-          {/* Moon Surface Conditions */}
+          {/* 月球表面条件 */}
           <div className="bg-white/5 rounded-lg p-2 border border-blue-500/20">
-            <div className="text-xs text-gray-200 mb-2">Surface Conditions</div>
+            <div className="text-xs text-gray-200 mb-2">表面条件</div>
             <div className="grid grid-cols-2 gap-2">
               <div className="bg-white/5 rounded p-1.5 border border-blue-500/20">
-                <div className="text-xs text-gray-300">Rotation</div>
-                <div className="text-xs font-bold text-blue-300">{selectedMoon.rotation ? formatPeriod(selectedMoon.rotation.rotation_period_s) : "Unknown"}</div>
+                <div className="text-xs text-gray-300">自转周期</div>
+                <div className="text-xs font-bold text-blue-300">{selectedMoon.rotation ? formatPeriod(selectedMoon.rotation.rotation_period_s) : "未知"}</div>
               </div>
               <div className="bg-white/5 rounded p-1.5 border border-blue-500/20">
-                <div className="text-xs text-gray-300">Tidal Lock</div>
-                <div className={`text-xs font-bold ${selectedMoon.rotation?.is_tidally_locked ? "text-green-300" : "text-orange-300"}`}>{selectedMoon.rotation?.is_tidally_locked ? "Yes" : "No"}</div>
+                <div className="text-xs text-gray-300">潮汐锁定</div>
+                <div className={`text-xs font-bold ${selectedMoon.rotation?.is_tidally_locked ? "text-green-300" : "text-orange-300"}`}>{selectedMoon.rotation?.is_tidally_locked ? "是" : "否"}</div>
               </div>
             </div>
           </div>
 
-          <div className="mt-2 text-xs text-blue-400/80 text-center">Click on planet to return to planet view</div>
+          <div className="mt-2 text-xs text-blue-400/80 text-center">点击行星返回行星视图</div>
         </div>
       )}
 
       <div className="mt-4 pt-3 border-t border-white/10">
-        <div className="text-xs text-gray-400 mb-2">Technical Data</div>
+        <div className="text-xs text-gray-400 mb-2">技术数据</div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 text-xs">
           <div className="bg-white/5 rounded px-1.5 py-0.5">
-            <span className="text-gray-400">Status:</span>
-            <div className="text-green-400 font-medium">Visited</div>
+            <span className="text-gray-400">状态:</span>
+            <div className="text-green-400 font-medium">已访问</div>
           </div>
           <div className="bg-white/5 rounded px-1.5 py-0.5">
-            <span className="text-gray-400">Planet:</span>
+            <span className="text-gray-400">行星:</span>
             <div className="text-white truncate font-medium">{formatName(planet.name)}</div>
           </div>
           <div className="bg-white/5 rounded px-1.5 py-0.5">
-            <span className="text-gray-400">System:</span>
+            <span className="text-gray-400">系统:</span>
             <div className="text-white truncate font-medium">{formatName(system.name)}</div>
           </div>
           <div className="bg-white/5 rounded px-1.5 py-0.5">
-            <span className="text-gray-400">System ID:</span>
+            <span className="text-gray-400">系统ID:</span>
             <div className="text-white font-medium">#{system.index + 1}</div>
           </div>
           <div className="bg-white/5 rounded px-1.5 py-0.5">
-            <span className="text-gray-400">Galaxy:</span>
+            <span className="text-gray-400">星系:</span>
             <div className="text-white truncate font-medium">{formatName(galaxy.name)}</div>
           </div>
           <div className="bg-white/5 rounded px-1.5 py-0.5">
-            <span className="text-gray-400">Coordinates:</span>
+            <span className="text-gray-400">坐标:</span>
             <div className="text-white font-medium">{galaxy.coordinates.join(", ")}</div>
           </div>
         </div>
