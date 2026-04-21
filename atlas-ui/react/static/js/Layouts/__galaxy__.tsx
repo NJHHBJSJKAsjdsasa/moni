@@ -76,7 +76,7 @@ const GalaxyLayout: React.FC<GalaxyLayoutProps> = ({ galaxy, systems, galaxy_url
 
           <div className="w-full px-2 sm:px-4 lg:px-6 py-4 sm:py-8 flex-1">
             <div className="text-center mb-2">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">Galaxy '{formatGalaxyName(galaxy.name)}'</h1>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">星系 '{formatGalaxyName(galaxy.name)}'</h1>
               <p className="text-[10px] sm:text-xs text-gray-300 flex items-center justify-center gap-x-4 gap-y-1 flex-wrap">
                 <CoordinatesIcon size={15} color="#ffffffff" />
                 {galaxy.coordinates.join(", ")}
@@ -100,13 +100,13 @@ const GalaxyLayout: React.FC<GalaxyLayoutProps> = ({ galaxy, systems, galaxy_url
             </div>
 
             <div className="mb-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Systems in '{formatGalaxyName(galaxy.name)}'</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">'{formatGalaxyName(galaxy.name)}' 中的系统</h2>
               <SystemsList systems={systems} coordinates={coordinates} />
             </div>
 
             <div className="bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 mb-8 shadow-2xl p-4 sm:p-6 text-center">
               <button onClick={() => (window.location.href = "/")} className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gray-600 via-gray-700 to-gray-600 hover:from-gray-700 hover:via-gray-800 hover:to-gray-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg backdrop-blur-sm">
-                <span className="text-base sm:text-lg">← Go Back to Planetary Index</span>
+                <span className="text-base sm:text-lg">← 返回行星索引</span>
               </button>
             </div>
 

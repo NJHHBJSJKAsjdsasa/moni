@@ -119,9 +119,9 @@ const VersionFooter: React.FC<VersionFooterProps> = ({ version, showBadge = fals
                 <svg className={`w-5 h-5 transition-colors duration-200 ${isPhotosensitivityEnabled ? "text-orange-400" : "text-gray-500"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
-                <span className="text-xs text-gray-400 font-medium">Photosensitive Mode</span>
+                <span className="text-xs text-gray-400 font-medium">光敏模式</span>
               </div>
-              <button onClick={handleTogglePhotosensitivity} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 ${isPhotosensitivityEnabled ? "bg-orange-600 focus:ring-orange-500" : "bg-gray-600 focus:ring-gray-500"}`} title={isPhotosensitivityEnabled ? "Disable photosensitive mode" : "Enable photosensitive mode"}>
+              <button onClick={handleTogglePhotosensitivity} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 ${isPhotosensitivityEnabled ? "bg-orange-600 focus:ring-orange-500" : "bg-gray-600 focus:ring-gray-500"}`} title={isPhotosensitivityEnabled ? "禁用光敏模式" : "启用光敏模式"}>
                 <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 ${isPhotosensitivityEnabled ? "translate-x-6" : "translate-x-1"}`} />
               </button>
             </div>

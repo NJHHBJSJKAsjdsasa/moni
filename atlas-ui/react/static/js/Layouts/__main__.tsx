@@ -338,14 +338,14 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
           <div className="w-full px-2 sm:px-4 lg:px-6 py-4 sm:py-8 relative flex-1">
             <div className="text-center mb-12 relative min-h-[200px] flex items-center justify-center">
               <div className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-700 ease-in-out transform ${showNavigationText ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-2"}`} style={{ pointerEvents: showNavigationText ? "auto" : "none" }}>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">{isRemoteUniverse ? "Atlas Multiverse Protocol" : "Atlas Navigation System"}</h1>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">{isRemoteUniverse ? "阿特拉斯多元宇宙协议" : "阿特拉斯导航系统"}</h1>
                 {isRemoteUniverse && universeConfig ? (
                   <div className="space-y-3">
                     <div className="w-full px-4">
                       {/* Desktop: una línea */}
                       <div className="hidden sm:flex items-center justify-center gap-2">
                         <NodeIdIcon className="w-5 h-5 text-purple-400 flex-shrink-0" />
-                        <span className="text-lg sm:text-xl text-purple-200">Exploring</span>
+                        <span className="text-lg sm:text-xl text-purple-200">探索中</span>
                         <span className="text-lg sm:text-xl text-purple-300 font-mono truncate">{universeConfig.node_id}</span>
                       </div>
 
@@ -353,7 +353,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
                       <div className="flex sm:hidden flex-col items-center justify-center gap-1">
                         <div className="flex items-center gap-2">
                           <NodeIdIcon className="w-5 h-5 text-purple-400 flex-shrink-0" />
-                          <span className="text-lg text-purple-200">Exploring</span>
+                          <span className="text-lg text-purple-200">探索中</span>
                         </div>
                         <div className="text-sm text-purple-300 font-mono text-center w-full" style={{ wordBreak: "break-all", overflowWrap: "anywhere" }}>
                           {universeConfig.node_id}
@@ -363,25 +363,25 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
                     <div className="text-sm text-gray-400 space-y-1 max-w-full px-4">
                       <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
                         <SeedIcon className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                        <span className="text-gray-400">Remote Seed:</span>
+                        <span className="text-gray-400">远程种子:</span>
                         <span className="text-blue-400 font-mono truncate max-w-xs">{SeedSanitizer.sanitizeForDisplay(universeConfig.seed_str)}</span>
                       </div>
                       <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
                         <BitBangIcon className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                        <span className="text-gray-400">Remote Bit Bang:</span>
+                        <span className="text-gray-400">远程比特大爆炸:</span>
                         <span className="text-cyan-400 font-mono">{formatCosmicTime(universeConfig.cosmic_origin_time)}</span>
                       </div>
                       {universeAge && (
                         <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
                           <UniverseAgeIcon className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                          <span className="text-gray-400">Time since Bit Bang:</span>
+                          <span className="text-gray-400">比特大爆炸至今:</span>
                           <span className="text-emerald-400 font-mono">{universeAge}</span>
                         </div>
                       )}
                       {universeDevelopment && (
                         <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
                           <DevelopmentIcon className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                          <span className="text-gray-400">Universe Development:</span>
+                          <span className="text-gray-400">宇宙发展:</span>
                           <span className="text-amber-400 font-mono">{universeDevelopment}</span>
                         </div>
                       )}
@@ -389,30 +389,30 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
                   </div>
                 ) : (
                   <div className="space-y-3">
-                    <p className="text-lg sm:text-xl text-gray-300 max-w-4xl mx-auto px-4">Navigate through infinite galaxies, solar systems, and planets. Enter coordinates to begin your journey across the universe.</p>
+                    <p className="text-lg sm:text-xl text-gray-300 max-w-4xl mx-auto px-4">穿越无限的星系、太阳系和行星。输入坐标开始你的宇宙之旅。</p>
                     {universeConfig && (
                       <div className="text-sm text-gray-400 space-y-1 max-w-full px-4">
                         <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
                           <SeedIcon className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                          <span className="text-gray-400">Local Seed:</span>
+                          <span className="text-gray-400">本地种子:</span>
                           <span className="text-blue-400 font-mono truncate max-w-xs">{SeedSanitizer.sanitizeForDisplay(universeConfig.seed_str)}</span>
                         </div>
                         <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
                           <BitBangIcon className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                          <span className="text-gray-400">Local Bit Bang:</span>
+                          <span className="text-gray-400">本地比特大爆炸:</span>
                           <span className="text-cyan-400 font-mono">{formatCosmicTime(universeConfig.cosmic_origin_time)}</span>
                         </div>
                         {universeAge && (
                           <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
                             <UniverseAgeIcon className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                            <span className="text-gray-400">Time since Bit Bang:</span>
+                            <span className="text-gray-400">比特大爆炸至今:</span>
                             <span className="text-emerald-400 font-mono">{universeAge}</span>
                           </div>
                         )}
                         {universeDevelopment && (
                           <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
                             <DevelopmentIcon className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                            <span className="text-gray-400">Universe Development:</span>
+                            <span className="text-gray-400">宇宙发展:</span>
                             <span className="text-amber-400 font-mono">{universeDevelopment}</span>
                           </div>
                         )}
@@ -431,7 +431,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
 
             {error && (
               <div className="mb-8 bg-red-500/20 border border-red-500 rounded-lg p-4 text-red-200 text-center">
-                <span className="font-semibold">Navigation Error:</span> {error}
+                <span className="font-semibold">导航错误:</span> {error}
               </div>
             )}
 

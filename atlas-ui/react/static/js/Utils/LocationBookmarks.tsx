@@ -255,26 +255,26 @@ export class LocationBookmarks {
 
       const title = document.createElement("h2");
       title.className = "text-2xl font-bold mb-4 text-white";
-      title.textContent = "Storage Full";
+      title.textContent = "存储空间已满";
 
       const tipParagraph = document.createElement("p");
       tipParagraph.className = "text-slate-400 mb-6 text-[10px] bg-slate-800/50 rounded-lg p-3 border border-slate-700/50";
-      tipParagraph.textContent = "💡 Complete daily challenges to increase your storage capacity";
+      tipParagraph.textContent = "💡 完成每日挑战以增加您的存储容量";
 
       const mainParagraph = document.createElement("p");
       mainParagraph.className = "text-slate-300 mb-4 text-base leading-relaxed";
-      mainParagraph.textContent = "You have reached your maximum of ";
+      mainParagraph.textContent = "您已达到最大存储数量 ";
 
       const maxSlotsSpan = document.createElement("span");
       maxSlotsSpan.className = "font-bold text-amber-400 bg-amber-400/10 px-2 py-1 rounded-lg";
       maxSlotsSpan.textContent = maxSlots.toString();
 
       mainParagraph.appendChild(maxSlotsSpan);
-      mainParagraph.appendChild(document.createTextNode(" saved locations."));
+      mainParagraph.appendChild(document.createTextNode(" 个已保存位置。"));
 
       const questionParagraph = document.createElement("p");
       questionParagraph.className = "text-slate-200 mb-8 text-base";
-      questionParagraph.textContent = "Overwrite the oldest saved location?";
+      questionParagraph.textContent = "是否覆盖最早保存的位置？";
 
       const buttonContainer = document.createElement("div");
       buttonContainer.className = "flex gap-4 justify-center";
@@ -282,12 +282,12 @@ export class LocationBookmarks {
       const cancelButton = document.createElement("button");
       cancelButton.id = "cancelSave";
       cancelButton.className = "px-6 py-3 bg-slate-700/80 hover:bg-slate-600/80 border border-slate-600/50 hover:border-slate-500/50 rounded-xl transition-all duration-200 font-medium text-slate-200 hover:text-white transform hover:scale-105 hover:shadow-lg";
-      cancelButton.textContent = "Cancel";
+      cancelButton.textContent = "取消";
 
       const confirmButton = document.createElement("button");
       confirmButton.id = "confirmOverwrite";
       confirmButton.className = "px-6 py-3 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 rounded-xl transition-all duration-200 font-semibold text-white transform hover:scale-105 hover:shadow-lg border border-amber-400/30";
-      confirmButton.textContent = "Overwrite";
+      confirmButton.textContent = "覆盖";
 
       buttonContainer.appendChild(cancelButton);
       buttonContainer.appendChild(confirmButton);
@@ -412,19 +412,19 @@ export class LocationBookmarks {
       if (saved) {
         return {
           success: true,
-          message: `Location "${name}" saved successfully!`,
+          message: `位置 "${name}" 保存成功！`,
         };
       } else {
         return {
           success: false,
-          message: "Save operation cancelled by user.",
+          message: "保存操作被用户取消。",
         };
       }
     } catch (error) {
       console.error("Error saving location with confirmation:", error);
       return {
         success: false,
-        message: "Failed to save location. Please try again.",
+        message: "保存位置失败。请重试。",
       };
     }
   }

@@ -171,19 +171,19 @@ export function calculatePlanetResources(elements: string[]): ElementValue {
 
 export function getElementRarityTier(elementName: string): string {
   const value = ELEMENT_RESOURCE_VALUES[elementName];
-  if (!value) return "Unknown";
+  if (!value) return "未知";
 
-  if (elementName === "Z-Divinium") return "Exception";
+  if (elementName === "Z-Divinium") return "特殊";
 
   const totalValue = value.antimatter + value.element115 + value.deuterium;
 
-  if (totalValue >= 200) return "Ultra Rare";
-  if (totalValue >= 100) return "Extremely Rare";
-  if (totalValue >= 75) return "Very Rare";
-  if (totalValue >= 50) return "Rare";
-  if (totalValue >= 30) return "Uncommon";
-  if (totalValue >= 15) return "Common";
-  if (totalValue >= 5) return "Very Common";
-  if (totalValue >= 2) return "Abundant";
-  return "Basic";
+  if (totalValue >= 200) return "极其稀有";
+  if (totalValue >= 100) return "非常稀有";
+  if (totalValue >= 75) return "稀有";
+  if (totalValue >= 50) return "较稀有";
+  if (totalValue >= 30) return "不常见";
+  if (totalValue >= 15) return "常见";
+  if (totalValue >= 5) return "非常常见";
+  if (totalValue >= 2) return "丰富";
+  return "基础";
 }

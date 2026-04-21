@@ -133,7 +133,7 @@ const PlanetLayout: React.FC<PlanetLayoutProps> = ({ planet, system, galaxy, pla
 
           <div className="w-full px-2 sm:px-4 lg:px-6 py-4 sm:py-8 flex-1">
             <div className="text-center mb-2">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">Planet '{formatPlanetName(planet.name)}'</h1>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">行星 '{formatPlanetName(planet.name)}'</h1>
               <p className="text-[10px] sm:text-xs text-gray-300 flex items-center justify-center gap-x-4 gap-y-1 flex-wrap">
                 <span className="flex items-center gap-1">
                   <SystemIcon size={15} color="#ffffffff" />
@@ -168,7 +168,7 @@ const PlanetLayout: React.FC<PlanetLayoutProps> = ({ planet, system, galaxy, pla
 
             <div className="bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 mb-8 shadow-2xl p-4 sm:p-6 text-center">
               <button onClick={() => (window.location.href = `/system/${system.index}`)} className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gray-600 via-gray-700 to-gray-600 hover:from-gray-700 hover:via-gray-800 hover:to-gray-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg backdrop-blur-sm">
-                <span className="text-base sm:text-lg">← Back to System '{formatSystemName(system.name)}'</span>
+                <span className="text-base sm:text-lg">← 返回系统 '{formatSystemName(system.name)}'</span>
               </button>
             </div>
           </div>

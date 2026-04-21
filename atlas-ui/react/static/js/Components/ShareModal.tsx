@@ -10,7 +10,7 @@ interface ShareModalProps {
   isGeneratingImage?: boolean;
 }
 
-const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, url, title = "Share this link", onTakeScreenshot, isGeneratingImage = false }) => {
+const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, url, title = "分享此链接", onTakeScreenshot, isGeneratingImage = false }) => {
   const [copied, setCopied] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -103,13 +103,13 @@ const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, url, title = "
           </svg>
         </button>
 
-        <h2 className="text-xl font-semibold text-white mb-4">Share Stargate Link</h2>
+        <h2 className="text-xl font-semibold text-white mb-4">分享星门链接</h2>
 
         <div className="mb-6">
           <div className="flex items-center gap-2 p-3 bg-slate-700/50 rounded-lg">
             <input type="text" value={url} readOnly className="flex-1 bg-transparent text-gray-300 outline-none text-sm" />
             <button onClick={handleCopyLink} className={`px-3 py-1 rounded transition-all ${copied ? "bg-green-600 text-white" : "bg-slate-600 hover:bg-slate-500 text-gray-200"}`}>
-              {copied ? "Copied!" : "Copy"}
+              {copied ? "已复制!" : "复制"}
             </button>
           </div>
         </div>

@@ -268,8 +268,8 @@ const MultiverseLayout: React.FC = () => {
 
         <div className="w-full px-2 sm:px-4 lg:px-6 py-4 sm:py-8 flex-1">
           <div className="text-center mb-6">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">Multiverse Network</h1>
-            <p className="text-sm text-gray-300 mb-4">Connected P2P Universe Instances</p>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">多元宇宙网络</h1>
+            <p className="text-sm text-gray-300 mb-4">已连接的P2P宇宙实例</p>
 
             <div className="flex items-center justify-center gap-2 text-xs flex-wrap mb-4">
               <div className="flex items-center gap-1">
@@ -311,7 +311,7 @@ const MultiverseLayout: React.FC = () => {
                 </div>
               )}
               <button onClick={() => fetchData()} className="px-3 py-1 bg-purple-600/30 hover:bg-purple-600/50 rounded-full border border-purple-500/50 transition-colors">
-                Refresh
+                刷新
               </button>
               <button
                 onClick={() => {
@@ -321,7 +321,7 @@ const MultiverseLayout: React.FC = () => {
                 }}
                 className={`px-3 py-1 rounded-full border transition-colors ${autoRefresh ? "bg-green-600/30 hover:bg-green-600/50 border-green-500/50" : "bg-gray-600/30 hover:bg-gray-600/50 border-gray-500/50"}`}
               >
-                Auto-refresh: {autoRefresh ? "ON" : "OFF"}
+                自动刷新: {autoRefresh ? "开启" : "关闭"}
               </button>
             </div>
 
@@ -356,8 +356,8 @@ const MultiverseLayout: React.FC = () => {
                   <div className="flex items-center gap-3">
                     <div className="text-center sm:text-left">
                       <h3 className="text-amber-200 font-bold text-sm sm:text-lg flex items-center justify-center sm:justify-start">
-                        <UniverseIcon className="mr-2" /> Exploring Remote Universe
-                      </h3>
+                      <UniverseIcon className="mr-2" /> 正在探索远程宇宙
+                    </h3>
                       <div className="space-y-1 mt-2">
                         <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 text-xs">
                           <div className="flex items-center gap-2">
@@ -378,7 +378,7 @@ const MultiverseLayout: React.FC = () => {
                   </div>
                   <button onClick={handleReturnToOriginalUniverse} className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-amber-500/25 flex items-center gap-2 w-full text-center sm:w-auto justify-center">
                     <UniverseIcon size={18} color="white" />
-                    <span>Return to Your Universe</span>
+                    <span>返回你的宇宙</span>
                   </button>
                 </div>
               </div>
@@ -418,7 +418,7 @@ const MultiverseLayout: React.FC = () => {
                           <div className="absolute -top-2 -left-2 z-10">
                             <div className="bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-bold py-1 px-2 rounded-full shadow-lg flex items-center gap-1 animate-pulse">
                               <UniverseIcon size={12} color="white" />
-                              <span>Exploring</span>
+                              <span>正在探索</span>
                             </div>
                           </div>
                         )}
@@ -499,11 +499,11 @@ const MultiverseLayout: React.FC = () => {
                         <div className="mt-4 pt-4 border-t border-white/10">
                           {isCurrentlyExploring(group.seed) ? (
                             <div className="w-full bg-gradient-to-r from-amber-600/50 to-orange-600/50 text-amber-200 font-semibold py-3 px-4 rounded-xl flex items-center justify-center gap-2 border border-amber-500/30">
-                              <span>You are Here</span>
+                              <span>你在这里</span>
                             </div>
                           ) : (
                             <button onClick={() => handleUniverseExploration(group)} className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-purple-500/25">
-                              Explore this Universe
+                              探索这个宇宙
                             </button>
                           )}
                         </div>
