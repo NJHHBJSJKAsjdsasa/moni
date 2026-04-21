@@ -15,6 +15,37 @@ from pymodules.__atlas_stargate import (
 def register_universe_page_routes(app, universe, config):
     from pymodules.__universe_routes_uip import get_universe
 
+    def safe_value(value):
+        """Convert values to safe JSON serializable types"""
+        if value is None:
+            return None
+        if isinstance(value, (int, float, bool, str)):
+            return value
+        if isinstance(value, (list, tuple)):
+            return [safe_value(item) for item in value]
+        if isinstance(value, dict):
+            return {safe_value(k): safe_value(v) for k, v in value.items()}
+        return str(value)
+
+    def get_safe_universe_config():
+        """Create a universe config dictionary with only safe JSON serializable values"""
+        return {
+            "remote": safe_value(config.remote),
+            "seed_name": safe_value(config.seed_name),
+            "node_id": safe_value(config.node_id),
+            "seed_str": safe_value(config.seed_str),
+            "cosmic_origin_time": safe_value(config.cosmic_origin_time),
+        }
+    
+    def safe_serialize(obj):
+        """Safely serialize any object to a JSON-compatible structure"""
+        import json
+        try:
+            json.dumps(obj)
+            return obj
+        except (TypeError, ValueError):
+            return safe_value(obj)
+
     def get_current_galaxy():
         universe = get_universe()
         if universe is None:
@@ -57,7 +88,7 @@ def register_universe_page_routes(app, universe, config):
             else:
                 return redirect(url_for("onboarding"))
 
-        universe_config = {"remote": config.remote, "seed_name": config.seed_name, "node_id": config.node_id, "seed_str": config.seed_str, "cosmic_origin_time": config.cosmic_origin_time}
+        universe_config = get_safe_universe_config()
         return render_template("index.html", version=VERSION, versionHash=VERSION_HASH, run_mode=RUN, universe_config=universe_config)
 
     @app.route("/onboarding", methods=["GET", "POST"])
@@ -87,12 +118,12 @@ def register_universe_page_routes(app, universe, config):
 
     @app.route("/universe-faq")
     def universe_faq():
-        universe_config = {"remote": config.remote, "seed_name": config.seed_name, "node_id": config.node_id, "seed_str": config.seed_str, "cosmic_origin_time": config.cosmic_origin_time}
+        universe_config = get_safe_universe_config()
         return render_template("faq.html", version=VERSION, versionHash=VERSION_HASH, run_mode=RUN, universe_config=universe_config)
 
     @app.route("/multiverse")
     def multiverse():
-        universe_config = {"remote": config.remote, "seed_name": config.seed_name, "node_id": config.node_id, "seed_str": config.seed_str, "cosmic_origin_time": config.cosmic_origin_time}
+        universe_config = get_safe_universe_config()
         return render_template("multiverse.html", version=VERSION, versionHash=VERSION_HASH, run_mode=RUN, image_url="", universe_config=universe_config)
 
     @app.route("/navigate", methods=["POST"])
@@ -150,10 +181,10 @@ def register_universe_page_routes(app, universe, config):
 
             systems = [
                 {
-                    "name": current_galaxy.get_solar_system(i).name,
-                    "index": i,
-                    "number": i + 1,
-                    "num_planets": current_galaxy.get_solar_system(i).num_planets,
+                    "name": safe_value(current_galaxy.get_solar_system(i).name),
+                    "index": safe_value(i),
+                    "number": safe_value(i + 1),
+                    "num_planets": safe_value(current_galaxy.get_solar_system(i).num_planets),
                 }
                 for i in range(start, min(end, current_galaxy.num_systems))
             ]
@@ -163,7 +194,7 @@ def register_universe_page_routes(app, universe, config):
 
             galaxy_url = generate_galaxy_url(current_galaxy.coordinates, page)
 
-            universe_config = {"remote": config.remote, "seed_name": config.seed_name, "node_id": config.node_id, "seed_str": config.seed_str, "cosmic_origin_time": config.cosmic_origin_time}
+            universe_config = get_safe_universe_config()
 
             return render_template(
                 "galaxy.html",
@@ -216,17 +247,17 @@ def register_universe_page_routes(app, universe, config):
 
             star_summary = [
                 {
-                    "类型": star["Type"],
-                    "颜色": star["Color"],
-                    "大小": f"{star['Radius Factor']:.2f} 太阳半径",
+                    "Type": safe_value(star["Type"]),
+                    "Color": safe_value(star["Color"]),
+                    "Size": safe_value(f"{star['Radius Factor']:.2f} 太阳半径"),
                 }
                 for star in current_system.stars
             ]
 
             system_summary = {
-                "恒星系统类型": current_system.star_system_type.capitalize(),
-                "行星数量": current_system.num_planets,
-                "恒星": star_summary,
+                "Star System Type": safe_value(current_system.star_system_type.capitalize()),
+                "Number of Planets": safe_value(current_system.num_planets),
+                "Stars": star_summary,
             }
 
             if request.headers.get("Accept") == "application/json":
@@ -238,7 +269,7 @@ def register_universe_page_routes(app, universe, config):
 
                 return jsonify({"system": {"name": current_system.name, "index": current_system.index, "planets": planets_list}, "galaxy": {"name": current_galaxy.name, "coordinates": current_galaxy.coordinates}})
 
-            universe_config = {"remote": config.remote, "seed_name": config.seed_name, "node_id": config.node_id, "seed_str": config.seed_str, "cosmic_origin_time": config.cosmic_origin_time}
+            universe_config = get_safe_universe_config()
 
             return render_template(
                 "system.html",
@@ -252,7 +283,7 @@ def register_universe_page_routes(app, universe, config):
                 versionHash=VERSION_HASH,
                 run_mode=RUN,
                 page=page,
-                cosmic_origin_time=config.cosmic_origin_time,
+                cosmic_origin_time=safe_value(config.cosmic_origin_time),
                 universe_config=universe_config,
             )
         except ValueError as e:
@@ -279,19 +310,19 @@ def register_universe_page_routes(app, universe, config):
                     planet_url = generate_planet_url(current_galaxy.coordinates, current_system.index, planet_name, page)
 
                     planet_summary = {
-                        "类型": planet.planet_type,
-                        "大气": planet.atmosphere,
-                        "质量": f"{planet.mass:.2e} kg",
-                        "直径": f"{planet.diameter:.2f} km",
-                        "重力": f"{planet.gravity:.2f} m/s²",
-                        "轨道半径": f"{planet.orbital_radius:.2f} AU",
-                        "轨道周期": f"{planet.orbital_period_seconds / (365.25 * 24 * 3600):.2f} 年",
-                        "表面温度": f"{planet.surface_temperature:.2f} K",
-                        "元素": ", ".join(planet.elements),
-                        "生命形式": planet.life_forms,
+                        "类型": safe_value(planet.planet_type),
+                        "大气": safe_value(planet.atmosphere),
+                        "质量": safe_value(f"{planet.mass:.2e} kg"),
+                        "直径": safe_value(f"{planet.diameter:.2f} km"),
+                        "重力": safe_value(f"{planet.gravity:.2f} m/s²"),
+                        "轨道半径": safe_value(f"{planet.orbital_radius:.2f} AU"),
+                        "轨道周期": safe_value(f"{planet.orbital_period_seconds / (365.25 * 24 * 3600):.2f} 年"),
+                        "表面温度": safe_value(f"{planet.surface_temperature:.2f} K"),
+                        "元素": safe_value(", ".join(planet.elements)),
+                        "生命形式": safe_value(planet.life_forms),
                     }
 
-                    universe_config = {"remote": config.remote, "seed_name": config.seed_name, "node_id": config.node_id, "seed_str": config.seed_str, "cosmic_origin_time": config.cosmic_origin_time}
+                    universe_config = get_safe_universe_config()
 
                     return render_template(
                         "planet.html",
@@ -305,8 +336,8 @@ def register_universe_page_routes(app, universe, config):
                         version=VERSION,
                         versionHash=VERSION_HASH,
                         run_mode=RUN,
-                        cosmic_origin_time=config.cosmic_origin_time,
-                        initial_angle_rotation=planet.initial_angle_rotation,
+                        cosmic_origin_time=safe_value(config.cosmic_origin_time),
+                        initial_angle_rotation=safe_value(planet.initial_angle_rotation),
                         universe_config=universe_config,
                     )
 
