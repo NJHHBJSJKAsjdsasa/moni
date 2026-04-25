@@ -51,7 +51,7 @@ const SystemVisualizationUniversal: React.FC<SystemVisualizationUniversalProps> 
     setTimeout(() => {
       setCanvasHidden(true);
       decelerateRef.current = true;
-    }, 800);
+    }, 500); // 减少延迟时间，让内容更快显示
   }, []);
 
   useEffect(() => {
