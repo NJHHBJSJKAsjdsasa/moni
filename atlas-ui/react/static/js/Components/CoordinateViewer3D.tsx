@@ -14,7 +14,7 @@ interface CoordinateViewer3DProps {
 const CoordinateViewer3D: React.FC<CoordinateViewer3DProps> = ({ coordinates, className = "", onUserInteraction, isVisible = true }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGL2Renderer | null>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const galaxyRef = useRef<THREE.Mesh | null>(null);
   const animationIdRef = useRef<number | null>(null);
   const rotatingGroupRef = useRef<THREE.Group | null>(null);
@@ -41,7 +41,7 @@ const CoordinateViewer3D: React.FC<CoordinateViewer3DProps> = ({ coordinates, cl
     camera.position.set(8, 6, 8);
     camera.lookAt(0, 0, 0);
 
-    const renderer = new THREE.WebGL2Renderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(containerWidth, containerHeight);
     renderer.setClearColor(0x000000, 0);
     renderer.domElement.style.pointerEvents = "none";
