@@ -123,4 +123,7 @@ class SolarSystem:
         }
 
     def get_planet(self, index):
-        return self.planets.get(index, None)
+        if index in self.planets:
+            return self.planets[index]
+        # If planet not found, return the first planet in the system
+        return next(iter(self.planets.values()), None)
