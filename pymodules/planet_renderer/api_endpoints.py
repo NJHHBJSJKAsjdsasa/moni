@@ -140,8 +140,13 @@ class PlanetRendererAPI:
             system = galaxy.get_solar_system(system_index)
             planet = system.get_planet(planet_index)
             
-            if planet is None:
-                return jsonify({"error": f"Planet with index {planet_index} not found in system"})
+            # If planet not found (e.g., session index is outdated), return the first planet
+            if planet is None and system.planets:
+                planet = next(iter(system.planets.values()))
+                # Update session with the new planet index
+                session["planet"] = next(iter(system.planets.keys()))
+            elif planet is None:
+                return jsonify({"error": "No planets found in system"})
 
             cosmic_origin_time = config.cosmic_origin_time
             current_time_seconds = math.floor(time.time())
