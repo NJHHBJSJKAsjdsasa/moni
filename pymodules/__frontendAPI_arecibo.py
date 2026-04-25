@@ -1,5 +1,6 @@
 # pymodules/__frontendAPI_arecibo.py
 
+import asyncio
 from flask import Flask, jsonify, session, request
 
 
