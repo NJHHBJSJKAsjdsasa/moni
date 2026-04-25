@@ -12,7 +12,7 @@ interface Universe3DViewerProps {
 const Universe3DViewer: React.FC<Universe3DViewerProps> = ({ coordinates, galaxyName }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGL2Renderer | null>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const animationIdRef = useRef<number | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -66,7 +66,7 @@ const Universe3DViewer: React.FC<Universe3DViewerProps> = ({ coordinates, galaxy
     camera.position.set(12, 8, 12);
     camera.lookAt(0, 0, 0);
 
-    const renderer = new THREE.WebGL2Renderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(containerWidth, isMobile ? 120 : 120);
     renderer.setClearColor(0x000000, 0.2);
     rendererRef.current = renderer;

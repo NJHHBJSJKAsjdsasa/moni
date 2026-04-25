@@ -10,7 +10,7 @@ interface Universe3DViewerFullscreenProps {
 const Universe3DViewerFullscreen: React.FC<Universe3DViewerFullscreenProps> = ({ coordinates, galaxyName }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGL2Renderer | null>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const animationIdRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Universe3DViewerFullscreen: React.FC<Universe3DViewerFullscreenProps> = ({
     camera.position.set(20, 15, 20);
     camera.lookAt(0, 0, 0);
 
-    const renderer = new THREE.WebGL2Renderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(containerWidth, containerHeight);
     renderer.setClearColor(0x000000, 0.2);
     rendererRef.current = renderer;
