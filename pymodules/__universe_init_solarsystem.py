@@ -20,6 +20,7 @@ class SolarSystem:
         self.star_system_type = self.determine_star_system_type()
         self.stars = self.generate_stars()
 
+        # Generate initial planets
         for i in range(self.num_planets):
             from pymodules.__universe_init_planet import Planet
 
@@ -37,6 +38,7 @@ class SolarSystem:
 
             self.planets[i] = Planet(planet_seed, planet_name, self.constants, star_mass)
 
+        # Generate extra planets if needed
         extra_planet_probabilities = {
             6: 0.35,
             7: 0.25,
@@ -44,8 +46,9 @@ class SolarSystem:
             9: 0.05,
         }
 
-        for extra_planet_index, probability in extra_planet_probabilities.items():
-            if self.num_planets != extra_planet_index:
+        current_planet_count = self.num_planets
+        for extra_planet_index in range(6, 10):
+            if current_planet_count != extra_planet_index:
                 break
 
             extra_seed = int(
@@ -55,7 +58,7 @@ class SolarSystem:
 
             random.seed(extra_seed)
 
-            if random.random() < probability:
+            if random.random() < extra_planet_probabilities.get(extra_planet_index, 0):
                 from pymodules.__universe_init_planet import Planet
 
                 planet_seed = int(
@@ -78,9 +81,26 @@ class SolarSystem:
                     star_mass *= mass_factors.get(star_type, 1.0)
 
                 self.planets[extra_planet_index] = Planet(planet_seed, planet_name, self.constants, star_mass)
-                self.num_planets = extra_planet_index + 1
+                current_planet_count += 1
+                self.num_planets = current_planet_count
             else:
                 break
+
+        # Ensure at least one planet exists
+        if not self.planets:
+            from pymodules.__universe_init_planet import Planet
+            planet_seed = int(
+                hashlib.sha256(f"{self.seed}-{seedmaster(4)}-0".encode()).hexdigest(),
+                16,
+            )
+            planet_name = generate_name(planet_seed, "planet")
+            star_mass = self.constants.M_SUN
+            if self.stars:
+                star_type = self.stars[0]["Type"]
+                mass_factors = {"Red Dwarf": 0.2, "Yellow Dwarf": 1.0, "Blue Giant": 10.0, "Red Giant": 1.2, "White Dwarf": 0.6, "Neutron Star": 1.4}
+                star_mass *= mass_factors.get(star_type, 1.0)
+            self.planets[0] = Planet(planet_seed, planet_name, self.constants, star_mass)
+            self.num_planets = 1
 
     def determine_star_system_type(self):
         system_type = random.choices(
@@ -123,7 +143,11 @@ class SolarSystem:
         }
 
     def get_planet(self, index):
+        # If index is valid, return the corresponding planet
         if index in self.planets:
             return self.planets[index]
-        # If planet not found, return the first planet in the system
-        return next(iter(self.planets.values()), None)
+        # If index is out of range, return the first planet
+        if self.planets:
+            return next(iter(self.planets.values()))
+        # This should never happen due to the earlier check in __init__
+        return None
