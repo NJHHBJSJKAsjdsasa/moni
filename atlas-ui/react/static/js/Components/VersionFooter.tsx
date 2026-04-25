@@ -89,26 +89,6 @@ const VersionFooter: React.FC<VersionFooterProps> = ({ version, showBadge = fals
                 <GitHubIcon />
                 <span className="text-sm text-gray-400 group-hover:text-white">Atlas</span>
               </a>
-              <a href="https://x.com/SurceBeats" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-200 group" title="Follow on Twitter/X">
-                <TwitterIcon />
-                <span className="text-sm text-gray-400 group-hover:text-white">Twitter</span>
-              </a>
-              <a href="https://www.linkedin.com/in/claudio-gonzalez-medina/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-200 group" title="Connect on LinkedIn">
-                <LinkedInIcon />
-                <span className="text-sm text-gray-400 group-hover:text-white">LinkedIn</span>
-              </a>
-              <a href="https://www.banshee.pro" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-200 group" title="Visit Banshee Technologies">
-                <WebIcon />
-                <span className="text-sm text-gray-400 group-hover:text-white">Banshee</span>
-              </a>
-              <a href="/multiverse" className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-200 group" title="Explore the Multiverse">
-                <MultiverseIcon />
-                <span className="text-sm text-gray-400 group-hover:text-white">Multiverse</span>
-              </a>
-              <a href="/universe-faq" className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-200 group" title="Universe FAQ">
-                <FAQIcon />
-                <span className="text-sm text-gray-400 group-hover:text-white">F.A.Q.</span>
-              </a>
             </div>
           </div>
 
@@ -126,16 +106,6 @@ const VersionFooter: React.FC<VersionFooterProps> = ({ version, showBadge = fals
               </button>
             </div>
           </div>
-
-          {/* Row 3: GOAT badge */}
-          {showBadge && (
-            <div className="flex flex-col items-center gap-1 pt-3 border-t border-white/5">
-              <span className="text-[9px] text-gray-600 tracking-wide uppercase">Running it on elsewhereOS?</span>
-              <a href="https://github.com/BansheeTech/HomeDockOS" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100 transition-opacity duration-500">
-                <img src="/static/HDOSDarkSmallBadge.svg" />
-              </a>
-            </div>
-          )}
         </div>
       </div>
     </footer>
