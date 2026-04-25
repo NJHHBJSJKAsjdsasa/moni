@@ -150,10 +150,18 @@ class CachedPlanet(Planet):
             self.elements = cached_data['elements']
             self.life_forms = cached_data['life_forms']
             self.atmosphere = cached_data['atmosphere']
-            self.num_moons = cached_data['num_moons']
+            # 处理 num_moons 属性
+            self.num_moons = cached_data.get('num_moons', 0)
+            # 初始化其他必要的属性
+            self.star_mass = constants.M_SUN
+            # 为了确保兼容性，创建一个简单的 moon_system 结构
+            self.moon_system = type('MoonSystem', (), {'moons': []})()
         else:
             # Create new planet
             super().__init__(seed, name, constants)
+            
+            # 计算卫星数量
+            self.num_moons = len(self.moon_system.moons) if hasattr(self, 'moon_system') else 0
             
             # Save to cache
             planet_data = {
