@@ -71,7 +71,7 @@ PROCEDURAL_COLOR_TYPES = {
 
 def _seeded_random(seed):
     """Simple seeded random generator for deterministic results."""
-    s = abs(seed) if seed else 1
+    s = abs(seed) if seed is not None else 1
     def next_random():
         nonlocal s
         s = (s * 1664525 + 1013904223) % 4294967296
