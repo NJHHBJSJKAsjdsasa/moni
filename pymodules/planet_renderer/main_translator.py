@@ -58,6 +58,13 @@ class PlanetRenderingTranslator:
         }
 
     def translate_planet_rendering(self, planet) -> Dict[str, Any]:
+        print(f"DEBUG: translate_planet_rendering called with planet: {planet}")
+        print(f"DEBUG: planet type: {type(planet)}")
+        if planet:
+            print(f"DEBUG: planet name: {planet.name}")
+            print(f"DEBUG: planet has seed: {hasattr(planet, 'seed')}")
+            if hasattr(planet, 'seed'):
+                print(f"DEBUG: planet seed: {planet.seed}")
 
         spaced_planet_name = planet.name.replace("_", " ")
         planet_type = planet.planet_type.replace("_", " ")
@@ -76,6 +83,7 @@ class PlanetRenderingTranslator:
         
         # Get config seed or use a default value if None
         config_seed = config.seed or 123456789
+        print(f"DEBUG: config_seed: {config_seed}")
         shape_seed = consistent_hash(f"{config_seed}-{spaced_planet_name}-{planet_type}-{planet.diameter}-{planet.density}-{planet.gravity}-_safe_shaper")
 
         planet_radius = int(200 * (planet.diameter / max(planet.diameter, 1)))
@@ -84,7 +92,9 @@ class PlanetRenderingTranslator:
         planet_color_map = get_planet_color_map()
         base_color = planet_color_map.get(planet.planet_type, "#FFFFFF")
         planet_seed = getattr(planet, "seed", None)
+        print(f"DEBUG: planet_seed: {planet_seed}")
         if planet_seed:
+            print(f"DEBUG: calling get_procedural_planet_color with seed: {planet_seed}")
             base_color = get_procedural_planet_color(base_color, planet.planet_type, planet_seed)
 
         planet_specific_data = {}
