@@ -34,7 +34,7 @@ class MoonsTranslator:
 
         visual_props = self.moon_visuals.get(moon_type, self.moon_visuals["rocky"])
 
-        moon_seed = consistent_hash(f"{config_seed}-{moon.name}-{moon.seed}")
+        moon_seed = consistent_hash(f"{config_seed}-{moon.name}-{getattr(moon, 'seed', 'default')}")
         rng = random.Random(moon_seed)
 
         planet_radius_km = planet.diameter / 2
