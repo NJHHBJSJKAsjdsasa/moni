@@ -3,7 +3,7 @@
 from pymodules.__universe_init_galaxy import Galaxy
 from pymodules.__universe_init_solarsystem import SolarSystem
 from pymodules.__universe_init_planet import Planet
-from pymodules.__atlas_permanent_cache import permanent_cache
+from pymodules.__atlas_sqlite_cache import sqlite_cache
 from typing import Optional, Dict, Any
 
 class CachedGalaxy(Galaxy):
@@ -12,7 +12,7 @@ class CachedGalaxy(Galaxy):
         x, y, z = coordinates
         
         # Check if galaxy is in cache
-        cached_data = permanent_cache.get_galaxy(x, y, z)
+        cached_data = sqlite_cache.get_galaxy(x, y, z)
         if cached_data:
             # Load from cache
             self.seed = cached_data['seed']
@@ -52,13 +52,13 @@ class CachedGalaxy(Galaxy):
                 'pulsars': self.pulsars,
                 'quasars': self.quasars
             }
-            permanent_cache.save_galaxy(x, y, z, galaxy_data)
+            sqlite_cache.save_galaxy(x, y, z, galaxy_data)
     
     def get_solar_system(self, index):
         x, y, z = self.coordinates
         
         # Check if system is in cache
-        cached_data = permanent_cache.get_system(x, y, z, index)
+        cached_data = sqlite_cache.get_system(x, y, z, index)
         if cached_data:
             # Load from cache
             from pymodules.__universe_init_solarsystem import SolarSystem
@@ -83,7 +83,7 @@ class CachedSolarSystem(SolarSystem):
         x, y, z = galaxy_coordinates
         
         # Check if system is in cache
-        cached_data = permanent_cache.get_system(x, y, z, index)
+        cached_data = sqlite_cache.get_system(x, y, z, index)
         if cached_data:
             # Load from cache
             self.seed = cached_data['seed']
@@ -103,13 +103,13 @@ class CachedSolarSystem(SolarSystem):
                 'name': self.name,
                 'num_planets': self.num_planets
             }
-            permanent_cache.save_system(x, y, z, index, system_data)
+            sqlite_cache.save_system(x, y, z, index, system_data)
     
     def get_planet(self, planet_name):
         x, y, z = self.galaxy_coordinates
         
         # Check if planet is in cache
-        cached_data = permanent_cache.get_planet(x, y, z, self.index, planet_name)
+        cached_data = sqlite_cache.get_planet(x, y, z, self.index, planet_name)
         if cached_data:
             # Load from cache
             from pymodules.__universe_init_planet import Planet
@@ -135,7 +135,7 @@ class CachedPlanet(Planet):
         x, y, z = galaxy_coordinates
         
         # Check if planet is in cache
-        cached_data = permanent_cache.get_planet(x, y, z, system_index, name)
+        cached_data = sqlite_cache.get_planet(x, y, z, system_index, name)
         if cached_data:
             # Load from cache
             self.seed = cached_data['seed']
@@ -164,7 +164,7 @@ class CachedPlanet(Planet):
                 'atmosphere': self.atmosphere,
                 'num_moons': self.num_moons
             }
-            permanent_cache.save_planet(x, y, z, system_index, name, planet_data)
+            sqlite_cache.save_planet(x, y, z, system_index, name, planet_data)
 
 # Override the Universe.get_galaxy method to use CachedGalaxy
 def patch_universe_get_galaxy():
