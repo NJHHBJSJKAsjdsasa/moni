@@ -141,7 +141,8 @@ class PlanetRendererAPI:
             planet = system.get_planet(planet_index)
             
             if planet is None:
-                return jsonify({"error": f"Planet with index {planet_index} not found in system"})
+                # 索引无效，返回错误信息并包含系统实际行星数量
+                return jsonify({"error": f"Planet with index {planet_index} not found in system", "system_planets_count": system.num_planets})
 
             cosmic_origin_time = config.cosmic_origin_time
             current_time_seconds = math.floor(time.time())
