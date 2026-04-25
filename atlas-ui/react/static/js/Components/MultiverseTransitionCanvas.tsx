@@ -17,7 +17,7 @@ interface MultiverseTransitionCanvasProps {
 const MultiverseTransitionCanvas: React.FC<MultiverseTransitionCanvasProps> = ({ isActive, onTransitionComplete }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const rendererRef = useRef<THREE.WebGL2Renderer | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const composerRef = useRef<EffectComposer | null>(null);
   const animationIdRef = useRef<number | null>(null);
@@ -547,7 +547,7 @@ const MultiverseTransitionCanvas: React.FC<MultiverseTransitionCanvasProps> = ({
       camera.position.set(0, 0, 3.0);
       cameraRef.current = camera;
 
-      const renderer = new THREE.WebGLRenderer({
+      const renderer = new THREE.WebGL2Renderer({
         antialias: true,
         alpha: false,
       });

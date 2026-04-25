@@ -23,7 +23,7 @@ interface Galaxy3DViewerProps {
 const Galaxy3DViewer = forwardRef<{ captureScreenshot: () => void; isGeneratingImage: boolean }, Galaxy3DViewerProps>(({ galaxyType, numSystems, blackHoles, pulsars, quasars, seed = 12345, onExpandClick, galaxyName, galaxyUrl }, ref) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const rendererRef = useRef<THREE.WebGL2Renderer | null>(null);
   const animationIdRef = useRef<number | null>(null);
   const controlsRef = useRef<OrbitControls | null>(null);
   const galaxyGroupRef = useRef<THREE.Group | null>(null);
@@ -101,7 +101,7 @@ const Galaxy3DViewer = forwardRef<{ captureScreenshot: () => void; isGeneratingI
     camera.lookAt(0, 0, 0);
     cameraRef.current = camera;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGL2Renderer({ antialias: true, alpha: true });
     renderer.setSize(size, size);
     renderer.setClearColor(0x000011, 1);
     rendererRef.current = renderer;
@@ -1051,6 +1051,87 @@ const Galaxy3DViewer = forwardRef<{ captureScreenshot: () => void; isGeneratingI
     pointLight.position.set(0, 100, 0);
     scene.add(pointLight);
 
+    // LOD management
+    const lodLevels = [
+      { distance: 100, quality: 1.0 },    // Close - full quality
+      { distance: 300, quality: 0.6 },     // Medium - 60% quality
+      { distance: 600, quality: 0.3 },     // Far - 30% quality
+      { distance: 1000, quality: 0.1 }     // Very far - 10% quality
+    ];
+
+    let currentLODQuality = 1.0;
+    let starsMesh: THREE.Points | null = null;
+
+    // Store the full geometry for LOD
+    let fullStarsGeometry: THREE.BufferGeometry | null = null;
+    let fullPositions: Float32Array | null = null;
+    let fullColors: Float32Array | null = null;
+    let fullSizes: Float32Array | null = null;
+
+    // Find the stars mesh after creation
+    galaxyGroup.children.forEach((child) => {
+      if (child instanceof THREE.Points) {
+        starsMesh = child;
+        fullStarsGeometry = child.geometry.clone();
+        const positionAttribute = child.geometry.attributes.position;
+        const colorAttribute = child.geometry.attributes.color;
+        const sizeAttribute = child.geometry.attributes.size;
+        if (positionAttribute && colorAttribute && sizeAttribute) {
+          fullPositions = new Float32Array(positionAttribute.array);
+          fullColors = new Float32Array(colorAttribute.array);
+          fullSizes = new Float32Array(sizeAttribute.array);
+        }
+      }
+    });
+
+    const updateLOD = () => {
+      if (!starsMesh || !fullStarsGeometry || !fullPositions || !fullColors || !fullSizes) return;
+
+      const distance = camera.position.length();
+      let targetQuality = 1.0;
+
+      for (const level of lodLevels) {
+        if (distance > level.distance) {
+          targetQuality = level.quality;
+        } else {
+          break;
+        }
+      }
+
+      if (Math.abs(targetQuality - currentLODQuality) < 0.05) return;
+
+      currentLODQuality = targetQuality;
+      const numPoints = Math.floor(fullPositions.length / 3 * targetQuality);
+      
+      if (numPoints < 100) return;
+
+      const newPositions = new Float32Array(numPoints * 3);
+      const newColors = new Float32Array(numPoints * 3);
+      const newSizes = new Float32Array(numPoints);
+
+      const step = Math.floor(fullPositions.length / 3 / numPoints);
+      for (let i = 0; i < numPoints; i++) {
+        const index = i * step * 3;
+        newPositions[i * 3] = fullPositions[index];
+        newPositions[i * 3 + 1] = fullPositions[index + 1];
+        newPositions[i * 3 + 2] = fullPositions[index + 2];
+        
+        newColors[i * 3] = fullColors[index];
+        newColors[i * 3 + 1] = fullColors[index + 1];
+        newColors[i * 3 + 2] = fullColors[index + 2];
+        
+        newSizes[i] = fullSizes[i * step];
+      }
+
+      const newGeometry = new THREE.BufferGeometry();
+      newGeometry.setAttribute('position', new THREE.Float32BufferAttribute(newPositions, 3));
+      newGeometry.setAttribute('color', new THREE.Float32BufferAttribute(newColors, 3));
+      newGeometry.setAttribute('size', new THREE.Float32BufferAttribute(newSizes, 1));
+
+      starsMesh.geometry.dispose();
+      starsMesh.geometry = newGeometry;
+    };
+
     const animate = () => {
       animationIdRef.current = requestAnimationFrame(animate);
       const time = performance.now() / 1000;
@@ -1150,6 +1231,9 @@ const Galaxy3DViewer = forwardRef<{ captureScreenshot: () => void; isGeneratingI
           obj.material.uniforms.cameraPos.value.copy(camera.position);
         }
       });
+
+      // Update LOD based on camera distance
+      updateLOD();
 
       if (controlsRef.current) {
         controlsRef.current.update();

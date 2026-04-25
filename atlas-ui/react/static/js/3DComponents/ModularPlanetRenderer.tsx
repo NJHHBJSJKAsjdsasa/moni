@@ -188,7 +188,7 @@ interface RendererStats {
 export const ModularPlanetRenderer = forwardRef<{ captureScreenshot: () => void }, ModularPlanetRendererProps>(({ planetName, containerClassName = "", width = 800, height = 600, autoRotate = true, enableControls = true, showDebugInfo = false, planetData, cosmicOriginTime, initialAngleRotation, timeOffset = 0, onDataLoaded, onEffectsCreated, onError, onMoonSelected, planetUrl }, ref) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const rendererRef = useRef<THREE.WebGL2Renderer | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const planetMeshRef = useRef<THREE.Mesh | null>(null);
   const controlsRef = useRef<OrbitControls | null>(null);
@@ -526,7 +526,7 @@ export const ModularPlanetRenderer = forwardRef<{ captureScreenshot: () => void 
       camera.lookAt(0, 0, 0);
       cameraRef.current = camera;
 
-      const renderer = new THREE.WebGLRenderer({
+      const renderer = new THREE.WebGL2Renderer({
         antialias: true,
         alpha: true,
         powerPreference: "high-performance",
