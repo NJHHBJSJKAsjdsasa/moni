@@ -19,6 +19,7 @@ from pymodules.__atlas_fixed_vars import PORT, RUN
 from pymodules.__atlas_config import config
 from pymodules.__atlas_observer import observer
 from pymodules.__atlas_ssl import ssl_enabled, get_ssl_cert_info
+from pymodules.__atlas_cache_proxy import patch_universe_get_galaxy
 
 from pymodules.__frontendAPI_location_data import register_location_api
 from pymodules.__frontendAPI_planet_renderer import register_planet_renderer_api
@@ -39,6 +40,9 @@ app = Flask(__name__, static_folder=None, template_folder=template_folder)
 app.secret_key = os.urandom(24)
 
 Compress(app)
+
+# Initialize permanent cache system
+patch_universe_get_galaxy()
 
 register_vite_assets(app, dev_mode=(RUN == "DEV"), dev_server_url="http://localhost:5173", dist_path="/atlas-ui/react/dist", manifest_path="atlas-ui/react/dist/.vite/manifest.json", nonce_provider=lambda: g.get("nonce"), logger=None)
 register_location_api(app)
