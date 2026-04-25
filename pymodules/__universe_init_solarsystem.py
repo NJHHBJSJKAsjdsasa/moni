@@ -123,4 +123,39 @@ class SolarSystem:
         }
 
     def get_planet(self, index):
-        return self.planets.get(index, None)
+        # 检查行星是否已存在
+        if index in self.planets:
+            return self.planets.get(index, None)
+        
+        # 如果行星不存在，根据系统种子生成新行星
+        # 使用索引和系统种子来生成可重复的行星
+        planet_seed = int(
+            hashlib.sha256(f"{self.seed}-extended-planet-{index}".encode()).hexdigest(),
+            16,
+        )
+        
+        # 导入 Planet 类
+        from pymodules.__universe_init_planet import Planet
+        
+        # 生成新行星名称
+        random.seed(planet_seed)
+        planet_name = generate_name(planet_seed, "planet", is_extra=True)
+        
+        # 获取恒星质量
+        star_mass = self.constants.M_SUN
+        if self.stars:
+            star_type = self.stars[0]["Type"]
+            mass_factors = {"Red Dwarf": 0.2, "Yellow Dwarf": 1.0, "Blue Giant": 10.0, "Red Giant": 1.2, "White Dwarf": 0.6, "Neutron Star": 1.4}
+            star_mass *= mass_factors.get(star_type, 1.0)
+        
+        # 生成新行星
+        new_planet = Planet(planet_seed, planet_name, self.constants, star_mass)
+        
+        # 保存新行星
+        self.planets[index] = new_planet
+        
+        # 更新行星数量（如果索引大于当前数量）
+        if index >= self.num_planets:
+            self.num_planets = index + 1
+        
+        return new_planet
