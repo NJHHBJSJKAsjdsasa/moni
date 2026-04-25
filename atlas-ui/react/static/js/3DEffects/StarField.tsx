@@ -39,9 +39,9 @@ const PROCEDURAL_RANGES = {
 };
 
 export class StarFieldEffect {
-  private starSystem: THREE.Points;
+  private starSystem: THREE.InstancedMesh;
   private material: THREE.ShaderMaterial;
-  private geometry: THREE.BufferGeometry;
+  private geometry: THREE.PlaneGeometry;
   private params: StarFieldParams;
   private starCount: number;
   private cameraPosition: THREE.Vector3 = new THREE.Vector3();
@@ -52,10 +52,7 @@ export class StarFieldEffect {
   private attenuationGeometry?: THREE.SphereGeometry;
 
   private static readonly vertexShader = `
-    attribute float size;
-    attribute float brightness;
-    attribute float twinklePhase;
-    attribute float starType;
+    attribute vec4 starData;
     attribute float distanceLayer;
     attribute vec3 originalPosition;
 
@@ -77,6 +74,11 @@ export class StarFieldEffect {
     varying vec2 vTangentDir;
 
     void main() {
+      float size = starData.x;
+      float brightness = starData.y;
+      float twinklePhase = starData.z;
+      float starType = starData.w;
+
       vBrightness = brightness;
       vStarType = starType;
       vAtmoBlur = 0.0;
@@ -138,7 +140,17 @@ export class StarFieldEffect {
       vTwinkle = baseTwinkle;
 
       float sizeMultiplier = starType > 0.5 ? 1.2 : 1.0;
-      gl_PointSize = size * sizeMultiplier * sizeBoost * (300.0 / -mvPosition.z);
+
+      // For InstancedMesh, we need to scale the plane
+      vec3 scale = vec3(size * sizeMultiplier * sizeBoost * 0.01 * (300.0 / length(mvPosition.xyz)));
+      mat4 scaleMatrix = mat4(
+        scale.x, 0.0, 0.0, 0.0,
+        0.0, scale.y, 0.0, 0.0,
+        0.0, 0.0, scale.z, 0.0,
+        0.0, 0.0, 0.0, 1.0
+      );
+
+      gl_Position = projectionMatrix * modelViewMatrix * scaleMatrix * vec4(adjustedPosition, 1.0);
     }
   `;
 
@@ -222,6 +234,9 @@ export class StarFieldEffect {
     }
   `;
 
+  private starMatrix: THREE.Matrix4[] = [];
+  private starData: Float32Array;
+
   constructor(planetRadius: number, params: StarFieldParams = {}) {
     const seed = params.seed !== undefined ? params.seed : Math.floor(Math.random() * 1000000);
     const rng = new SeededRandom(seed + 10000);
@@ -251,11 +266,14 @@ export class StarFieldEffect {
     this.startTime = getUniverseTime(cosmicOriginTime);
 
     this.starCount = this.params.starCount!;
-    this.geometry = new THREE.BufferGeometry();
+    this.geometry = new THREE.PlaneGeometry(1, 1);
     this.material = this.createMaterial();
 
+    this.starData = new Float32Array(this.starCount * 4); // size, brightness, twinklePhase, starType
+    this.starMatrix = new Array(this.starCount).fill(0).map(() => new THREE.Matrix4());
+
     this.generateStars(planetRadius);
-    this.starSystem = new THREE.Points(this.geometry, this.material);
+    this.starSystem = new THREE.InstancedMesh(this.geometry, this.material, this.starCount);
     this.starSystem.renderOrder = -100;
 
     if ((this.params.atmosphereDensity || 0) > 0 && this.params.atmosphereRadius) {
@@ -264,16 +282,12 @@ export class StarFieldEffect {
   }
 
   private generateStars(_planetRadius: number): void {
-    const positions = new Float32Array(this.starCount * 3);
-    const originalPositions = new Float32Array(this.starCount * 3);
-    const sizes = new Float32Array(this.starCount);
-    const brightnesses = new Float32Array(this.starCount);
-    const twinklePhases = new Float32Array(this.starCount);
-    const starTypes = new Float32Array(this.starCount);
-    const distanceLayers = new Float32Array(this.starCount);
-
     const seed = this.params.seed!;
     const rng = new SeededRandom(seed + 10000);
+
+    // Create instance attributes
+    const distanceLayers = new Float32Array(this.starCount);
+    const originalPositions = new Float32Array(this.starCount * 3);
 
     for (let i = 0; i < this.starCount; i++) {
       const phi = rng.uniform(0, 2 * Math.PI);
@@ -288,36 +302,44 @@ export class StarFieldEffect {
       const y = distance * Math.sin(theta) * Math.sin(phi);
       const z = distance * Math.cos(theta);
 
-      positions[i * 3] = x;
-      positions[i * 3 + 1] = y;
-      positions[i * 3 + 2] = z;
-
       originalPositions[i * 3] = x;
       originalPositions[i * 3 + 1] = y;
       originalPositions[i * 3 + 2] = z;
 
       const isVariable = rng.uniform(0, 1) < this.params.variableChance!;
-      starTypes[i] = isVariable ? 1.0 : 0.0;
+      const starType = isVariable ? 1.0 : 0.0;
 
       distanceLayers[i] = distanceVariation;
 
-      sizes[i] = rng.uniform(this.params.minSize!, this.params.maxSize!);
-      brightnesses[i] = rng.uniform(this.params.minBrightness!, this.params.maxBrightness!);
-      twinklePhases[i] = rng.uniform(0, Math.PI * 2);
+      const size = rng.uniform(this.params.minSize!, this.params.maxSize!);
+      let brightness = rng.uniform(this.params.minBrightness!, this.params.maxBrightness!);
+      const twinklePhase = rng.uniform(0, Math.PI * 2);
 
       if (isVariable) {
-        brightnesses[i] = Math.min(1.0, brightnesses[i] + 0.2);
-        twinklePhases[i] = rng.uniform(0, Math.PI * 2);
+        brightness = Math.min(1.0, brightness + 0.2);
       }
+
+      // Store star data for instance attributes
+      this.starData[i * 4] = size;
+      this.starData[i * 4 + 1] = brightness;
+      this.starData[i * 4 + 2] = twinklePhase;
+      this.starData[i * 4 + 3] = starType;
+
+      // Create instance matrix
+      const matrix = this.starMatrix[i];
+      matrix.makeTranslation(x, y, z);
     }
 
-    this.geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    this.geometry.setAttribute("originalPosition", new THREE.BufferAttribute(originalPositions, 3));
-    this.geometry.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
-    this.geometry.setAttribute("brightness", new THREE.BufferAttribute(brightnesses, 1));
-    this.geometry.setAttribute("twinklePhase", new THREE.BufferAttribute(twinklePhases, 1));
-    this.geometry.setAttribute("starType", new THREE.BufferAttribute(starTypes, 1));
-    this.geometry.setAttribute("distanceLayer", new THREE.BufferAttribute(distanceLayers, 1));
+    // Add instance attributes
+    this.geometry.setAttribute('starData', new THREE.InstancedBufferAttribute(this.starData, 4, false));
+    this.geometry.setAttribute('distanceLayer', new THREE.InstancedBufferAttribute(distanceLayers, 1, false));
+    this.geometry.setAttribute('originalPosition', new THREE.InstancedBufferAttribute(originalPositions, 3, false));
+
+    // Set instance matrices
+    for (let i = 0; i < this.starCount; i++) {
+      this.starSystem.setMatrixAt(i, this.starMatrix[i]);
+    }
+    this.starSystem.instanceMatrix.needsUpdate = true;
   }
 
   private createMaterial(): THREE.ShaderMaterial {
@@ -426,7 +448,7 @@ export class StarFieldEffect {
     this.material.uniforms.orbitalPosition.value.copy(position);
   }
 
-  getObject3D(): THREE.Points {
+  getObject3D(): THREE.Object3D {
     return this.starSystem;
   }
 

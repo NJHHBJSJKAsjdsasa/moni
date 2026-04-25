@@ -10,6 +10,7 @@ from pathlib import Path
 from flask import jsonify, request, redirect, url_for, session, render_template
 
 from pymodules.__atlas_fixed_vars import RUN
+from pymodules.__atlas_redis_cache import redis_cache
 
 
 def register_universe_routes(app, universe, config):
@@ -18,11 +19,22 @@ def register_universe_routes(app, universe, config):
     @app.route("/api/universe/config")
     def get_universe_config():
         try:
+            # Try to get from cache
+            cache_key = "universe:config"
+            cached_data = redis_cache.get(cache_key)
+            if cached_data:
+                return jsonify(cached_data)
+
             if not config.is_initialized:
                 if not config.initialize():
                     return jsonify({"error": "配置未初始化"})
 
-            return jsonify({"success": True, "config_seed": config.seed, "seed_str": config.seed_str, "seed_hash": config.seed_hash, "seed_decimal": str(config.seed), "cosmic_origin_time": config.cosmic_origin_time, "cosmic_origin_datetime": str(config.cosmic_origin_datetime)})
+            response_data = {"success": True, "config_seed": config.seed, "seed_str": config.seed_str, "seed_hash": config.seed_hash, "seed_decimal": str(config.seed), "cosmic_origin_time": config.cosmic_origin_time, "cosmic_origin_datetime": str(config.cosmic_origin_datetime)}
+
+            # Cache the result for 24 hours
+            redis_cache.set(cache_key, response_data, 86400)
+
+            return jsonify(response_data)
         except Exception as e:
             return jsonify({"error": str(e)})
 
@@ -36,24 +48,52 @@ def register_universe_routes(app, universe, config):
             y = random.randint(0, 10000000)
             z = random.randint(0, 10000000)
 
-            galaxy = get_universe().get_galaxy(x, y, z)
+            # Try to get galaxy from cache
+            cache_key = f"galaxy:{x}:{y}:{z}"
+            cached_galaxy = redis_cache.get(cache_key)
 
-            response_data = {"success": True, "coordinates": {"x": x, "y": y, "z": z}, "galaxy_name": galaxy.name, "galaxy_type": galaxy.galaxy_type, "num_systems": galaxy.num_systems, "navigation_data": {"x": x, "y": y, "z": z}}
+            if cached_galaxy:
+                galaxy_data = cached_galaxy
+            else:
+                galaxy = get_universe().get_galaxy(x, y, z)
+                galaxy_data = {
+                    "name": galaxy.name,
+                    "galaxy_type": galaxy.galaxy_type,
+                    "num_systems": galaxy.num_systems
+                }
+                # Cache galaxy data for 1 hour
+                redis_cache.set(cache_key, galaxy_data, 3600)
+
+            response_data = {"success": True, "coordinates": {"x": x, "y": y, "z": z}, "galaxy_name": galaxy_data["name"], "galaxy_type": galaxy_data["galaxy_type"], "num_systems": galaxy_data["num_systems"], "navigation_data": {"x": x, "y": y, "z": z}}
 
             rand = random.random()
 
-            if rand > 0.05 and galaxy.num_systems > 0:
-                random_system = random.randint(0, galaxy.num_systems - 1)
-                system = galaxy.get_solar_system(random_system)
+            if rand > 0.05 and galaxy_data["num_systems"] > 0:
+                random_system = random.randint(0, galaxy_data["num_systems"] - 1)
+                
+                # Try to get system from cache
+                system_cache_key = f"system:{x}:{y}:{z}:{random_system}"
+                cached_system = redis_cache.get(system_cache_key)
 
-                response_data["system_name"] = system.name
+                if cached_system:
+                    system_data = cached_system
+                else:
+                    system = get_universe().get_galaxy(x, y, z).get_solar_system(random_system)
+                    system_data = {
+                        "name": system.name,
+                        "planets": ["name" for planet in system.planets.values()]
+                    }
+                    # Cache system data for 1 hour
+                    redis_cache.set(system_cache_key, system_data, 3600)
+
+                response_data["system_name"] = system_data["name"]
                 response_data["system_index"] = random_system
                 response_data["navigation_data"]["system"] = random_system
 
-                if rand > 0.15:
+                if rand > 0.15 and system_data.get("planets"):
                     planets_list = []
-                    for planet in system.planets.values():
-                        planets_list.append({"name": planet.name})
+                    for planet_name in system_data["planets"]:
+                        planets_list.append({"name": planet_name})
 
                     if planets_list:
                         random_planet = random.choice(planets_list)
@@ -104,12 +144,20 @@ def register_universe_routes(app, universe, config):
 
     @app.route("/api/multiverse/peers")
     def get_multiverse_peers():
-
         try:
+            # Try to get from cache
+            cache_key = "multiverse:peers"
+            cached_data = redis_cache.get(cache_key)
+            if cached_data:
+                return jsonify(cached_data)
+
             peers_file = Path("internal_data/p2p/known_peers.json")
 
             if not peers_file.exists():
-                return jsonify({"success": False, "error": "Peers data not available", "peers": []}), 404
+                response_data = {"success": False, "error": "Peers data not available", "peers": []}
+                # Cache error response for 5 minutes
+                redis_cache.set(cache_key, response_data, 300)
+                return jsonify(response_data), 404
 
             with open(peers_file, "r") as f:
                 data = json.load(f)
@@ -177,7 +225,12 @@ def register_universe_routes(app, universe, config):
 
             processed_groups.sort(key=sort_key)
 
-            return jsonify({"success": True, "groups": processed_groups, "total_peers": len(sanitized_peers), "timestamp": int(time.time())})
+            response_data = {"success": True, "groups": processed_groups, "total_peers": len(sanitized_peers), "timestamp": int(time.time())}
+
+            # Cache the result for 5 minutes
+            redis_cache.set(cache_key, response_data, 300)
+
+            return jsonify(response_data)
 
         except Exception as e:
             return jsonify({"success": False, "error": f"获取节点数据失败: {str(e)}", "peers": []}), 500

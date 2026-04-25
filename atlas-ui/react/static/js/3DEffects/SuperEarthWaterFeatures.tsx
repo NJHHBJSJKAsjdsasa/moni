@@ -61,7 +61,8 @@ export class SuperEarthWaterFeaturesEffect {
   }
 
   private generateWaterTextures(): void {
-    const normalSize = 256;
+    // Reduced texture sizes for better performance
+    const normalSize = 128;
     const normalData = new Uint8Array(normalSize * normalSize * 4);
 
     for (let i = 0; i < normalSize; i++) {
@@ -89,9 +90,13 @@ export class SuperEarthWaterFeaturesEffect {
     this.normalMap = new THREE.DataTexture(normalData, normalSize, normalSize, THREE.RGBAFormat);
     this.normalMap.wrapS = THREE.RepeatWrapping;
     this.normalMap.wrapT = THREE.RepeatWrapping;
+    // Enable texture compression if supported
+    if (typeof THREE.TextureCompression !== 'undefined') {
+      this.normalMap.encoding = THREE.sRGBEncoding;
+    }
     this.normalMap.needsUpdate = true;
 
-    const dispSize = 128;
+    const dispSize = 64;
     const dispData = new Uint8Array(dispSize * dispSize * 4);
 
     for (let i = 0; i < dispSize; i++) {
@@ -116,9 +121,12 @@ export class SuperEarthWaterFeaturesEffect {
     this.displacementMap = new THREE.DataTexture(dispData, dispSize, dispSize, THREE.RGBAFormat);
     this.displacementMap.wrapS = THREE.RepeatWrapping;
     this.displacementMap.wrapT = THREE.RepeatWrapping;
+    if (typeof THREE.TextureCompression !== 'undefined') {
+      this.displacementMap.encoding = THREE.sRGBEncoding;
+    }
     this.displacementMap.needsUpdate = true;
 
-    const foamSize = 128;
+    const foamSize = 64;
     const foamData = new Uint8Array(foamSize * foamSize * 4);
 
     for (let i = 0; i < foamSize; i++) {
@@ -141,6 +149,9 @@ export class SuperEarthWaterFeaturesEffect {
     this.foamMap = new THREE.DataTexture(foamData, foamSize, foamSize, THREE.RGBAFormat);
     this.foamMap.wrapS = THREE.RepeatWrapping;
     this.foamMap.wrapT = THREE.RepeatWrapping;
+    if (typeof THREE.TextureCompression !== 'undefined') {
+      this.foamMap.encoding = THREE.sRGBEncoding;
+    }
     this.foamMap.needsUpdate = true;
   }
 

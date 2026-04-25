@@ -188,7 +188,7 @@ interface RendererStats {
 export const ModularPlanetRenderer = forwardRef<{ captureScreenshot: () => void }, ModularPlanetRendererProps>(({ planetName, containerClassName = "", width = 800, height = 600, autoRotate = true, enableControls = true, showDebugInfo = false, planetData, cosmicOriginTime, initialAngleRotation, timeOffset = 0, onDataLoaded, onEffectsCreated, onError, onMoonSelected, planetUrl }, ref) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const rendererRef = useRef<THREE.WebGL2Renderer | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const planetMeshRef = useRef<THREE.Mesh | null>(null);
   const controlsRef = useRef<OrbitControls | null>(null);
@@ -526,7 +526,7 @@ export const ModularPlanetRenderer = forwardRef<{ captureScreenshot: () => void 
       camera.lookAt(0, 0, 0);
       cameraRef.current = camera;
 
-      const renderer = new THREE.WebGLRenderer({
+      const renderer = new THREE.WebGL2Renderer({
         antialias: true,
         alpha: true,
         powerPreference: "high-performance",
@@ -795,9 +795,23 @@ export const ModularPlanetRenderer = forwardRef<{ captureScreenshot: () => void 
     }
   };
 
-  const createBasePlanet = (scene: THREE.Scene) => {
-    const planetGeometry = new THREE.SphereGeometry(NORMALIZED_PLANET_RADIUS, 128, 64);
+  // LOD management for planet
+  const planetLODLevels = [
+    { distance: 5, segments: 128 },  // Close - high detail
+    { distance: 10, segments: 64 },  // Medium - medium detail
+    { distance: 20, segments: 32 }   // Far - low detail
+  ];
 
+  let currentLODSegments = 128;
+  let planetGeometries: Record<number, THREE.SphereGeometry> = {};
+
+  const createBasePlanet = (scene: THREE.Scene) => {
+    // Create geometries for different LOD levels
+    planetLODLevels.forEach(level => {
+      planetGeometries[level.segments] = new THREE.SphereGeometry(NORMALIZED_PLANET_RADIUS, level.segments, level.segments / 2);
+    });
+
+    const planetGeometry = planetGeometries[128];
     const tempMaterial = new THREE.MeshBasicMaterial({ color: 0x808080 });
     const planetMesh = new THREE.Mesh(planetGeometry, tempMaterial);
     planetMesh.castShadow = true;
@@ -819,6 +833,30 @@ export const ModularPlanetRenderer = forwardRef<{ captureScreenshot: () => void 
     const axesHelper = new THREE.AxesHelper(20);
     axesHelper.visible = false;
     scene.add(axesHelper);
+  };
+
+  const updatePlanetLOD = () => {
+    if (!planetMeshRef.current || !cameraRef.current) return;
+
+    const distance = cameraRef.current.position.length();
+    let targetSegments = 128;
+
+    for (const level of planetLODLevels) {
+      if (distance > level.distance) {
+        targetSegments = level.segments;
+      } else {
+        break;
+      }
+    }
+
+    if (targetSegments !== currentLODSegments) {
+      const newGeometry = planetGeometries[targetSegments];
+      if (newGeometry) {
+        planetMeshRef.current.geometry.dispose();
+        planetMeshRef.current.geometry = newGeometry;
+        currentLODSegments = targetSegments;
+      }
+    }
   };
 
   const handleMouseDown = useCallback((event: MouseEvent) => {
@@ -1327,6 +1365,9 @@ export const ModularPlanetRenderer = forwardRef<{ captureScreenshot: () => void 
     try {
       effectRegistryRef.current.updateAllEffects(deltaTime, planetMeshRef.current?.rotation.y, cameraRef.current || undefined, currentTimeRef.current);
     } catch (error) {}
+
+    // Update planet LOD based on camera distance
+    updatePlanetLOD();
 
     if (planetMeshRef.current && renderingDataRef.current) {
       const currentPlanetName = (renderingDataRef.current.planet_info?.name || planetName).replace(/ /g, "_");

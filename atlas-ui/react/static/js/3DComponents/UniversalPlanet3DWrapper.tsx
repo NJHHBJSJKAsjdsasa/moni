@@ -82,7 +82,7 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode; onError
 export const UniversalPlanet3DWrapper: React.FC<UniversalPlanet3DProps> = ({ planetName, containerClassName = "", width = 800, height = 600, autoRotate = true, enableControls = true, showDebugInfo = false, planetData, cosmicOriginTime, initialAngleRotation, onDataLoaded, onError }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const rendererRef = useRef<THREE.WebGL2Renderer | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const planetMeshRef = useRef<THREE.Mesh | null>(null);
   const controlsRef = useRef<OrbitControls | null>(null);
@@ -120,7 +120,7 @@ export const UniversalPlanet3DWrapper: React.FC<UniversalPlanet3DProps> = ({ pla
       camera.position.set(0, 0, 5);
       cameraRef.current = camera;
 
-      const renderer = new THREE.WebGLRenderer({
+      const renderer = new THREE.WebGL2Renderer({
         antialias: true,
         alpha: true,
         powerPreference: "high-performance",

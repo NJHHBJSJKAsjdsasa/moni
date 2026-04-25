@@ -65,7 +65,7 @@ const calculateEllipticalPosition = (angle: number, semiMajorAxis: number, eccen
 const SolarSystem3DViewer: React.FC<SolarSystem3DViewerProps> = ({ planets, stars, systemName, cosmicOriginTime }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const rendererRef = useRef<THREE.WebGL2Renderer | null>(null);
   const animationIdRef = useRef<number | null>(null);
   const planetsRef = useRef<THREE.Mesh[]>([]);
   const orbitsRef = useRef<THREE.Line[]>([]);
@@ -223,7 +223,7 @@ const SolarSystem3DViewer: React.FC<SolarSystem3DViewerProps> = ({ planets, star
     camera.position.set(0, 80, 120);
     camera.lookAt(0, 0, 0);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGL2Renderer({ antialias: true, alpha: true });
     renderer.setSize(containerWidth, isMobile ? 120 : 120);
     renderer.setClearColor(0x000011, 1);
     rendererRef.current = renderer;
