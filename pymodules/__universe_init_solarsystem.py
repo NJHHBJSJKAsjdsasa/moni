@@ -143,7 +143,7 @@ class SolarSystem:
         
         # 获取恒星质量
         star_mass = self.constants.M_SUN
-        if self.stars:
+        if hasattr(self, 'stars') and self.stars:
             star_type = self.stars[0]["Type"]
             mass_factors = {"Red Dwarf": 0.2, "Yellow Dwarf": 1.0, "Blue Giant": 10.0, "Red Giant": 1.2, "White Dwarf": 0.6, "Neutron Star": 1.4}
             star_mass *= mass_factors.get(star_type, 1.0)
