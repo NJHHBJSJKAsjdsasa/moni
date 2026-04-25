@@ -315,6 +315,9 @@ class MoonSystem:
         self.star_mass = star_mass
         self.moons: List[Moon] = []
 
+        if not planet:
+            return
+
         self.system_seed = int(
             hashlib.sha256(f"{planet.seed}-{seedmaster(2)}-moon_system".encode()).hexdigest(),
             16,
@@ -328,6 +331,8 @@ class MoonSystem:
         self._generate_moons()
 
     def _calculate_roche_limit(self) -> float:
+        if not self.planet:
+            return 0.0
         planet_radius_km = self.planet.diameter / 2
 
         if self.planet.planet_type in ["Gas Giant", "Frozen Gas Giant"]:
@@ -340,6 +345,8 @@ class MoonSystem:
         return roche_limit
 
     def _calculate_hill_sphere(self) -> float:
+        if not self.planet:
+            return 0.0
         planet_semi_major_axis = self.planet.orbital_radius * 1.496e8
 
         hill_radius = planet_semi_major_axis * (self.planet.mass / (3 * self.star_mass)) ** (1 / 3)
@@ -347,6 +354,8 @@ class MoonSystem:
         return hill_radius
 
     def _should_have_moons(self) -> bool:
+        if not self.planet:
+            return False
         system_rng = random.Random(self.system_seed + consistent_hash("moon_system_decisions"))
 
         if self.planet.mass < 1e22:
@@ -374,6 +383,8 @@ class MoonSystem:
         return system_rng.random() < (base_probability * mass_factor)
 
     def _determine_moon_origins(self) -> List[Tuple[MoonOrigin, int]]:
+        if not self.planet:
+            return []
         origins = []
 
         planet_mass_earth = self.planet.mass / self.planet.constants.M_EARTH
@@ -400,7 +411,7 @@ class MoonSystem:
         return origins
 
     def _generate_moons(self):
-        if not self._should_have_moons():
+        if not self.planet or not self._should_have_moons():
             return
 
         moon_specs = self._determine_moon_origins()
@@ -420,7 +431,7 @@ class MoonSystem:
         self._ensure_orbital_stability()
 
     def _ensure_orbital_stability(self):
-        if len(self.moons) <= 1:
+        if not self.planet or len(self.moons) <= 1:
             return
 
         stable_moons = [self.moons[0]]
@@ -440,7 +451,7 @@ class MoonSystem:
         self._detect_and_adjust_resonances()
 
     def _detect_and_adjust_resonances(self):
-        if len(self.moons) <= 1:
+        if not self.planet or len(self.moons) <= 1:
             return
 
         for i in range(len(self.moons) - 1):
@@ -464,6 +475,10 @@ class MoonSystem:
     def get_moon_data(self) -> List[Dict]:
         moon_data = []
         for moon in self.moons:
+            relative_size = 0.0
+            if self.planet:
+                relative_size = moon.radius / (self.planet.diameter / 2)
+            
             data = {
                 "name": moon.name,
                 "properties": {
@@ -492,7 +507,7 @@ class MoonSystem:
                     "roughness": 0.8,
                     "metalness": 0.1,
                     "normal_strength": 1.0,
-                    "relative_size": moon.radius / (self.planet.diameter / 2),
+                    "relative_size": relative_size,
                     "has_atmosphere": False,
                 },
                 "procedural": {
