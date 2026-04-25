@@ -1,15 +1,16 @@
 // atlas-ui/react/static/js/Layouts/__main__.tsx
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, lazy, Suspense } from "react";
 import Header from "../Components/Header.tsx";
 import CoordinateSelector from "../Components/CoordinateSelector.tsx";
-import CoordinateViewer3D from "../Components/CoordinateViewer3D.tsx";
 import VersionFooter from "../Components/VersionFooter.tsx";
-import SpaceshipPanel from "../Components/SpaceshipPanel.tsx";
-import FuelBars from "../Components/FuelBars.tsx";
-import StarfieldWarpReveal from "../Components/StarfieldWarpReveal.tsx";
-import MultiverseBanner from "../Components/MultiverseBanner.jsx";
-import TaskPanel from "../Components/TaskPanel.tsx";
+
+const CoordinateViewer3D = lazy(() => import("../Components/CoordinateViewer3D.tsx"));
+const SpaceshipPanel = lazy(() => import("../Components/SpaceshipPanel.tsx"));
+const FuelBars = lazy(() => import("../Components/FuelBars.tsx"));
+const StarfieldWarpReveal = lazy(() => import("../Components/StarfieldWarpReveal.tsx"));
+const MultiverseBanner = lazy(() => import("../Components/MultiverseBanner.jsx"));
+const TaskPanel = lazy(() => import("../Components/TaskPanel.tsx"));
 import { UnifiedSpaceshipStorage } from "../Utils/UnifiedSpaceshipStorage.tsx";
 import { SpaceshipTravelManager } from "../Utils/SpaceshipTravelCosts.tsx";
 import { SpaceshipResourceManager } from "../Utils/SpaceshipResources.tsx";
@@ -113,11 +114,11 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
     return () => clearInterval(interval);
   }, []);
 
-  const handleWarpRevealComplete = () => {
+  const handleWarpRevealComplete = React.useCallback(() => {
     setShowWarpReveal(false);
-  };
+  }, []);
 
-  const handle3DUserInteraction = (isInteracting: boolean) => {
+  const handle3DUserInteraction = React.useCallback((isInteracting: boolean) => {
     isUser3DInteracting.current = isInteracting;
 
     if (isInteracting) {
@@ -137,9 +138,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
         hideTimerRef.current = null;
       }, 4000);
     }
-  };
+  }, []);
 
-  const handleCoordinateChange = (coordinates: Coordinates, isUserInteraction: boolean = false) => {
+  const handleCoordinateChange = React.useCallback((coordinates: Coordinates, isUserInteraction: boolean = false) => {
     setCurrentCoordinates(coordinates);
 
     if (isUserInteraction) {
@@ -158,7 +159,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
         }, 3000);
       }
     }
-  };
+  }, []);
 
   useEffect(() => {
     (window as any).setRandomLocationActive = (active: boolean) => {
@@ -180,7 +181,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
     };
   }, []);
 
-  const calculateTravelCost = (coordinates: Coordinates) => {
+  const calculateTravelCost = React.useCallback((coordinates: Coordinates) => {
     const distance = Math.floor(Math.sqrt(Math.pow(coordinates.x - 1000000, 2) + Math.pow(coordinates.y - 1000000, 2) + Math.pow(coordinates.z - 1000000, 2)) / 10000);
 
     const cost = SpaceshipResourceManager.calculateTravelCost("galaxy", distance);
@@ -203,11 +204,11 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
     const resources = SpaceshipResourceManager.getResources();
     const affordable = resources.antimatter >= actualConsumption.antimatter && resources.element115 >= actualConsumption.element115 && resources.deuterium >= actualConsumption.deuterium;
     setCanAfford(affordable);
-  };
+  }, []);
 
   useEffect(() => {
     calculateTravelCost(currentCoordinates);
-  }, [currentCoordinates.x, currentCoordinates.y, currentCoordinates.z]);
+  }, [currentCoordinates.x, currentCoordinates.y, currentCoordinates.z, calculateTravelCost]);
 
   useEffect(() => {
     const updateTravelCost = () => {
@@ -217,7 +218,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
     const interval = setInterval(updateTravelCost, 5000);
 
     return () => clearInterval(interval);
-  }, [currentCoordinates.x, currentCoordinates.y, currentCoordinates.z]);
+  }, [currentCoordinates.x, currentCoordinates.y, currentCoordinates.z, calculateTravelCost]);
 
   useEffect(() => {
     return () => {
@@ -227,7 +228,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
     };
   }, []);
 
-  const formatResource = (value: number) => {
+  const formatResource = React.useCallback((value: number) => {
     if (value >= 1000000) {
       return `${(value / 1000000).toFixed(2)}M`;
     }
@@ -235,9 +236,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
       return `${(value / 1000).toFixed(1)}k`;
     }
     return value.toString();
-  };
+  }, []);
 
-  const formatCosmicTime = (timestamp: number): string => {
+  const formatCosmicTime = React.useCallback((timestamp: number): string => {
     if (!timestamp) return "Unknown Origin";
     const date = new Date(timestamp * 1000);
     const year = date.getFullYear();
@@ -247,9 +248,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
     const minutes = String(date.getMinutes()).padStart(2, "0");
     const seconds = String(date.getSeconds()).padStart(2, "0");
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-  };
+  }, []);
 
-  const calculateUniverseAge = (cosmicOriginTime: number): { age: string; development: string } => {
+  const calculateUniverseAge = React.useCallback((cosmicOriginTime: number): { age: string; development: string } => {
     const now = Math.floor(Date.now() / 1000);
     const ageInSeconds = now - cosmicOriginTime;
 
@@ -272,7 +273,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
     const development = percentage.toFixed(15).replace(/0+$/, "").replace(/\.$/, "") + "%";
 
     return { age: parts.join(" "), development };
-  };
+  }, []);
 
   useEffect(() => {
     if (!universeConfig?.cosmic_origin_time) return;
@@ -287,9 +288,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
     const interval = setInterval(updateAge, 1000);
 
     return () => clearInterval(interval);
-  }, [universeConfig?.cosmic_origin_time]);
+  }, [universeConfig?.cosmic_origin_time, calculateUniverseAge]);
 
-  const handleSubmit = () => {
+  const handleSubmit = React.useCallback(() => {
     const distance = Math.floor(Math.sqrt(Math.pow(currentCoordinates.x - 1000000, 2) + Math.pow(currentCoordinates.y - 1000000, 2) + Math.pow(currentCoordinates.z - 1000000, 2)) / 10000);
 
     if (!SpaceshipTravelManager.canAffordTravel("galaxy", distance)) {
@@ -315,91 +316,61 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
 
     document.body.appendChild(form);
     form.submit();
-  };
+  }, [currentCoordinates]);
 
   return (
     <>
-      {showWarpReveal && <StarfieldWarpReveal seedData={seedData} onComplete={handleWarpRevealComplete} />}
-      <MultiverseBanner />
+      <Suspense fallback={null}>
+        {showWarpReveal && <StarfieldWarpReveal seedData={seedData} onComplete={handleWarpRevealComplete} />}
+        <MultiverseBanner />
 
-      <div className="w-full min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white flex flex-col">
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        ></div>
+        <div className="w-full min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white flex flex-col">
+          <div
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            }}
+          ></div>
 
-        <FuelBars />
+          <FuelBars />
 
-        <div className="relative z-10 pt-1 flex-1 flex flex-col">
-          <Header />
+          <div className="relative z-10 pt-1 flex-1 flex flex-col">
+            <Header />
 
-          <div className="w-full px-2 sm:px-4 lg:px-6 py-4 sm:py-8 relative flex-1">
-            <div className="text-center mb-12 relative min-h-[200px] flex items-center justify-center">
-              <div className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-700 ease-in-out transform ${showNavigationText ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-2"}`} style={{ pointerEvents: showNavigationText ? "auto" : "none" }}>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">{isRemoteUniverse ? "阿特拉斯多元宇宙协议" : "阿特拉斯导航系统"}</h1>
-                {isRemoteUniverse && universeConfig ? (
-                  <div className="space-y-3">
-                    <div className="w-full px-4">
-                      {/* Desktop: una línea */}
-                      <div className="hidden sm:flex items-center justify-center gap-2">
-                        <NodeIdIcon className="w-5 h-5 text-purple-400 flex-shrink-0" />
-                        <span className="text-lg sm:text-xl text-purple-200">探索中</span>
-                        <span className="text-lg sm:text-xl text-purple-300 font-mono truncate">{universeConfig.node_id}</span>
-                      </div>
-
-                      {/* Mobile: dos líneas */}
-                      <div className="flex sm:hidden flex-col items-center justify-center gap-1">
-                        <div className="flex items-center gap-2">
+            <div className="w-full px-2 sm:px-4 lg:px-6 py-4 sm:py-8 relative flex-1">
+              <div className="text-center mb-12 relative min-h-[200px] flex items-center justify-center">
+                <div className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-700 ease-in-out transform ${showNavigationText ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-2"}`} style={{ pointerEvents: showNavigationText ? "auto" : "none" }}>
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">{isRemoteUniverse ? "阿特拉斯多元宇宙协议" : "阿特拉斯导航系统"}</h1>
+                  {isRemoteUniverse && universeConfig ? (
+                    <div className="space-y-3">
+                      <div className="w-full px-4">
+                        {/* Desktop: una línea */}
+                        <div className="hidden sm:flex items-center justify-center gap-2">
                           <NodeIdIcon className="w-5 h-5 text-purple-400 flex-shrink-0" />
-                          <span className="text-lg text-purple-200">探索中</span>
+                          <span className="text-lg sm:text-xl text-purple-200">探索中</span>
+                          <span className="text-lg sm:text-xl text-purple-300 font-mono truncate">{universeConfig.node_id}</span>
                         </div>
-                        <div className="text-sm text-purple-300 font-mono text-center w-full" style={{ wordBreak: "break-all", overflowWrap: "anywhere" }}>
-                          {universeConfig.node_id}
+
+                        {/* Mobile: dos líneas */}
+                        <div className="flex sm:hidden flex-col items-center justify-center gap-1">
+                          <div className="flex items-center gap-2">
+                            <NodeIdIcon className="w-5 h-5 text-purple-400 flex-shrink-0" />
+                            <span className="text-lg text-purple-200">探索中</span>
+                          </div>
+                          <div className="text-sm text-purple-300 font-mono text-center w-full" style={{ wordBreak: "break-all", overflowWrap: "anywhere" }}>
+                            {universeConfig.node_id}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="text-sm text-gray-400 space-y-1 max-w-full px-4">
-                      <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
-                        <SeedIcon className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                        <span className="text-gray-400">远程种子:</span>
-                        <span className="text-blue-400 font-mono truncate max-w-xs">{SeedSanitizer.sanitizeForDisplay(universeConfig.seed_str)}</span>
-                      </div>
-                      <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
-                        <BitBangIcon className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                        <span className="text-gray-400">远程比特大爆炸:</span>
-                        <span className="text-cyan-400 font-mono">{formatCosmicTime(universeConfig.cosmic_origin_time)}</span>
-                      </div>
-                      {universeAge && (
-                        <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
-                          <UniverseAgeIcon className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                          <span className="text-gray-400">比特大爆炸至今:</span>
-                          <span className="text-emerald-400 font-mono">{universeAge}</span>
-                        </div>
-                      )}
-                      {universeDevelopment && (
-                        <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
-                          <DevelopmentIcon className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                          <span className="text-gray-400">宇宙发展:</span>
-                          <span className="text-amber-400 font-mono">{universeDevelopment}</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    <p className="text-lg sm:text-xl text-gray-300 max-w-4xl mx-auto px-4">穿越无限的星系、太阳系和行星。输入坐标开始你的宇宙之旅。</p>
-                    {universeConfig && (
                       <div className="text-sm text-gray-400 space-y-1 max-w-full px-4">
                         <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
                           <SeedIcon className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                          <span className="text-gray-400">本地种子:</span>
+                          <span className="text-gray-400">远程种子:</span>
                           <span className="text-blue-400 font-mono truncate max-w-xs">{SeedSanitizer.sanitizeForDisplay(universeConfig.seed_str)}</span>
                         </div>
                         <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
                           <BitBangIcon className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                          <span className="text-gray-400">本地比特大爆炸:</span>
+                          <span className="text-gray-400">远程比特大爆炸:</span>
                           <span className="text-cyan-400 font-mono">{formatCosmicTime(universeConfig.cosmic_origin_time)}</span>
                         </div>
                         {universeAge && (
@@ -417,45 +388,77 @@ const MainLayout: React.FC<MainLayoutProps> = ({ error, version }) => {
                           </div>
                         )}
                       </div>
-                    )}
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      <p className="text-lg sm:text-xl text-gray-300 max-w-4xl mx-auto px-4">穿越无限的星系、太阳系和行星。输入坐标开始你的宇宙之旅。</p>
+                      {universeConfig && (
+                        <div className="text-sm text-gray-400 space-y-1 max-w-full px-4">
+                          <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
+                            <SeedIcon className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                            <span className="text-gray-400">本地种子:</span>
+                            <span className="text-blue-400 font-mono truncate max-w-xs">{SeedSanitizer.sanitizeForDisplay(universeConfig.seed_str)}</span>
+                          </div>
+                          <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
+                            <BitBangIcon className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+                            <span className="text-gray-400">本地比特大爆炸:</span>
+                            <span className="text-cyan-400 font-mono">{formatCosmicTime(universeConfig.cosmic_origin_time)}</span>
+                          </div>
+                          {universeAge && (
+                            <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
+                              <UniverseAgeIcon className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                              <span className="text-gray-400">比特大爆炸至今:</span>
+                              <span className="text-emerald-400 font-mono">{universeAge}</span>
+                            </div>
+                          )}
+                          {universeDevelopment && (
+                            <div className="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm">
+                              <DevelopmentIcon className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                              <span className="text-gray-400">宇宙发展:</span>
+                              <span className="text-amber-400 font-mono">{universeDevelopment}</span>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                <div className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ease-in-out transform ${show3DViewer ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-2"}`} style={{ pointerEvents: show3DViewer ? "auto" : "none" }}>
+                  <div className="w-96 h-96">
+                    <CoordinateViewer3D coordinates={currentCoordinates} className="w-full h-full" onUserInteraction={handle3DUserInteraction} isVisible={show3DViewer} />
                   </div>
-                )}
+                </div>
               </div>
 
-              <div className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ease-in-out transform ${show3DViewer ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 -translate-y-2"}`} style={{ pointerEvents: show3DViewer ? "auto" : "none" }}>
-                <div className="w-96 h-96">
-                  <CoordinateViewer3D coordinates={currentCoordinates} className="w-full h-full" onUserInteraction={handle3DUserInteraction} isVisible={show3DViewer} />
+              {error && (
+                <div className="mb-8 bg-red-500/20 border border-red-500 rounded-lg p-4 text-red-200 text-center">
+                  <span className="font-semibold">导航错误:</span> {error}
                 </div>
+              )}
+
+              <div className="bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 mb-8 shadow-2xl overflow-hidden">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSubmit();
+                  }}
+                  className="w-full"
+                >
+                  <div className="p-3 sm:p-4 lg:p-6">
+                    <CoordinateSelector onCoordinateChange={handleCoordinateChange} travelCost={travelCost} canAfford={canAfford} formatResource={formatResource} efficiency={SpaceshipTravelManager.getTravelEfficiency()} />
+                  </div>
+                </form>
               </div>
             </div>
 
-            {error && (
-              <div className="mb-8 bg-red-500/20 border border-red-500 rounded-lg p-4 text-red-200 text-center">
-                <span className="font-semibold">导航错误:</span> {error}
-              </div>
-            )}
-
-            <div className="bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 mb-8 shadow-2xl overflow-hidden">
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  handleSubmit();
-                }}
-                className="w-full"
-              >
-                <div className="p-3 sm:p-4 lg:p-6">
-                  <CoordinateSelector onCoordinateChange={handleCoordinateChange} travelCost={travelCost} canAfford={canAfford} formatResource={formatResource} efficiency={SpaceshipTravelManager.getTravelEfficiency()} />
-                </div>
-              </form>
-            </div>
+            <VersionFooter version={version} showBadge />
           </div>
 
-          <VersionFooter version={version} showBadge />
+          <SpaceshipPanel />
+          <TaskPanel />
         </div>
-
-        <SpaceshipPanel />
-        <TaskPanel />
-      </div>
+      </Suspense>
     </>
   );
 };
