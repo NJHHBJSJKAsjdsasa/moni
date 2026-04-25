@@ -218,7 +218,7 @@ const SolarSystem3DViewerLeft = forwardRef<{ captureScreenshot: () => void; isGe
   }, [isFullscreen, isEntering]);
 
   useEffect(() => {
-    if (loadingAPI || !systemData || !mountRef.current) {
+    if (loadingAPI || (!systemData && !planets.length) || !mountRef.current) {
       return;
     }
 
@@ -301,7 +301,7 @@ const SolarSystem3DViewerLeft = forwardRef<{ captureScreenshot: () => void; isGe
       };
 
       const starGroup = new THREE.Group();
-      systemData.stars.forEach((star, index) => {
+      displayStars.forEach((star, index) => {
         const starRadius = parseFloat(star.Size) * 1.75;
         const starGeometry = new THREE.SphereGeometry(starRadius, 16, 16);
         const starColor = starColors[star.Color] || "#FFFF44";
@@ -313,13 +313,13 @@ const SolarSystem3DViewerLeft = forwardRef<{ captureScreenshot: () => void; isGe
 
         const starMesh = new THREE.Mesh(starGeometry, starMaterial);
 
-        const starRadii = systemData.stars.map((s, i) => parseFloat(s.Size) * 1.75);
+        const starRadii = displayStars.map((s, i) => parseFloat(s.Size) * 1.75);
         const maxStarRadius = Math.max(...starRadii);
         const spacing = maxStarRadius * 3;
 
-        if (systemData.stars.length === 1) {
+        if (displayStars.length === 1) {
           starMesh.position.set(0, 0, 0);
-        } else if (systemData.stars.length === 2) {
+        } else if (displayStars.length === 2) {
           starMesh.position.set(index === 0 ? -spacing : spacing, 0, 0);
         } else {
           if (index === 0) starMesh.position.set(-spacing, 0, 0);
@@ -340,17 +340,34 @@ const SolarSystem3DViewerLeft = forwardRef<{ captureScreenshot: () => void; isGe
       });
       scene.add(starGroup);
 
-      const maxOrbitalRadius = systemData.timing.max_orbital_radius;
+      // 确定要使用的数据
+      const useSystemData = systemData && systemData.planets && systemData.stars;
+      const displayPlanets = useSystemData ? systemData.planets : planets;
+      const displayStars = useSystemData ? systemData.stars : stars;
+      
+      // 计算最大轨道半径
+      let maxOrbitalRadius = 1;
+      if (useSystemData && systemData.timing) {
+        maxOrbitalRadius = systemData.timing.max_orbital_radius;
+      } else {
+        // 从行星数据中计算最大轨道半径
+        displayPlanets.forEach(planet => {
+          if (planet.orbital_radius > maxOrbitalRadius) {
+            maxOrbitalRadius = planet.orbital_radius;
+          }
+        });
+      }
+      
       // 增加缩放因子，使行星和轨道在初始视图中更明显
       const scaleFactor = 120;
 
-      const starRadiiForOrbit = systemData.stars.map((s) => parseFloat(s.Size) * 1.75);
+      const starRadiiForOrbit = displayStars.map((s) => parseFloat(s.Size) * 1.75);
       const maxStarRadiusWithGlow = Math.max(...starRadiiForOrbit) * 1.5;
       const minOrbitRadius = Math.max(20, maxStarRadiusWithGlow + 5);
 
       (window as any).systemMaxOrbitalRadius = maxOrbitalRadius;
 
-      systemData.planets.forEach((planet, index) => {
+      displayPlanets.forEach((planet, index) => {
         const relativeOrbitRadius = planet.orbital_radius / maxOrbitalRadius;
         const orbitRadius = minOrbitRadius + relativeOrbitRadius * scaleFactor;
 
@@ -557,7 +574,7 @@ const SolarSystem3DViewerLeft = forwardRef<{ captureScreenshot: () => void; isGe
         (window as any).solarSystemCleanup();
       }
     };
-  }, [planets, stars, cosmicOriginTime, systemData, timeOffset]);
+  }, [planets, stars, cosmicOriginTime, systemData, timeOffset, loadingAPI]);
 
   const handleDownloadScreenshot = () => {
     if (!rendererRef.current || !sceneRef.current || !cameraRef.current || isGeneratingImage) return;
