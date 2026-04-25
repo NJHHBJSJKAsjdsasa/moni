@@ -62,7 +62,7 @@ class PlanetRenderingTranslator:
         spaced_planet_name = planet.name.replace("_", " ")
         planet_type = planet.planet_type.replace("_", " ")
 
-        cosmic_origin_time = config.cosmic_origin_time
+        cosmic_origin_time = config.cosmic_origin_time or time.time()
         current_time = time.time()
         time_elapsed_seconds = current_time - cosmic_origin_time
 
@@ -73,7 +73,10 @@ class PlanetRenderingTranslator:
         orbital_angle = (planet.initial_orbital_angle + time_elapsed_seconds * angle_velocity_orbit) % (2 * math.pi)
 
         tilt_factor = math.sin(math.radians(planet.axial_tilt))
-        shape_seed = consistent_hash(f"{config.seed}-{spaced_planet_name}-{planet_type}-{planet.diameter}-{planet.density}-{planet.gravity}-_safe_shaper")
+        
+        # Get config seed or use a default value if None
+        config_seed = config.seed or 123456789
+        shape_seed = consistent_hash(f"{config_seed}-{spaced_planet_name}-{planet_type}-{planet.diameter}-{planet.density}-{planet.gravity}-_safe_shaper")
 
         planet_radius = int(200 * (planet.diameter / max(planet.diameter, 1)))
         rng = random.Random(shape_seed)
@@ -89,9 +92,9 @@ class PlanetRenderingTranslator:
             orbital_period_years = planet.orbital_period_seconds / (365.25 * 24 * 3600) if planet.orbital_period_seconds else 1.0
 
             if planet_type in ["Gas Giant", "Frozen Gas Giant", "Nebulous", "Anomaly", "Exotic", "Carbon"]:
-                planet_specific_data = self.planet_types[planet_type](planet_radius, rng, config.seed, spaced_planet_name, orbital_period_years)
+                planet_specific_data = self.planet_types[planet_type](planet_radius, rng, config_seed, spaced_planet_name, orbital_period_years)
             else:
-                planet_specific_data = self.planet_types[planet_type](planet_radius, rng, config.seed, spaced_planet_name)
+                planet_specific_data = self.planet_types[planet_type](planet_radius, rng, config_seed, spaced_planet_name)
 
         if not planet_specific_data:
             planet_specific_data = {"type": "basic"}
@@ -102,16 +105,16 @@ class PlanetRenderingTranslator:
         if planet.planet_rings:
             rings_data = self.rings_translator.translate_rings(planet, planet_radius, rng, tilt_factor, angle_rotation)
 
-        life_forms_data = self.life_forms_translator.translate_life_forms(planet.life_forms, planet_radius, rng, config.seed, spaced_planet_name)
+        life_forms_data = self.life_forms_translator.translate_life_forms(planet.life_forms, planet_radius, rng, config_seed, spaced_planet_name)
 
         moons_data = None
         if hasattr(planet, "moon_system") and planet.moon_system:
-            moons_data = self.moons_translator.translate_moon_system(planet.moon_system, planet, str(config.seed))
+            moons_data = self.moons_translator.translate_moon_system(planet.moon_system, planet, str(config_seed))
 
         return {
             "planet_info": {"name": spaced_planet_name, "type": planet_type, "base_color": base_color, "radius": planet_radius, "diameter": planet.diameter, "orbital_radius": planet.orbital_radius, "density": planet.density, "gravity": planet.gravity, "axial_tilt": planet.axial_tilt, "rotation_period": planet.rotation_period_seconds, "orbital_period": planet.orbital_period_seconds},
             "debug": {"visual_debug": VISUAL_DEBUG, "cosmic_origin_time": cosmic_origin_time, "initial_angle_rotation": planet.initial_angle_rotation},
-            "seeds": {"shape_seed": shape_seed, "config_seed": str(config.seed), "planet_seed": planet_seed},
+            "seeds": {"shape_seed": shape_seed, "config_seed": str(config_seed), "planet_seed": planet_seed},
             "timing": {"current_rotation_angle": angle_rotation, "orbital_angle": orbital_angle, "initial_orbital_angle": planet.initial_orbital_angle, "tilt_factor": tilt_factor, "cosmic_origin_time": cosmic_origin_time, "time_elapsed_seconds": time_elapsed_seconds, "elapsed_time": time_elapsed_seconds},
             "surface_elements": planet_specific_data,
             "atmosphere": atmosphere_data,
