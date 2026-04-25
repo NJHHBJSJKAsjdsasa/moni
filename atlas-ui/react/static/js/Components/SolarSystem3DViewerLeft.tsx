@@ -218,304 +218,342 @@ const SolarSystem3DViewerLeft = forwardRef<{ captureScreenshot: () => void; isGe
   }, [isFullscreen, isEntering]);
 
   useEffect(() => {
-    if (loadingAPI || !systemData) {
+    if (loadingAPI || !systemData || !mountRef.current) {
       return;
     }
 
     (window as any).tonnirLoggedInSystem = false;
 
-    if (!mountRef.current) return;
-
     const container = mountRef.current;
-    const containerWidth = container.clientWidth;
-    const containerHeight = container.clientHeight;
-    const size = Math.min(containerWidth, containerHeight);
-
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000011);
-    sceneRef.current = scene;
-
-    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 10000);
-    camera.position.set(0, 300, 0);
-    camera.lookAt(0, 0, 0);
-    cameraRef.current = camera;
-
-    const renderer = new THREE.WebGL2Renderer({ antialias: true, alpha: true });
-    renderer.setSize(size, size);
-    renderer.setClearColor(0x000011, 1);
-    rendererRef.current = renderer;
-
-    renderer.domElement.className = "";
-    container.appendChild(renderer.domElement);
-
-    const planetColors: { [key: string]: string } = {
-      "Gas Giant": "#FFA500",
-      Anomaly: "#FFFFFF",
-      Rocky: "#808080",
-      Icy: "#ADD8E6",
-      Oceanic: "#0000FF",
-      Desert: "#FFD700",
-      Lava: "#FF0000",
-      Arid: "#800000",
-      Swamp: "#008000",
-      Tundra: "#F0F8FF",
-      Forest: "#006400",
-      Savannah: "#F4A460",
-      Cave: "#D1D1D1",
-      Crystalline: "#00FFFF",
-      Metallic: "#C0C0C0",
-      Toxic: "#800080",
-      Radioactive: "#00FF00",
-      Magma: "#FF4500",
-      "Molten Core": "#FF8C00",
-      Carbon: "#090909",
-      Diamond: "#87CEFA",
-      "Super Earth": "#90EE90",
-      "Sub Earth": "#006400",
-      "Frozen Gas Giant": "#ADD8E6",
-      Nebulous: "#FFC0CB",
-      Aquifer: "#00FFFF",
-      Exotic: "#FF00FF",
-    };
-
-    const starColors: { [key: string]: string } = {
-      red: "#FF4444",
-      orange: "#FF8844",
-      yellow: "#FFFF44",
-      white: "#FFFFFF",
-      blue: "#4488FF",
-      purple: "#8844FF",
-    };
-
-    const starGroup = new THREE.Group();
-    systemData.stars.forEach((star, index) => {
-      const starRadius = parseFloat(star.Size) * 1.75;
-      const starGeometry = new THREE.SphereGeometry(starRadius, 16, 16);
-      const starColor = starColors[star.Color] || "#FFFF44";
-      const starMaterial = new THREE.MeshBasicMaterial({
-        color: starColor,
-        transparent: true,
-        opacity: 0.9,
-      });
-
-      const starMesh = new THREE.Mesh(starGeometry, starMaterial);
-
-      const starRadii = systemData.stars.map((s, i) => parseFloat(s.Size) * 1.75);
-      const maxStarRadius = Math.max(...starRadii);
-      const spacing = maxStarRadius * 3;
-
-      if (systemData.stars.length === 1) {
-        starMesh.position.set(0, 0, 0);
-      } else if (systemData.stars.length === 2) {
-        starMesh.position.set(index === 0 ? -spacing : spacing, 0, 0);
-      } else {
-        if (index === 0) starMesh.position.set(-spacing, 0, 0);
-        else if (index === 1) starMesh.position.set(spacing, 0, 0);
-        else starMesh.position.set(0, spacing, 0);
+    let resizeObserver: ResizeObserver | null = null;
+    
+    // 使用 requestAnimationFrame 确保 DOM 渲染完成
+    const initializeScene = () => {
+      if (!mountRef.current) return;
+      
+      const containerWidth = mountRef.current.clientWidth;
+      const containerHeight = mountRef.current.clientHeight;
+      
+      // 确保容器有尺寸
+      if (containerWidth === 0 || containerHeight === 0) {
+        // 如果容器还没有尺寸，再试一次
+        requestAnimationFrame(initializeScene);
+        return;
       }
 
-      const glowGeometry = new THREE.SphereGeometry(starRadius * 1.5, 16, 16);
-      const glowMaterial = new THREE.MeshBasicMaterial({
-        color: starColor,
-        transparent: true,
-        opacity: 0.3,
-      });
-      const glow = new THREE.Mesh(glowGeometry, glowMaterial);
-      starMesh.add(glow);
+      const size = Math.min(containerWidth, containerHeight);
 
-      starGroup.add(starMesh);
-    });
-    scene.add(starGroup);
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000011);
+      sceneRef.current = scene;
 
-    const maxOrbitalRadius = systemData.timing.max_orbital_radius;
-    const scaleFactor = 80;
+      const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 10000);
+      camera.position.set(0, 300, 0);
+      camera.lookAt(0, 0, 0);
+      cameraRef.current = camera;
 
-    const starRadiiForOrbit = systemData.stars.map((s) => parseFloat(s.Size) * 1.75);
-    const maxStarRadiusWithGlow = Math.max(...starRadiiForOrbit) * 1.5;
-    const minOrbitRadius = Math.max(30, maxStarRadiusWithGlow + 10);
+      const renderer = new THREE.WebGL2Renderer({ antialias: true, alpha: true });
+      renderer.setSize(size, size);
+      renderer.setClearColor(0x000011, 1);
+      rendererRef.current = renderer;
 
-    (window as any).systemMaxOrbitalRadius = maxOrbitalRadius;
+      renderer.domElement.className = "";
+      mountRef.current.appendChild(renderer.domElement);
 
-    systemData.planets.forEach((planet, index) => {
-      const relativeOrbitRadius = planet.orbital_radius / maxOrbitalRadius;
-      const orbitRadius = minOrbitRadius + relativeOrbitRadius * scaleFactor;
+      const planetColors: { [key: string]: string } = {
+        "Gas Giant": "#FFA500",
+        Anomaly: "#FFFFFF",
+        Rocky: "#808080",
+        Icy: "#ADD8E6",
+        Oceanic: "#0000FF",
+        Desert: "#FFD700",
+        Lava: "#FF0000",
+        Arid: "#800000",
+        Swamp: "#008000",
+        Tundra: "#F0F8FF",
+        Forest: "#006400",
+        Savannah: "#F4A460",
+        Cave: "#D1D1D1",
+        Crystalline: "#00FFFF",
+        Metallic: "#C0C0C0",
+        Toxic: "#800080",
+        Radioactive: "#00FF00",
+        Magma: "#FF4500",
+        "Molten Core": "#FF8C00",
+        Carbon: "#090909",
+        Diamond: "#87CEFA",
+        "Super Earth": "#90EE90",
+        "Sub Earth": "#006400",
+        "Frozen Gas Giant": "#ADD8E6",
+        Nebulous: "#FFC0CB",
+        Aquifer: "#00FFFF",
+        Exotic: "#FF00FF",
+      };
 
-      const eccentricity = planet.eccentricity_factor;
-      const semiMajorAxis = orbitRadius;
+      const starColors: { [key: string]: string } = {
+        red: "#FF4444",
+        orange: "#FF8844",
+        yellow: "#FFFF44",
+        white: "#FFFFFF",
+        blue: "#4488FF",
+        purple: "#8844FF",
+      };
 
-      const inclination = getOrbitalInclination(planet.name);
-      const ascendingNode = getAscendingNode(planet.name);
+      const starGroup = new THREE.Group();
+      systemData.stars.forEach((star, index) => {
+        const starRadius = parseFloat(star.Size) * 1.75;
+        const starGeometry = new THREE.SphereGeometry(starRadius, 16, 16);
+        const starColor = starColors[star.Color] || "#FFFF44";
+        const starMaterial = new THREE.MeshBasicMaterial({
+          color: starColor,
+          transparent: true,
+          opacity: 0.9,
+        });
 
-      const numSegments = 360;
-      const dashLength = 2;
-      const gapLength = 4;
+        const starMesh = new THREE.Mesh(starGeometry, starMaterial);
 
-      for (let k = 0; k < numSegments; k += dashLength + gapLength) {
-        const dashPoints = [];
-        for (let j = k; j < Math.min(k + dashLength, numSegments - 1); j++) {
-          const angle = (j / numSegments) * 2 * Math.PI;
+        const starRadii = systemData.stars.map((s, i) => parseFloat(s.Size) * 1.75);
+        const maxStarRadius = Math.max(...starRadii);
+        const spacing = maxStarRadius * 3;
 
-          const pos = calculateEllipticalPosition(angle, semiMajorAxis, eccentricity, inclination, ascendingNode);
-          dashPoints.push(pos);
+        if (systemData.stars.length === 1) {
+          starMesh.position.set(0, 0, 0);
+        } else if (systemData.stars.length === 2) {
+          starMesh.position.set(index === 0 ? -spacing : spacing, 0, 0);
+        } else {
+          if (index === 0) starMesh.position.set(-spacing, 0, 0);
+          else if (index === 1) starMesh.position.set(spacing, 0, 0);
+          else starMesh.position.set(0, spacing, 0);
         }
 
-        if (dashPoints.length > 1) {
-          const dashGeometry = new THREE.BufferGeometry().setFromPoints(dashPoints);
-          const dashMaterial = new THREE.LineBasicMaterial({
-            color: 0x708090,
-            transparent: true,
-            opacity: 0.8,
-            linewidth: 2,
-          });
-          const dashLine = new THREE.Line(dashGeometry, dashMaterial);
-          scene.add(dashLine);
-          orbitsRef.current.push(dashLine);
-        }
-      }
+        const glowGeometry = new THREE.SphereGeometry(starRadius * 1.5, 16, 16);
+        const glowMaterial = new THREE.MeshBasicMaterial({
+          color: starColor,
+          transparent: true,
+          opacity: 0.3,
+        });
+        const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+        starMesh.add(glow);
 
-      const basePlanetRadius = planet.diameter / 12000;
-      const planetRadius = Math.max(Math.min(basePlanetRadius, 5.0), 1.0);
-      const planetGeometry = new THREE.SphereGeometry(planetRadius, 16, 16);
-      const planetColor = planetColors[planet.planet_type] || "#FFFFFF";
-      const planetMaterial = new THREE.MeshBasicMaterial({
-        color: planetColor,
-        transparent: true,
-        opacity: 0.9,
+        starGroup.add(starMesh);
       });
+      scene.add(starGroup);
 
-      const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
+      const maxOrbitalRadius = systemData.timing.max_orbital_radius;
+      const scaleFactor = 80;
 
-      const planetGlow = new THREE.Mesh(
-        new THREE.SphereGeometry(planetRadius * 1.5, 16, 16),
-        new THREE.MeshBasicMaterial({
+      const starRadiiForOrbit = systemData.stars.map((s) => parseFloat(s.Size) * 1.75);
+      const maxStarRadiusWithGlow = Math.max(...starRadiiForOrbit) * 1.5;
+      const minOrbitRadius = Math.max(30, maxStarRadiusWithGlow + 10);
+
+      (window as any).systemMaxOrbitalRadius = maxOrbitalRadius;
+
+      systemData.planets.forEach((planet, index) => {
+        const relativeOrbitRadius = planet.orbital_radius / maxOrbitalRadius;
+        const orbitRadius = minOrbitRadius + relativeOrbitRadius * scaleFactor;
+
+        const eccentricity = planet.eccentricity_factor;
+        const semiMajorAxis = orbitRadius;
+
+        const inclination = getOrbitalInclination(planet.name);
+        const ascendingNode = getAscendingNode(planet.name);
+
+        const numSegments = 360;
+        const dashLength = 2;
+        const gapLength = 4;
+
+        for (let k = 0; k < numSegments; k += dashLength + gapLength) {
+          const dashPoints = [];
+          for (let j = k; j < Math.min(k + dashLength, numSegments - 1); j++) {
+            const angle = (j / numSegments) * 2 * Math.PI;
+
+            const pos = calculateEllipticalPosition(angle, semiMajorAxis, eccentricity, inclination, ascendingNode);
+            dashPoints.push(pos);
+          }
+
+          if (dashPoints.length > 1) {
+            const dashGeometry = new THREE.BufferGeometry().setFromPoints(dashPoints);
+            const dashMaterial = new THREE.LineBasicMaterial({
+              color: 0x708090,
+              transparent: true,
+              opacity: 0.8,
+              linewidth: 2,
+            });
+            const dashLine = new THREE.Line(dashGeometry, dashMaterial);
+            scene.add(dashLine);
+            orbitsRef.current.push(dashLine);
+          }
+        }
+
+        const basePlanetRadius = planet.diameter / 12000;
+        const planetRadius = Math.max(Math.min(basePlanetRadius, 5.0), 1.0);
+        const planetGeometry = new THREE.SphereGeometry(planetRadius, 16, 16);
+        const planetColor = planetColors[planet.planet_type] || "#FFFFFF";
+        const planetMaterial = new THREE.MeshBasicMaterial({
           color: planetColor,
           transparent: true,
-          opacity: 0.2,
-        })
-      );
-      planetMesh.add(planetGlow);
+          opacity: 0.9,
+        });
 
-      scene.add(planetMesh);
-      planetsRef.current.push(planetMesh);
+        const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
 
-      (planetMesh as any).planetData = planet;
-      (planetMesh as any).orbitRadius = orbitRadius;
-      (planetMesh as any).semiMajorAxis = semiMajorAxis;
-      (planetMesh as any).eccentricity = eccentricity;
-      (planetMesh as any).inclination = inclination;
-      (planetMesh as any).ascendingNode = ascendingNode;
+        const planetGlow = new THREE.Mesh(
+          new THREE.SphereGeometry(planetRadius * 1.5, 16, 16),
+          new THREE.MeshBasicMaterial({
+            color: planetColor,
+            transparent: true,
+            opacity: 0.2,
+          })
+        );
+        planetMesh.add(planetGlow);
 
-      planetLabelsRef.current.push(null as any);
-    });
+        scene.add(planetMesh);
+        planetsRef.current.push(planetMesh);
 
-    const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
-    scene.add(ambientLight);
+        (planetMesh as any).planetData = planet;
+        (planetMesh as any).orbitRadius = orbitRadius;
+        (planetMesh as any).semiMajorAxis = semiMajorAxis;
+        (planetMesh as any).eccentricity = eccentricity;
+        (planetMesh as any).inclination = inclination;
+        (planetMesh as any).ascendingNode = ascendingNode;
 
-    const pointLight = new THREE.PointLight(0xffffff, 1, 1000);
-    pointLight.position.set(0, 0, 0);
-    scene.add(pointLight);
-
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
-    controls.minDistance = 50;
-    controls.maxDistance = 800;
-    controls.autoRotate = false;
-    controls.autoRotateSpeed = 0.5;
-    controls.enablePan = true;
-    controls.enableZoom = true;
-    controls.target.set(0, 0, 0);
-    controlsRef.current = controls;
-
-    const handleKeyWheel = (event: WheelEvent) => {
-      if (event.ctrlKey) {
-        event.preventDefault();
-        if (event.deltaY > 0) {
-          setTimeOffset((prev) => prev + 604800);
-        } else {
-          setTimeOffset((prev) => prev - 604800);
-        }
-      } else {
-        event.preventDefault();
-        const zoomSpeed = 0.1;
-        const currentDistance = camera.position.distanceTo(new THREE.Vector3(0, 0, 0));
-
-        if (event.deltaY > 0 && currentDistance < 500) {
-          camera.position.multiplyScalar(1 + zoomSpeed);
-        } else if (event.deltaY < 0 && currentDistance > 20) {
-          camera.position.multiplyScalar(1 - zoomSpeed);
-        }
-      }
-    };
-
-    const canvas = renderer.domElement;
-    canvas.style.borderRadius = "8px";
-    canvas.addEventListener("wheel", handleKeyWheel);
-
-    const animate = () => {
-      animationIdRef.current = requestAnimationFrame(animate);
-
-      planetsRef.current.forEach((planetMesh, index) => {
-        const planet = (planetMesh as any).planetData;
-        const semiMajorAxis = (planetMesh as any).semiMajorAxis;
-        const eccentricity = (planetMesh as any).eccentricity;
-        const inclination = (planetMesh as any).inclination;
-        const ascendingNode = (planetMesh as any).ascendingNode;
-
-        const orbitalPeriod = planet.orbital_period_seconds;
-        const angleVelocityOrbit = (2 * Math.PI) / orbitalPeriod;
-
-        const angleOrbit = (planet.initial_orbital_angle + currentTimeRef.current * angleVelocityOrbit) % (2 * Math.PI);
-
-        const position = calculateEllipticalPosition(angleOrbit, semiMajorAxis, eccentricity, inclination, ascendingNode);
-        planetMesh.position.copy(position);
-
-        const rotationPeriodSeconds = planet.rotation_period_seconds;
-        const angleVelocityRotation = (2 * Math.PI) / rotationPeriodSeconds;
-        planetMesh.rotation.y = (currentTimeRef.current * angleVelocityRotation) % (2 * Math.PI);
+        planetLabelsRef.current.push(null as any);
       });
 
-      if (controlsRef.current) {
-        controlsRef.current.update();
+      const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
+      scene.add(ambientLight);
+
+      const pointLight = new THREE.PointLight(0xffffff, 1, 1000);
+      pointLight.position.set(0, 0, 0);
+      scene.add(pointLight);
+
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+      controls.minDistance = 50;
+      controls.maxDistance = 800;
+      controls.autoRotate = false;
+      controls.autoRotateSpeed = 0.5;
+      controls.enablePan = true;
+      controls.enableZoom = true;
+      controls.target.set(0, 0, 0);
+      controlsRef.current = controls;
+
+      const handleKeyWheel = (event: WheelEvent) => {
+        if (event.ctrlKey) {
+          event.preventDefault();
+          if (event.deltaY > 0) {
+            setTimeOffset((prev) => prev + 604800);
+          } else {
+            setTimeOffset((prev) => prev - 604800);
+          }
+        } else {
+          event.preventDefault();
+          const zoomSpeed = 0.1;
+          const currentDistance = camera.position.distanceTo(new THREE.Vector3(0, 0, 0));
+
+          if (event.deltaY > 0 && currentDistance < 500) {
+            camera.position.multiplyScalar(1 + zoomSpeed);
+          } else if (event.deltaY < 0 && currentDistance > 20) {
+            camera.position.multiplyScalar(1 - zoomSpeed);
+          }
+        }
+      };
+
+      const canvas = renderer.domElement;
+      canvas.style.borderRadius = "8px";
+      canvas.addEventListener("wheel", handleKeyWheel);
+
+      const animate = () => {
+        animationIdRef.current = requestAnimationFrame(animate);
+
+        planetsRef.current.forEach((planetMesh, index) => {
+          const planet = (planetMesh as any).planetData;
+          const semiMajorAxis = (planetMesh as any).semiMajorAxis;
+          const eccentricity = (planetMesh as any).eccentricity;
+          const inclination = (planetMesh as any).inclination;
+          const ascendingNode = (planetMesh as any).ascendingNode;
+
+          const orbitalPeriod = planet.orbital_period_seconds;
+          const angleVelocityOrbit = (2 * Math.PI) / orbitalPeriod;
+
+          const angleOrbit = (planet.initial_orbital_angle + currentTimeRef.current * angleVelocityOrbit) % (2 * Math.PI);
+
+          const position = calculateEllipticalPosition(angleOrbit, semiMajorAxis, eccentricity, inclination, ascendingNode);
+          planetMesh.position.copy(position);
+
+          const rotationPeriodSeconds = planet.rotation_period_seconds;
+          const angleVelocityRotation = (2 * Math.PI) / rotationPeriodSeconds;
+          planetMesh.rotation.y = (currentTimeRef.current * angleVelocityRotation) % (2 * Math.PI);
+        });
+
+        if (controlsRef.current) {
+          controlsRef.current.update();
+        }
+
+        renderer.render(scene, camera);
+      };
+
+      animate();
+
+      const handleResize = () => {
+        if (!mountRef.current || !renderer) return;
+        const containerRef = mountRef.current;
+        const newSize = Math.min(containerRef.clientWidth, containerRef.clientHeight);
+        renderer.setSize(newSize, newSize);
+        camera.aspect = 1;
+        camera.updateProjectionMatrix();
+      };
+
+      // 使用 ResizeObserver 监听容器尺寸变化
+      if (typeof ResizeObserver !== 'undefined') {
+        resizeObserver = new ResizeObserver(() => {
+          handleResize();
+        });
+        resizeObserver.observe(mountRef.current);
       }
 
-      renderer.render(scene, camera);
+      window.addEventListener("resize", handleResize);
+
+      // 清理函数
+      const cleanup = () => {
+        window.removeEventListener("resize", handleResize);
+        canvas.removeEventListener("wheel", handleKeyWheel);
+        
+        if (resizeObserver) {
+          resizeObserver.disconnect();
+        }
+
+        if (controlsRef.current) {
+          controlsRef.current.dispose();
+        }
+
+        if (animationIdRef.current) {
+          cancelAnimationFrame(animationIdRef.current);
+        }
+
+        if (mountRef.current && renderer.domElement) {
+          mountRef.current.removeChild(renderer.domElement);
+        }
+
+        renderer.dispose();
+
+        planetsRef.current = [];
+        orbitsRef.current = [];
+        planetLabelsRef.current = [];
+      };
+
+      // 将 cleanup 存储为引用，以便在组件卸载时使用
+      (window as any).solarSystemCleanup = cleanup;
     };
 
-    animate();
-
-    const handleResize = () => {
-      if (!mountRef.current || !renderer) return;
-      const container = mountRef.current;
-      const size = Math.min(container.clientWidth, container.clientHeight);
-      renderer.setSize(size, size);
-      camera.aspect = 1;
-      camera.updateProjectionMatrix();
-    };
-
-    window.addEventListener("resize", handleResize);
+    // 开始初始化场景
+    requestAnimationFrame(initializeScene);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
-      canvas.removeEventListener("wheel", handleKeyWheel);
-
-      if (controlsRef.current) {
-        controlsRef.current.dispose();
+      if ((window as any).solarSystemCleanup) {
+        (window as any).solarSystemCleanup();
       }
-
-      if (animationIdRef.current) {
-        cancelAnimationFrame(animationIdRef.current);
-      }
-
-      if (container && renderer.domElement) {
-        container.removeChild(renderer.domElement);
-      }
-
-      renderer.dispose();
-
-      planetsRef.current = [];
-      orbitsRef.current = [];
-      planetLabelsRef.current = [];
     };
   }, [planets, stars, cosmicOriginTime, systemData, timeOffset]);
 

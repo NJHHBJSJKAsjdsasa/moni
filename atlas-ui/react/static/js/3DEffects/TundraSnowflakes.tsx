@@ -144,18 +144,18 @@ export class TundraSnowflakesEffect {
     const baseGeometry = new THREE.TubeGeometry(baseCurve, tubularSegments, tubeRadius, radialSegments, false);
 
     // Create color attribute for the base geometry
-    const colors = new Float32Array(baseGeometry.attributes.position.count * 3);
+    const particleColors = new Float32Array(baseGeometry.attributes.position.count * 3);
     const uvArray = baseGeometry.attributes.uv.array as Float32Array;
 
-    for (let i = 0; i < colors.length / 3; i++) {
+    for (let i = 0; i < particleColors.length / 3; i++) {
       const uvX = uvArray[i * 2];
       const intensity = Math.pow(1 - uvX, 1.5);
-      colors[i * 3] = intensity;
-      colors[i * 3 + 1] = intensity;
-      colors[i * 3 + 2] = intensity;
+      particleColors[i * 3] = intensity;
+      particleColors[i * 3 + 1] = intensity;
+      particleColors[i * 3 + 2] = intensity;
     }
 
-    baseGeometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+    baseGeometry.setAttribute("color", new THREE.BufferAttribute(particleColors, 3));
 
     // Create a single material for all snowflakes
     this.material = new THREE.MeshBasicMaterial({
