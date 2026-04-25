@@ -7,10 +7,14 @@ planet_translator = PlanetRenderingTranslator()
 
 
 def get_planet_rendering_data(planet):
+    if not planet:
+        return {"error": "Planet object is None"}
     return planet_translator.translate_planet_rendering(planet)
 
 
 def translate_planet_to_json(planet):
+    if not planet:
+        return {"error": "Planet object is None"}
     return planet_translator.translate_planet_rendering(planet)
 
 
