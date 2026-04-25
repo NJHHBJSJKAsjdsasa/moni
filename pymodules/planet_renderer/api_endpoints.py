@@ -138,11 +138,25 @@ class PlanetRendererAPI:
 
             galaxy = universe.get_galaxy(*galaxy_data["coordinates"])
             system = galaxy.get_solar_system(system_index)
+            
+            # 检查索引是否有效
             planet = system.get_planet(planet_index)
             
             if planet is None:
-                # 索引无效，返回错误信息并包含系统实际行星数量
-                return jsonify({"error": f"Planet with index {planet_index} not found in system", "system_planets_count": system.num_planets})
+                # 索引无效，自动选择第一个可用行星
+                planet_keys = list(system.planets.keys())
+                if not planet_keys:
+                    return jsonify({"error": "No planets available in this system"})
+                
+                # 选择第一个行星
+                new_planet_index = planet_keys[0]
+                planet = system.get_planet(new_planet_index)
+                
+                # 更新会话中的索引
+                session["planet"] = new_planet_index
+                
+                # 记录日志
+                print(f"Planet index {planet_index} was invalid, automatically switched to index {new_planet_index}")
 
             cosmic_origin_time = config.cosmic_origin_time
             current_time_seconds = math.floor(time.time())
