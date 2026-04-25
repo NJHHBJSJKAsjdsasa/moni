@@ -70,7 +70,8 @@ const GalaxyNavigation: React.FC<GalaxyNavigationProps> = ({ currentGalaxy }) =>
         return;
       }
 
-      if (!SpaceshipTravelManager.executeTravel("galaxy", distance)) {
+      const travelResult = SpaceshipTravelManager.executeTravel("galaxy", distance);
+      if (travelResult === "emergency") {
         return;
       }
 
@@ -110,7 +111,8 @@ const GalaxyNavigation: React.FC<GalaxyNavigationProps> = ({ currentGalaxy }) =>
         return;
       }
 
-      if (!SpaceshipTravelManager.executeTravel("galaxy", distance)) {
+      const travelResult = SpaceshipTravelManager.executeTravel("galaxy", distance);
+      if (travelResult === "emergency") {
         return; // Travel failed
       }
 

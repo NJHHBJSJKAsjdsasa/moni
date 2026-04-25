@@ -9,10 +9,11 @@ from pymodules.__universe_name_generator import generate_name
 
 
 class Universe:
-    def __init__(self, seed, constants):
+    def __init__(self, seed, constants, cosmic_origin_time=None):
         self.seed = seed
         self.constants = constants
         self.galaxies = {}
+        self.cosmic_origin_time = cosmic_origin_time
 
     def generate_galaxy_seed(self, x, y, z):
         return int(

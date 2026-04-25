@@ -18,7 +18,7 @@ class UniverseInitializationProtocol:
                 return False
 
         if self.universe is None:
-            self.universe = Universe(self.config.seed, self.constants)
+            self.universe = Universe(self.config.seed, self.constants, self.config.cosmic_origin_time)
             __main__.universe = self.universe
 
         return True
@@ -52,7 +52,7 @@ def get_universe():
         from pymodules.__universe_constants import PhysicalConstants
 
         constants = PhysicalConstants()
-        remote_universe = Universe(config.seed, constants)
+        remote_universe = Universe(config.seed, constants, config.cosmic_origin_time)
         return remote_universe
 
     return _uip.get_universe()
