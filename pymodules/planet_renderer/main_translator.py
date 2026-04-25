@@ -60,6 +60,9 @@ class PlanetRenderingTranslator:
     def translate_planet_rendering(self, planet) -> Dict[str, Any]:
         print(f"DEBUG: translate_planet_rendering called with planet: {planet}")
         print(f"DEBUG: planet type: {type(planet)}")
+        if not planet:
+            return {"error": "Planet object is None"}
+        
         if planet:
             print(f"DEBUG: planet name: {planet.name}")
             print(f"DEBUG: planet has seed: {hasattr(planet, 'seed')}")
