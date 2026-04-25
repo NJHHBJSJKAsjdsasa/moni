@@ -248,7 +248,8 @@ const SolarSystem3DViewerLeft = forwardRef<{ captureScreenshot: () => void; isGe
       sceneRef.current = scene;
 
       const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 10000);
-      camera.position.set(0, 300, 0);
+      // 设置更合理的初始相机位置，让系统在初始视图中可见
+      camera.position.set(0, 150, 0);
       camera.lookAt(0, 0, 0);
       cameraRef.current = camera;
 
@@ -340,11 +341,12 @@ const SolarSystem3DViewerLeft = forwardRef<{ captureScreenshot: () => void; isGe
       scene.add(starGroup);
 
       const maxOrbitalRadius = systemData.timing.max_orbital_radius;
-      const scaleFactor = 80;
+      // 增加缩放因子，使行星和轨道在初始视图中更明显
+      const scaleFactor = 120;
 
       const starRadiiForOrbit = systemData.stars.map((s) => parseFloat(s.Size) * 1.75);
       const maxStarRadiusWithGlow = Math.max(...starRadiiForOrbit) * 1.5;
-      const minOrbitRadius = Math.max(30, maxStarRadiusWithGlow + 10);
+      const minOrbitRadius = Math.max(20, maxStarRadiusWithGlow + 5);
 
       (window as any).systemMaxOrbitalRadius = maxOrbitalRadius;
 
@@ -385,8 +387,8 @@ const SolarSystem3DViewerLeft = forwardRef<{ captureScreenshot: () => void; isGe
           }
         }
 
-        const basePlanetRadius = planet.diameter / 12000;
-        const planetRadius = Math.max(Math.min(basePlanetRadius, 5.0), 1.0);
+        const basePlanetRadius = planet.diameter / 8000;
+        const planetRadius = Math.max(Math.min(basePlanetRadius, 8.0), 1.5);
         const planetGeometry = new THREE.SphereGeometry(planetRadius, 16, 16);
         const planetColor = planetColors[planet.planet_type] || "#FFFFFF";
         const planetMaterial = new THREE.MeshBasicMaterial({
