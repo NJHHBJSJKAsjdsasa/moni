@@ -722,6 +722,10 @@ def generate_name(seed, type="galaxy", is_extra=False):
     return f"{prefix}{suffix}_{number}"
 
 
+def generate_galaxy_name(seed):
+    return generate_name(seed, type="galaxy")
+
+
 def generate_moon_name(seed, moon_type="rocky", index=0):
     random.seed(seed)
 
@@ -884,3 +888,11 @@ def generate_moon_name(seed, moon_type="rocky", index=0):
             return f"{base_name} {roman_numerals[index]}"
         else:
             return f"{base_name} {index + 1}"
+
+
+def generate_planet_name(seed, is_extra=False):
+    return generate_name(seed, type="planet", is_extra=is_extra)
+
+
+def generate_system_name(seed):
+    return generate_name(seed, type="system")
