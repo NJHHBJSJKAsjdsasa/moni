@@ -92,6 +92,9 @@ class CachedSolarSystem(SolarSystem):
             self.name = cached_data['name']
             self.num_planets = cached_data['num_planets']
             self.planets = {}
+            # 初始化 stars 属性
+            self.stars = cached_data.get('stars', [])
+            self.star_system_type = cached_data.get('star_system_type', 'single')
         else:
             # Create new system
             super().__init__(seed, index, constants)
@@ -101,31 +104,31 @@ class CachedSolarSystem(SolarSystem):
                 'seed': self.seed,
                 'index': self.index,
                 'name': self.name,
-                'num_planets': self.num_planets
+                'num_planets': self.num_planets,
+                'stars': self.stars,
+                'star_system_type': self.star_system_type
             }
             sqlite_cache.save_system(x, y, z, index, system_data)
     
-    def get_planet(self, planet_name):
+    def get_planet(self, index):
+        # 首先尝试从缓存加载
         x, y, z = self.galaxy_coordinates
         
-        # Check if planet is in cache
-        cached_data = sqlite_cache.get_planet(x, y, z, self.index, planet_name)
-        if cached_data:
-            # Load from cache
-            from pymodules.__universe_init_planet import Planet
-            planet_seed = cached_data['seed']
-            if planet_name not in self.planets:
-                # Create planet with cached seed
-                planet = CachedPlanet(planet_seed, planet_name, self.constants, (x, y, z), self.index)
-                self.planets[planet_name] = planet
-            return self.planets[planet_name]
-        else:
-            # Create new planet
-            planet = super().get_planet(planet_name)
-            # Wrap in cached version
-            cached_planet = CachedPlanet(planet.seed, planet_name, self.constants, (x, y, z), self.index)
-            self.planets[planet_name] = cached_planet
+        # 检查行星是否已存在
+        if index in self.planets:
+            return self.planets[index]
+        
+        # 调用父类方法获取行星
+        planet = super().get_planet(index)
+        
+        # 缓存行星
+        if planet:
+            # 包装为缓存版本
+            cached_planet = CachedPlanet(planet.seed, planet.name, self.constants, (x, y, z), self.index)
+            self.planets[index] = cached_planet
             return cached_planet
+        
+        return None
 
 class CachedPlanet(Planet):
     """Cached version of Planet class"""
