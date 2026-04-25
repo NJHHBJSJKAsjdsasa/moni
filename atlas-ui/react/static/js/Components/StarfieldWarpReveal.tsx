@@ -24,7 +24,7 @@ interface StarfieldWarpRevealProps {
 const StarfieldWarpReveal: React.FC<StarfieldWarpRevealProps> = ({ seedData, onComplete }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGL2Renderer | null>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const composerRef = useRef<EffectComposer | null>(null);
   const animationIdRef = useRef<number | null>(null);
@@ -149,7 +149,7 @@ const StarfieldWarpReveal: React.FC<StarfieldWarpRevealProps> = ({ seedData, onC
       camera.position.set(0, 0, 0);
       cameraRef.current = camera;
 
-      const renderer = new THREE.WebGL2Renderer({
+      const renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true,
       });

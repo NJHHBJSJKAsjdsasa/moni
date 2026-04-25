@@ -197,7 +197,7 @@ export class ToxicPostProcessingEffect {
   };
   private toxicTint: THREE.Color;
 
-  constructor(scene: THREE.Scene, camera: THREE.Camera, renderer: THREE.WebGL2Renderer, planetRadius: number, params: ToxicPostProcessingParams = {}) {
+  constructor(scene: THREE.Scene, camera: THREE.Camera, renderer: THREE.WebGLRenderer, planetRadius: number, params: ToxicPostProcessingParams = {}) {
     this.planetRadius = planetRadius;
 
     const seed = params.seed || Math.floor(Math.random() * 1000000);
@@ -285,7 +285,7 @@ export class ToxicPostProcessingEffect {
   }
 }
 
-export function createToxicPostProcessingFromPythonData(scene: THREE.Scene, camera: THREE.Camera, renderer: THREE.WebGL2Renderer, planetRadius: number, surfaceData: any, globalSeed?: number): ToxicPostProcessingEffect | null {
+export function createToxicPostProcessingFromPythonData(scene: THREE.Scene, camera: THREE.Camera, renderer: THREE.WebGLRenderer, planetRadius: number, surfaceData: any, globalSeed?: number): ToxicPostProcessingEffect | null {
   if (!surfaceData || !surfaceData.planet_type || surfaceData.planet_type !== "toxic") {
     return null;
   }

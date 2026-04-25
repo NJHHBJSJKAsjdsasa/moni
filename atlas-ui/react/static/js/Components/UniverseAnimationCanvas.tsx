@@ -16,7 +16,7 @@ interface UniverseAnimationCanvasProps {
 const UniverseAnimationCanvas: React.FC<UniverseAnimationCanvasProps> = ({ animationType, onAnimationComplete }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGL2Renderer | null>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const composerRef = useRef<EffectComposer | null>(null);
   const animationIdRef = useRef<number | null>(null);
@@ -140,7 +140,7 @@ const UniverseAnimationCanvas: React.FC<UniverseAnimationCanvasProps> = ({ anima
       camera.position.set(0, 0, 0.1);
       cameraRef.current = camera;
 
-      const renderer = new THREE.WebGL2Renderer({
+      const renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: false,
       });

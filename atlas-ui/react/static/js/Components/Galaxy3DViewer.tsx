@@ -23,7 +23,7 @@ interface Galaxy3DViewerProps {
 const Galaxy3DViewer = forwardRef<{ captureScreenshot: () => void; isGeneratingImage: boolean }, Galaxy3DViewerProps>(({ galaxyType, numSystems, blackHoles, pulsars, quasars, seed = 12345, onExpandClick, galaxyName, galaxyUrl }, ref) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGL2Renderer | null>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const animationIdRef = useRef<number | null>(null);
   const controlsRef = useRef<OrbitControls | null>(null);
   const galaxyGroupRef = useRef<THREE.Group | null>(null);
@@ -101,7 +101,7 @@ const Galaxy3DViewer = forwardRef<{ captureScreenshot: () => void; isGeneratingI
     camera.lookAt(0, 0, 0);
     cameraRef.current = camera;
 
-    const renderer = new THREE.WebGL2Renderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(size, size);
     renderer.setClearColor(0x000011, 1);
     rendererRef.current = renderer;

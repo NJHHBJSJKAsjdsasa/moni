@@ -16,7 +16,7 @@ interface Galaxy3DViewerFullscreenProps {
 const Galaxy3DViewerFullscreen: React.FC<Galaxy3DViewerFullscreenProps> = ({ galaxyType, numSystems, blackHoles, pulsars, quasars, seed = 12345, galaxyName }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGL2Renderer | null>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const animationIdRef = useRef<number | null>(null);
   const controlsRef = useRef<OrbitControls | null>(null);
   const galaxyGroupRef = useRef<THREE.Group | null>(null);
@@ -82,7 +82,7 @@ const Galaxy3DViewerFullscreen: React.FC<Galaxy3DViewerFullscreenProps> = ({ gal
     camera.position.set(0, 200, 400);
     camera.lookAt(0, 0, 0);
 
-    const renderer = new THREE.WebGL2Renderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(containerWidth, containerHeight);
     renderer.setClearColor(0x000011, 1);
     rendererRef.current = renderer;
