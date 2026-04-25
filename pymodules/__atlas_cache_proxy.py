@@ -140,22 +140,18 @@ class CachedPlanet(Planet):
         # Check if planet is in cache
         cached_data = sqlite_cache.get_planet(x, y, z, system_index, name)
         if cached_data:
-            # Load from cache
-            self.seed = cached_data['seed']
-            self.name = cached_data['name']
-            self.constants = constants  # Constants are not cached
-            self.planet_type = cached_data['planet_type']
-            self.diameter = cached_data['diameter']
-            self.orbital_radius = cached_data['orbital_radius']
-            self.elements = cached_data['elements']
-            self.life_forms = cached_data['life_forms']
-            self.atmosphere = cached_data['atmosphere']
-            # 处理 num_moons 属性
-            self.num_moons = cached_data.get('num_moons', 0)
-            # 初始化其他必要的属性
-            self.star_mass = constants.M_SUN
-            # 为了确保兼容性，创建一个简单的 moon_system 结构
-            self.moon_system = type('MoonSystem', (), {'moons': []})()
+            # 首先调用父类的初始化方法，确保所有属性都被正确初始化
+            super().__init__(seed, name, constants)
+            
+            # 然后从缓存中覆盖相应的属性
+            self.name = cached_data.get('name', name)
+            self.planet_type = cached_data.get('planet_type', self.planet_type)
+            self.diameter = cached_data.get('diameter', self.diameter)
+            self.orbital_radius = cached_data.get('orbital_radius', self.orbital_radius)
+            self.elements = cached_data.get('elements', self.elements)
+            self.life_forms = cached_data.get('life_forms', self.life_forms)
+            self.atmosphere = cached_data.get('atmosphere', self.atmosphere)
+            self.num_moons = cached_data.get('num_moons', len(self.moon_system.moons) if hasattr(self, 'moon_system') else 0)
         else:
             # Create new planet
             super().__init__(seed, name, constants)
