@@ -80,7 +80,9 @@ class PlanetRenderingTranslator:
 
         planet_color_map = get_planet_color_map()
         base_color = planet_color_map.get(planet.planet_type, "#FFFFFF")
-        base_color = get_procedural_planet_color(base_color, planet.planet_type, planet.seed)
+        planet_seed = getattr(planet, "seed", None)
+        if planet_seed:
+            base_color = get_procedural_planet_color(base_color, planet.planet_type, planet_seed)
 
         planet_specific_data = {}
         if planet_type in self.planet_types:
@@ -109,7 +111,7 @@ class PlanetRenderingTranslator:
         return {
             "planet_info": {"name": spaced_planet_name, "type": planet_type, "base_color": base_color, "radius": planet_radius, "diameter": planet.diameter, "orbital_radius": planet.orbital_radius, "density": planet.density, "gravity": planet.gravity, "axial_tilt": planet.axial_tilt, "rotation_period": planet.rotation_period_seconds, "orbital_period": planet.orbital_period_seconds},
             "debug": {"visual_debug": VISUAL_DEBUG, "cosmic_origin_time": cosmic_origin_time, "initial_angle_rotation": planet.initial_angle_rotation},
-            "seeds": {"shape_seed": shape_seed, "config_seed": str(config.seed), "planet_seed": planet.seed},
+            "seeds": {"shape_seed": shape_seed, "config_seed": str(config.seed), "planet_seed": planet_seed},
             "timing": {"current_rotation_angle": angle_rotation, "orbital_angle": orbital_angle, "initial_orbital_angle": planet.initial_orbital_angle, "tilt_factor": tilt_factor, "cosmic_origin_time": cosmic_origin_time, "time_elapsed_seconds": time_elapsed_seconds, "elapsed_time": time_elapsed_seconds},
             "surface_elements": planet_specific_data,
             "atmosphere": atmosphere_data,
